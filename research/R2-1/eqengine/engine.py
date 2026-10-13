@@ -9,6 +9,7 @@ from __future__ import annotations
 import json
 import math
 import random
+import shutil
 import subprocess
 import unicodedata
 from dataclasses import dataclass
@@ -125,7 +126,8 @@ class EquationEngine:
 
     def layout_latex(self, latex: str) -> dict[str, Any]:
         """Call MathJax layout engine to extract structural elements."""
-        cmd = ["node", str(MATHJAX_LAYOUT_SCRIPT), latex]
+        node_bin = shutil.which("node") or shutil.which("node.exe") or "node"
+        cmd = [node_bin, str(MATHJAX_LAYOUT_SCRIPT), latex]
         proc = subprocess.run(
             cmd,
             capture_output=True,
