@@ -63,11 +63,11 @@ strict = true
 files = ["src/penpress", "scripts"]
 
 [[tool.mypy.overrides]]
-module = ["reportlab.*"]
+module = ["reportlab.*", "pypdfium2.*", "pypdfium2", "skimage.*", "pdfminer.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
-module = ["penpress.profile.sheet_ingest"]
+module = ["penpress.profile.sheet_ingest", "penpress.ingest.figures"]
 disallow_untyped_calls = false
 
 
