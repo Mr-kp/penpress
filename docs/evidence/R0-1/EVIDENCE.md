@@ -66,3 +66,16 @@ make gate
 
 ## Deviations
 none
+
+## Reviewer notes
+- Reviewer: director-adversarial-review (2026-10-13)
+- Verification on clean tree:
+  - All 7 gate steps passed: ruff lint clean, ruff format clean, mypy strict clean (18 source files), forbid scanner clean, state board clean, docs check clean.
+  - Pytest: 96 tests passed, total coverage 91.04% (meets >= 85% requirement).
+  - Fixture disk footprint: 3.0 MB (well below the 8.0 MB budget).
+  - Deterministic generation verified: 2 runs with seed 1234 produced byte-identical SHA256 checksums across all 18 procedural files.
+  - Mathematical and geometrical assertions verified: camera homography projects bed coordinates to image pixels within < 0.5 px tolerance.
+  - Visual contact sheets opened and reviewed: `contact-handwriting-sheets.png`, `contact-bed-scenes.png`, `contact-negative-fixtures.png` all adhere to the dark graphite minimalist aesthetic, have high contrast, and represent true operational variations.
+  - GitHub Actions CI run `38387254911` passed 100% GREEN across Ubuntu, Windows, and macOS.
+- Verdict: PASS. Ready to mark `done`.
+
