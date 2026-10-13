@@ -25,6 +25,8 @@ All notable changes are recorded here (Keep a Changelog). Every change under `sr
 - 2026-10-13T14:40:00Z: Camera calibration, paper detection, and obstacle keepout spike in `research/R3-1/` (paper quad corner error 0.33-0.37 mm across 300 scenes, 0% false accept rate on negative fixtures, clip handle segmentation, ADR-0003 accepted).
 - 2026-10-13T15:38:00Z: Handwriting profile generator and sample sheet ingestion engine in `src/penpress/profile/` (`HandwritingProfile` versioned schema, `sheet_gen.py` ArUco calibration PDF generator, `sheet_ingest.py` perspective rectification, skeleton graph centerline tracing with RDP simplification achieving 1.903 px Chamfer distance, and unit test suite).
 - 2026-10-13T15:44:00Z: Declared runtime profile dependencies (`opencv-python-headless`, `scikit-image`, `scipy`, `reportlab`, `numpy`) and added typed context override for `sheet_ingest.py`.
+- 2026-10-13T15:58:00Z: Added resilient git executable path resolution with `shutil.which` in `scripts/docs_check.py` for cross-platform Windows runner compatibility.
+
 
 
 

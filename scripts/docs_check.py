@@ -7,6 +7,7 @@ Behaviour change in src/ (or scripts/, web/) requires CHANGELOG.md in the same r
 from __future__ import annotations
 
 import os
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -16,25 +17,29 @@ WATCHED = ("src/", "web/", "scripts/")
 
 
 def changed_files(base: str) -> list[str] | None:
-    probe = subprocess.run(
-        ["git", "rev-parse", "--verify", "--quiet", base],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    if probe.returncode != 0:
+    git_bin = shutil.which("git") or "git"
+    try:
+        probe = subprocess.run(
+            [git_bin, "rev-parse", "--verify", "--quiet", base],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if probe.returncode != 0:
+            return None
+        result = subprocess.run(
+            [git_bin, "diff", "--name-only", f"{base}...HEAD"],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+            return None
+        return [line.strip() for line in result.stdout.splitlines() if line.strip()]
+    except FileNotFoundError:
         return None
-    result = subprocess.run(
-        ["git", "diff", "--name-only", f"{base}...HEAD"],
-        cwd=ROOT,
-        capture_output=True,
-        text=True,
-        check=False,
-    )
-    if result.returncode != 0:
-        return None
-    return [line.strip() for line in result.stdout.splitlines() if line.strip()]
 
 
 def evaluate(files: list[str]) -> list[str]:
