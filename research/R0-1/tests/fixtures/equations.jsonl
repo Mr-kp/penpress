@@ -1,0 +1,125 @@
+{"id": "EQ-001", "category": "arithmetic", "difficulty": 1, "latex": "2 + 3 = 5"}
+{"id": "EQ-002", "category": "arithmetic", "difficulty": 1, "latex": "14 - 9 = 5"}
+{"id": "EQ-003", "category": "arithmetic", "difficulty": 1, "latex": "7 \\times 8 = 56"}
+{"id": "EQ-004", "category": "arithmetic", "difficulty": 1, "latex": "81 \\div 9 = 9"}
+{"id": "EQ-005", "category": "arithmetic", "difficulty": 1, "latex": "3x + 5 = 20"}
+{"id": "EQ-006", "category": "arithmetic", "difficulty": 1, "latex": "y = mx + b"}
+{"id": "EQ-007", "category": "arithmetic", "difficulty": 1, "latex": "a^2 + b^2 = c^2"}
+{"id": "EQ-008", "category": "arithmetic", "difficulty": 1, "latex": "E = mc^2"}
+{"id": "EQ-009", "category": "arithmetic", "difficulty": 1, "latex": "F = ma"}
+{"id": "EQ-010", "category": "arithmetic", "difficulty": 1, "latex": "PV = nRT"}
+{"id": "EQ-011", "category": "fractions", "difficulty": 1, "latex": "\\frac{1}{2} + \\frac{1}{4} = \\frac{3}{4}"}
+{"id": "EQ-012", "category": "fractions", "difficulty": 1, "latex": "\\frac{a}{b} = \\frac{c}{d}"}
+{"id": "EQ-013", "category": "fractions", "difficulty": 2, "latex": "\\frac{x^2 - 1}{x + 1} = x - 1"}
+{"id": "EQ-014", "category": "fractions", "difficulty": 2, "latex": "\\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"}
+{"id": "EQ-015", "category": "fractions", "difficulty": 2, "latex": "\\frac{\\Delta y}{\\Delta x} = m"}
+{"id": "EQ-016", "category": "fractions", "difficulty": 3, "latex": "\\frac{1}{1 + \\frac{1}{1 + \\frac{1}{x}}}"}
+{"id": "EQ-017", "category": "fractions", "difficulty": 3, "latex": "\\frac{a + \\frac{b}{c}}{d + \\frac{e}{f}}"}
+{"id": "EQ-018", "category": "fractions", "difficulty": 3, "latex": "\\frac{\\frac{x}{y} - \\frac{y}{x}}{x - y}"}
+{"id": "EQ-019", "category": "fractions", "difficulty": 2, "latex": "\\frac{d}{dx} \\left( \\frac{u}{v} \\right) = \\frac{u'v - uv'}{v^2}"}
+{"id": "EQ-020", "category": "fractions", "difficulty": 3, "latex": "\\frac{1}{2\\pi} \\int_{0}^{2\\pi} \\frac{d\\theta}{a + b\\cos\\theta}"}
+{"id": "EQ-021", "category": "roots", "difficulty": 1, "latex": "\\sqrt{4} = 2"}
+{"id": "EQ-022", "category": "roots", "difficulty": 1, "latex": "\\sqrt{x + y}"}
+{"id": "EQ-023", "category": "roots", "difficulty": 2, "latex": "\\sqrt[3]{8} = 2"}
+{"id": "EQ-024", "category": "roots", "difficulty": 2, "latex": "\\sqrt{x^2 + y^2 + z^2}"}
+{"id": "EQ-025", "category": "roots", "difficulty": 2, "latex": "\\sqrt[n]{a^m} = a^{\\frac{m}{n}}"}
+{"id": "EQ-026", "category": "roots", "difficulty": 3, "latex": "\\sqrt{1 + \\sqrt{1 + \\sqrt{1 + x}}}"}
+{"id": "EQ-027", "category": "roots", "difficulty": 3, "latex": "\\sqrt{\\frac{a^2 + b^2}{c^2 + d^2}}"}
+{"id": "EQ-028", "category": "roots", "difficulty": 2, "latex": "\\sqrt{2\\pi n} \\left(\\frac{n}{e}\\right)^n"}
+{"id": "EQ-029", "category": "roots", "difficulty": 3, "latex": "\\sqrt[4]{\\frac{x^3 + y^3}{z^3}}"}
+{"id": "EQ-030", "category": "roots", "difficulty": 1, "latex": "\\sqrt{16} = 4"}
+{"id": "EQ-031", "category": "exponents", "difficulty": 1, "latex": "e^x = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!}"}
+{"id": "EQ-032", "category": "exponents", "difficulty": 1, "latex": "x^{a+b} = x^a x^b"}
+{"id": "EQ-033", "category": "exponents", "difficulty": 2, "latex": "(x^a)^b = x^{ab}"}
+{"id": "EQ-034", "category": "exponents", "difficulty": 2, "latex": "a^{-n} = \\frac{1}{a^n}"}
+{"id": "EQ-035", "category": "exponents", "difficulty": 2, "latex": "e^{i\\pi} + 1 = 0"}
+{"id": "EQ-036", "category": "exponents", "difficulty": 3, "latex": "2^{2^{2^x}}"}
+{"id": "EQ-037", "category": "exponents", "difficulty": 3, "latex": "x^{y^z} \\neq (x^y)^z"}
+{"id": "EQ-038", "category": "exponents", "difficulty": 2, "latex": "A_0 e^{-\\lambda t}"}
+{"id": "EQ-039", "category": "exponents", "difficulty": 1, "latex": "10^3 = 1000"}
+{"id": "EQ-040", "category": "exponents", "difficulty": 2, "latex": "\\exp\\left(-\\frac{x^2}{2\\sigma^2}\\right)"}
+{"id": "EQ-041", "category": "calculus", "difficulty": 1, "latex": "\\int x \\, dx = \\frac{1}{2}x^2 + C"}
+{"id": "EQ-042", "category": "calculus", "difficulty": 2, "latex": "\\int_a^b f(x) \\, dx = F(b) - F(a)"}
+{"id": "EQ-043", "category": "calculus", "difficulty": 2, "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}"}
+{"id": "EQ-044", "category": "calculus", "difficulty": 2, "latex": "\\sum_{k=0}^\\infty r^k = \\frac{1}{1-r}"}
+{"id": "EQ-045", "category": "calculus", "difficulty": 3, "latex": "\\iint_D f(x, y) \\, dx \\, dy"}
+{"id": "EQ-046", "category": "calculus", "difficulty": 3, "latex": "\\oint_C \\vec{F} \\cdot d\\vec{r} = \\iint_S (\\nabla \\times \\vec{F}) \\cdot d\\vec{S}"}
+{"id": "EQ-047", "category": "calculus", "difficulty": 3, "latex": "\\int_{-\\infty}^\\infty e^{-x^2} \\, dx = \\sqrt{\\pi}"}
+{"id": "EQ-048", "category": "calculus", "difficulty": 2, "latex": "\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1"}
+{"id": "EQ-049", "category": "calculus", "difficulty": 2, "latex": "\\frac{df}{dx} = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}"}
+{"id": "EQ-050", "category": "calculus", "difficulty": 3, "latex": "\\int_0^1 x^p (1-x)^q \\, dx = B(p+1, q+1)"}
+{"id": "EQ-051", "category": "matrices", "difficulty": 1, "latex": "\\vec{v} = (x, y, z)"}
+{"id": "EQ-052", "category": "matrices", "difficulty": 1, "latex": "\\hat{i} \\times \\hat{j} = \\hat{k}"}
+{"id": "EQ-053", "category": "matrices", "difficulty": 2, "latex": "\\vec{a} \\cdot \\vec{b} = |\\vec{a}||\\vec{b}| \\cos\\theta"}
+{"id": "EQ-054", "category": "matrices", "difficulty": 2, "latex": "\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}"}
+{"id": "EQ-055", "category": "matrices", "difficulty": 2, "latex": "\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}"}
+{"id": "EQ-056", "category": "matrices", "difficulty": 2, "latex": "\\det(A) = ad - bc"}
+{"id": "EQ-057", "category": "matrices", "difficulty": 3, "latex": "\\begin{bmatrix} a_{11} & a_{12} & a_{13} \\\\ a_{21} & a_{22} & a_{23} \\\\ a_{31} & a_{32} & a_{33} \\end{bmatrix}"}
+{"id": "EQ-058", "category": "matrices", "difficulty": 3, "latex": "A^{-1} = \\frac{1}{\\det(A)} \\text{adj}(A)"}
+{"id": "EQ-059", "category": "matrices", "difficulty": 3, "latex": "\\nabla \\times (\\nabla \\phi) = \\vec{0}"}
+{"id": "EQ-060", "category": "matrices", "difficulty": 2, "latex": "\\|\\vec{x}\\|_2 = \\sqrt{\\sum_i x_i^2}"}
+{"id": "EQ-061", "category": "piecewise", "difficulty": 2, "latex": "|x| = \\begin{cases} x & x \\ge 0 \\\\ -x & x < 0 \\end{cases}"}
+{"id": "EQ-062", "category": "piecewise", "difficulty": 2, "latex": "u(t) = \\begin{cases} 1 & t \\ge 0 \\\\ 0 & t < 0 \\end{cases}"}
+{"id": "EQ-063", "category": "piecewise", "difficulty": 3, "latex": "f(x) = \\begin{cases} x^2 & x \\le 1 \\\\ 2x - 1 & x > 1 \\end{cases}"}
+{"id": "EQ-064", "category": "piecewise", "difficulty": 3, "latex": "\\text{sgn}(x) = \\begin{cases} 1 & x > 0 \\\\ 0 & x = 0 \\\\ -1 & x < 0 \\end{cases}"}
+{"id": "EQ-065", "category": "piecewise", "difficulty": 3, "latex": "\\delta_{ij} = \\begin{cases} 1 & i = j \\\\ 0 & i \\neq j \\end{cases}"}
+{"id": "EQ-066", "category": "trig", "difficulty": 1, "latex": "\\sin^2\\theta + \\cos^2\\theta = 1"}
+{"id": "EQ-067", "category": "trig", "difficulty": 1, "latex": "\\tan\\theta = \\frac{\\sin\\theta}{\\cos\\theta}"}
+{"id": "EQ-068", "category": "trig", "difficulty": 2, "latex": "\\sin(2\\theta) = 2\\sin\\theta\\cos\\theta"}
+{"id": "EQ-069", "category": "trig", "difficulty": 2, "latex": "\\cos(2\\theta) = \\cos^2\\theta - \\sin^2\\theta"}
+{"id": "EQ-070", "category": "trig", "difficulty": 1, "latex": "\\ln(xy) = \\ln x + \\ln y"}
+{"id": "EQ-071", "category": "trig", "difficulty": 2, "latex": "\\log_b(a) = \\frac{\\ln a}{\\ln b}"}
+{"id": "EQ-072", "category": "trig", "difficulty": 2, "latex": "\\cosh^2 x - \\sinh^2 x = 1"}
+{"id": "EQ-073", "category": "trig", "difficulty": 3, "latex": "\\tan(a + b) = \\frac{\\tan a + \\tan b}{1 - \\tan a \\tan b}"}
+{"id": "EQ-074", "category": "trig", "difficulty": 2, "latex": "\\arcsin(x) + \\arccos(x) = \\frac{\\pi}{2}"}
+{"id": "EQ-075", "category": "trig", "difficulty": 1, "latex": "e^{\\ln x} = x"}
+{"id": "EQ-076", "category": "physics", "difficulty": 1, "latex": "\\lambda \\nu = c"}
+{"id": "EQ-077", "category": "physics", "difficulty": 1, "latex": "p = \\hbar k"}
+{"id": "EQ-078", "category": "physics", "difficulty": 2, "latex": "\\Delta x \\Delta p \\ge \\frac{\\hbar}{2}"}
+{"id": "EQ-079", "category": "physics", "difficulty": 2, "latex": "i\\hbar \\frac{\\partial}{\\partial t} \\Psi = \\hat{H} \\Psi"}
+{"id": "EQ-080", "category": "physics", "difficulty": 2, "latex": "\\nabla \\cdot \\vec{E} = \\frac{\\rho}{\\epsilon_0}"}
+{"id": "EQ-081", "category": "physics", "difficulty": 2, "latex": "\\nabla \\cdot \\vec{B} = 0"}
+{"id": "EQ-082", "category": "physics", "difficulty": 3, "latex": "\\nabla \\times \\vec{E} = -\\frac{\\partial \\vec{B}}{\\partial t}"}
+{"id": "EQ-083", "category": "physics", "difficulty": 3, "latex": "\\nabla \\times \\vec{B} = \\mu_0 \\vec{J} + \\frac{1}{c^2} \\frac{\\partial \\vec{E}}{\\partial t}"}
+{"id": "EQ-084", "category": "physics", "difficulty": 2, "latex": "R_{\\mu\\nu} - \\frac{1}{2} R g_{\\mu\\nu} = \\frac{8\\pi G}{c^4} T_{\\mu\\nu}"}
+{"id": "EQ-085", "category": "physics", "difficulty": 1, "latex": "V = IR"}
+{"id": "EQ-086", "category": "chemistry", "difficulty": 1, "latex": "2\\text{H}_2 + \\text{O}_2 \\to 2\\text{H}_2\\text{O}"}
+{"id": "EQ-087", "category": "chemistry", "difficulty": 1, "latex": "\\text{NaCl} \\to \\text{Na}^+ + \\text{Cl}^-"}
+{"id": "EQ-088", "category": "chemistry", "difficulty": 2, "latex": "\\text{CH}_4 + 2\\text{O}_2 \\to \\text{CO}_2 + 2\\text{H}_2\\text{O}"}
+{"id": "EQ-089", "category": "chemistry", "difficulty": 2, "latex": "\\text{CaCO}_3 \\to \\text{CaO} + \\text{CO}_2"}
+{"id": "EQ-090", "category": "chemistry", "difficulty": 2, "latex": "K_a = \\frac{[\\text{H}^+][\\text{A}^-]}{[\\text{HA}]}"}
+{"id": "EQ-091", "category": "chemistry", "difficulty": 2, "latex": "\\text{pH} = -\\log[\\text{H}^+]"}
+{"id": "EQ-092", "category": "chemistry", "difficulty": 3, "latex": "\\Delta G = \\Delta H - T\\Delta S"}
+{"id": "EQ-093", "category": "chemistry", "difficulty": 3, "latex": "E = E^\\circ - \\frac{RT}{nF} \\ln Q"}
+{"id": "EQ-094", "category": "chemistry", "difficulty": 2, "latex": "2\\text{Fe} + 3\\text{Cl}_2 \\to 2\\text{FeCl}_3"}
+{"id": "EQ-095", "category": "chemistry", "difficulty": 1, "latex": "\\text{H}_2\\text{O}"}
+{"id": "EQ-096", "category": "units", "difficulty": 1, "latex": "1 \\text{ kg} = 1000 \\text{ g}"}
+{"id": "EQ-097", "category": "units", "difficulty": 1, "latex": "1 \\text{ m} = 100 \\text{ cm}"}
+{"id": "EQ-098", "category": "units", "difficulty": 1, "latex": "100 \\text{ km/h} = 27.78 \\text{ m/s}"}
+{"id": "EQ-099", "category": "units", "difficulty": 2, "latex": "G = 6.674 \\times 10^{-11} \\text{ m}^3\\text{kg}^{-1}\\text{s}^{-2}"}
+{"id": "EQ-100", "category": "units", "difficulty": 2, "latex": "c = 2.998 \\times 10^8 \\text{ m/s}"}
+{"id": "EQ-101", "category": "units", "difficulty": 2, "latex": "h = 6.626 \\times 10^{-34} \\text{ J}\\cdot\\text{s}"}
+{"id": "EQ-102", "category": "units", "difficulty": 3, "latex": "k_B = 1.381 \\times 10^{-23} \\text{ J/K}"}
+{"id": "EQ-103", "category": "units", "difficulty": 1, "latex": "1 \\text{ N} = 1 \\text{ kg}\\cdot\\text{m/s}^2"}
+{"id": "EQ-104", "category": "units", "difficulty": 2, "latex": "1 \\text{ J} = 1 \\text{ N}\\cdot\\text{m}"}
+{"id": "EQ-105", "category": "units", "difficulty": 2, "latex": "1 \\text{ W} = 1 \\text{ J/s}"}
+{"id": "EQ-106", "category": "arithmetic", "difficulty": 1, "latex": "5! = 120"}
+{"id": "EQ-107", "category": "arithmetic", "difficulty": 2, "latex": "\\binom{n}{k} = \\frac{n!}{k!(n-k)!}"}
+{"id": "EQ-108", "category": "arithmetic", "difficulty": 1, "latex": "(a + b)^2 = a^2 + 2ab + b^2"}
+{"id": "EQ-109", "category": "arithmetic", "difficulty": 1, "latex": "(a - b)(a + b) = a^2 - b^2"}
+{"id": "EQ-110", "category": "calculus", "difficulty": 2, "latex": "\\frac{\\partial u}{\\partial t} = \\alpha \\frac{\\partial^2 u}{\\partial x^2}"}
+{"id": "EQ-111", "category": "calculus", "difficulty": 3, "latex": "\\nabla^2 \\psi + k^2 \\psi = 0"}
+{"id": "EQ-112", "category": "calculus", "difficulty": 2, "latex": "\\int_0^\\infty e^{-st} f(t) \\, dt = F(s)"}
+{"id": "EQ-113", "category": "physics", "difficulty": 2, "latex": "T = 2\\pi \\sqrt{\\frac{L}{g}}"}
+{"id": "EQ-114", "category": "physics", "difficulty": 1, "latex": "p = mv"}
+{"id": "EQ-115", "category": "physics", "difficulty": 2, "latex": "K = \\frac{1}{2}mv^2"}
+{"id": "EQ-116", "category": "trig", "difficulty": 2, "latex": "\\sin(x + y) = \\sin x \\cos y + \\cos x \\sin y"}
+{"id": "EQ-117", "category": "trig", "difficulty": 2, "latex": "\\cos(x + y) = \\cos x \\cos y - \\sin x \\sin y"}
+{"id": "EQ-118", "category": "trig", "difficulty": 3, "latex": "\\sum_{n=1}^\\infty \\frac{1}{n^2} = \\frac{\\pi^2}{6}"}
+{"id": "EQ-119", "category": "matrices", "difficulty": 2, "latex": "A B \\neq B A"}
+{"id": "EQ-120", "category": "matrices", "difficulty": 3, "latex": "\\det(A B) = \\det(A) \\det(B)"}
+{"id": "EQ-121", "category": "matrices", "difficulty": 2, "latex": "\\text{Tr}(A) = \\sum_i a_{ii}"}
+{"id": "EQ-122", "category": "fractions", "difficulty": 2, "latex": "\\frac{1}{R_{\\text{eq}}} = \\frac{1}{R_1} + \\frac{1}{R_2}"}
+{"id": "EQ-123", "category": "chemistry", "difficulty": 2, "latex": "2\\text{Al} + 6\\text{HCl} \\to 2\\text{AlCl}_3 + 3\\text{H}_2"}
+{"id": "EQ-124", "category": "physics", "difficulty": 3, "latex": "\\lambda_{\\text{max}} T = 2.898 \\times 10^{-3} \\text{ m}\\cdot\\text{K}"}
+{"id": "EQ-125", "category": "calculus", "difficulty": 3, "latex": "\\Gamma(n) = (n - 1)!"}

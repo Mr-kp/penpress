@@ -23,3 +23,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T10:36:19Z [agent] [P1-5] Claimed P1-5: First vertical slice end-to-end pipeline (text to strokes to G-code to simulator image to OCR)
 - 2026-10-13T10:42:10Z [agent] [P1-5] P1-5 completed: text to Hershey strokes to G-code to Marlin simulation to Tesseract OCR (0.12% CER) verified. Card moved to review.
 - 2026-10-13T10:46:55Z [agent] [P1-5] P1-5 reviewed and marked done by director-adversarial-review. CI 100% green. Phase P1 100% COMPLETE.
+- 2026-10-13T10:49:48Z [agent] [R0-1] Claimed R0-1: Synthetic fixture factory (deterministic seeded generator for handwriting sheets, bed camera scenes, equations, PDFs, and stroke recovery ground truth)
+- 2026-10-13T11:00:12Z [agent] [R0-1] R0-1 completed: synthetic fixture factory, 125 equations, 4 OFL sample sheets, 3 bed scenes with homography, 4 negative fixtures, 3.0MB size, deterministic sha256 verified. Moved to review.
