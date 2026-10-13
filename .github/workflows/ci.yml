@@ -17,7 +17,18 @@ jobs:
         with:
           fetch-depth: 0
       - uses: astral-sh/setup-uv@v5
-      - name: Install
+      - name: Install System Dependencies (Tesseract OCR)
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" = "Linux" ]; then
+            sudo apt-get update && sudo apt-get install -y tesseract-ocr
+          elif [ "${{ runner.os }}" = "macOS" ]; then
+            brew install tesseract
+          elif [ "${{ runner.os }}" = "Windows" ]; then
+            choco install tesseract --no-progress
+            echo "C:\Program Files\Tesseract-OCR" >> "$GITHUB_PATH"
+          fi
+      - name: Install Python Environment
         run: uv sync --python 3.12
       - name: Set docs-check base
         shell: bash
