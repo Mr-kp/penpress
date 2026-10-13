@@ -21,7 +21,7 @@ from penpress.core.hershey import HERSHEY_DATA_FILENAME
 
 def test_hershey_data_file_checksum() -> None:
     data_res = resources.files("penpress.core.data").joinpath(HERSHEY_DATA_FILENAME)
-    data_bytes = data_res.read_bytes()
+    data_bytes = data_res.read_bytes().replace(b"\r\n", b"\n")
     computed_sha256 = hashlib.sha256(data_bytes).hexdigest()
     assert computed_sha256 == EXPECTED_HERSHEY_SHA256, (
         f"Checksum mismatch: {computed_sha256} != {EXPECTED_HERSHEY_SHA256}"
