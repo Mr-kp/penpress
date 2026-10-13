@@ -48,3 +48,4 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T15:23:55Z [agent] [X-1] X-1 reviewed by director-adversarial-review: ROADMAP mapped to 11 concrete implementation cards across P2-P9 with numeric acceptance criteria and anti-shortcuts, state.py check passed with 0 errors across 27 cards. X-1 marked done.
 - 2026-10-13T15:28:23Z [agent] [P2-1] Claimed P2-1: Handwriting profile generator and sample sheet ingestion engine
 - 2026-10-13T15:39:07Z [agent] [P2-1] P2-1 implemented: sheet_gen, sheet_ingest, profile models, 1.903px Chamfer distance, gate passes
+- 2026-10-13T15:50:27Z [agent] [P2-1] P2-1 approved by director-adversarial-reviewer: marked done

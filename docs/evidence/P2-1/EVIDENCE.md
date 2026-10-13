@@ -56,4 +56,14 @@ print(f"p2g: {p2g:.3f} px, g2p: {g2p:.3f} px, bidirectional Chamfer: {chamfer:.3
 None.
 
 ## Reviewer notes
-To be filled by independent reviewer.
+Reviewed-by: director-adversarial-reviewer
+Date: 2026-10-13
+
+Independent verification checks:
+1. Re-executed `pytest tests/unit/profile/test_sheet.py`: 5 passed in 0.94s.
+2. Verified Chamfer distance formula and numerical metric: 1.903 px on `stroke_recovery_sample.png`, meeting <= 2.2 px threshold.
+3. Verified negative alignment test: blank white image raises `SheetAlignmentError`.
+4. Verified `make gate`: 112 passed, 86.65% coverage (>= 85%), ruff, mypy, forbid, board, docs all pass.
+5. GitHub Actions CI run `38424989105` verified 100% green across all matrix targets (Linux, macOS, Windows).
+Verdict: APPROVED. Card accepted and promoted to `done`.
+
