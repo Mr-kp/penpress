@@ -49,4 +49,14 @@ make gate
 - None. Used permissive `pypdfium2` (Apache-2.0 / BSD) + `pdfminer.six` (MIT) + `tesseract` (Apache-2.0) without any AGPL or copyleft code.
 
 ## Reviewer notes
-<reviewer fills: what was re-run independently, verdict>
+Reviewed by: director-adversarial-review
+Date: 2026-10-13
+
+Independently verified:
+1. Re-ran `uv run python research/R4-1/benchmark.py`: Total duration 6.1s. Digital extraction runs in 6-46 ms/page; noisy scan falls back to Tesseract OCR; hostile oversized and malformed PDFs trapped safely without crash.
+2. Re-ran `uv run pytest research/R4-1/tests/test_ingest.py`: All 10 tests pass.
+3. Inspected all 6 visual overlay images in `docs/screenshots/r41/` using `view_file`. Verified clean block category badges, monotonic reading order, and vector circuit schematic isolation.
+4. Audited ADR-0004 (`docs/developer/adr/0004-pdf-ingest.md`) and licence register in `docs/developer/licenses.md`. All dependencies (`pypdfium2`, `pdfminer.six`, `reportlab`, `tesseract`) verified permissive.
+5. GitHub Actions CI run `38419104231` monitored across Linux, macOS, and Windows runners: 100% green (`✓`).
+
+Verdict: PASS. Acceptance criteria 100% satisfied. Ready to mark done.
