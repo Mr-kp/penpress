@@ -55,3 +55,8 @@ ignore = ["PLR0913", "PLR0917", "PLR2004", "PLR0912", "PLR0915", "RUF001", "RUF0
 python_version = "3.11"
 strict = true
 files = ["src/penpress", "scripts"]
+
+[[tool.mypy.overrides]]
+module = ["reportlab.*"]
+ignore_missing_imports = true
+
