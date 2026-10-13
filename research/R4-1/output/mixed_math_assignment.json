@@ -1,0 +1,408 @@
+{
+  "doc_id": "mixed_math_assignment",
+  "source_filename": "mixed_math_assignment.pdf",
+  "page_count": 1,
+  "total_blocks": 24,
+  "extraction_duration_s": 0.013,
+  "status": "ok",
+  "warnings": [],
+  "pages": [
+    {
+      "page_idx": 0,
+      "width_pt": 612.0,
+      "height_pt": 792.0,
+      "is_scanned": false,
+      "blocks": [
+        {
+          "block_id": "p0_b0",
+          "block_type": "title",
+          "page_idx": 0,
+          "reading_order": 0,
+          "bbox": {
+            "x0": 65.3,
+            "y0": 710.27,
+            "x1": 546.7,
+            "y1": 728.27
+          },
+          "text": "Calculus III: Multivariable Integration & Stokes' Theorem",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b1",
+          "block_type": "heading",
+          "page_idx": 0,
+          "reading_order": 1,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 665.1,
+            "x1": 309.72,
+            "y1": 679.1
+          },
+          "text": "Problem 1: Flux through a Paraboloid",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b2",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 2,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 645.93,
+            "x1": 484.12,
+            "y1": 655.93
+          },
+          "text": "Compute the outward flux of the vector field F through the surface S bounded by the paraboloid.",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b3",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 3,
+          "bbox": {
+            "x0": 96.0,
+            "y0": 623.65,
+            "x1": 523.2,
+            "y1": 640.45
+          },
+          "text": "Gauss Divergence Theorem: $$\\iint_S \\mathbf{F} \\cdot d\\mathbf{S} = \\iiint_V (\\nabla \\cdot\n\\mathbf{F}) \\, dV$$",
+          "latex": "\\iint_S \\mathbf{F} \\cdot d\\mathbf{S} = \\iiint_V (\\nabla \\cdot\n\\mathbf{F}) \\, dV",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b4",
+          "block_type": "heading",
+          "page_idx": 0,
+          "reading_order": 4,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 587.5,
+            "x1": 335.39,
+            "y1": 601.5
+          },
+          "text": "Problem 2: Circulation along Closed Path",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b5",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 5,
+          "bbox": {
+            "x0": 96.0,
+            "y0": 562.05,
+            "x1": 537.6,
+            "y1": 578.85
+          },
+          "text": "Stokes' Theorem: $$\\oint_C \\mathbf{F} \\cdot d\\mathbf{r} = \\iint_S (\\nabla \\times \\mathbf{F})\n\\cdot d\\mathbf{S}$$",
+          "latex": "\\oint_C \\mathbf{F} \\cdot d\\mathbf{r} = \\iint_S (\\nabla \\times \\mathbf{F})\n\\cdot d\\mathbf{S}",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b6",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 6,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 528.32,
+            "x1": 340.08,
+            "y1": 540.32
+          },
+          "text": "Table 1: Test Vector Fields and Boundary Curves",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_fig23",
+          "block_type": "figure_vector",
+          "page_idx": 0,
+          "reading_order": 7,
+          "bbox": {
+            "x0": 54.0,
+            "y0": 442.8,
+            "x1": 558.0,
+            "y1": 522.8
+          },
+          "text": "",
+          "latex": "",
+          "confidence": 0.95,
+          "metadata": {
+            "path_count": 11,
+            "stroke_segments": 13
+          },
+          "vector_paths_count": 11,
+          "vector_points_total": 24
+        },
+        {
+          "block_id": "p0_b7",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 8,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 510.14,
+            "x1": 101.79,
+            "y1": 518.14
+          },
+          "text": "Field Index",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b8",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 9,
+          "bbox": {
+            "x0": 140.0,
+            "y0": 510.14,
+            "x1": 220.02,
+            "y1": 518.14
+          },
+          "text": "Vector Field F(x, y, z)",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b9",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 10,
+          "bbox": {
+            "x0": 300.0,
+            "y0": 510.14,
+            "x1": 376.89,
+            "y1": 518.14
+          },
+          "text": "Boundary Condition",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b10",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 11,
+          "bbox": {
+            "x0": 450.0,
+            "y0": 510.14,
+            "x1": 479.34,
+            "y1": 518.14
+          },
+          "text": "Domain",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b11",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 12,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 490.14,
+            "x1": 84.9,
+            "y1": 498.14
+          },
+          "text": "Field A",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b14",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 13,
+          "bbox": {
+            "x0": 140.0,
+            "y0": 490.14,
+            "x1": 191.1,
+            "y1": 498.14
+          },
+          "text": "F = (y, -x, z^2)",
+          "latex": "F = (y, -x, z^2)",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b16",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 14,
+          "bbox": {
+            "x0": 300.0,
+            "y0": 490.14,
+            "x1": 379.33,
+            "y1": 498.14
+          },
+          "text": "C: x^2 + y^2 = 1, z = 0",
+          "latex": "C: x^2 + y^2 = 1, z = 0",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b17",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 15,
+          "bbox": {
+            "x0": 450.0,
+            "y0": 490.14,
+            "x1": 521.58,
+            "y1": 498.14
+          },
+          "text": "Unit disk in xy-plane",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b12",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 16,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 470.14,
+            "x1": 84.9,
+            "y1": 478.14
+          },
+          "text": "Field B",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b15",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 17,
+          "bbox": {
+            "x0": 140.0,
+            "y0": 470.14,
+            "x1": 193.58,
+            "y1": 478.14
+          },
+          "text": "F = (2z, 3x, 5y)",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b18",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 18,
+          "bbox": {
+            "x0": 300.0,
+            "y0": 470.14,
+            "x1": 404.88,
+            "y1": 478.14
+          },
+          "text": "S: x^2 + y^2 + z^2 = 4, z >= 0",
+          "latex": "S: x^2 + y^2 + z^2 = 4, z >= 0",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b19",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 19,
+          "bbox": {
+            "x0": 450.0,
+            "y0": 470.14,
+            "x1": 515.8,
+            "y1": 478.14
+          },
+          "text": "Upper hemisphere",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b13",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 20,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 450.14,
+            "x1": 85.34,
+            "y1": 458.14
+          },
+          "text": "Field C",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b20",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 21,
+          "bbox": {
+            "x0": 140.0,
+            "y0": 450.14,
+            "x1": 204.83,
+            "y1": 458.14
+          },
+          "text": "F = (e^y, e^z, e^x)",
+          "latex": "F = (e^y, e^z, e^x)",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b21",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 22,
+          "bbox": {
+            "x0": 300.0,
+            "y0": 450.14,
+            "x1": 374.26,
+            "y1": 458.14
+          },
+          "text": "Tetrahedron at origin",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b22",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 23,
+          "bbox": {
+            "x0": 450.0,
+            "y0": 450.14,
+            "x1": 528.72,
+            "y1": 458.14
+          },
+          "text": "x+y+z <= 1, x,y,z >= 0",
+          "latex": "x+y+z <= 1, x,y,z >= 0",
+          "confidence": 0.98,
+          "metadata": {}
+        }
+      ]
+    }
+  ]
+}

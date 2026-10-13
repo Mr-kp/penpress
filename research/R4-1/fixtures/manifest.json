@@ -1,0 +1,62 @@
+{
+  "single_column_academic": {
+    "doc_id": "single_column_academic",
+    "file": "single_column_academic.pdf",
+    "expected_blocks": 9,
+    "expected_equations": [
+      "\\ddot{\\theta}_1 + \\omega_0^2 \\theta_1 + \\kappa (\\theta_1 - \\theta_2) = 0",
+      "\\ddot{\\theta}_2 + \\omega_0^2 \\theta_2 - \\kappa (\\theta_1 - \\theta_2) = 0",
+      "\\omega_1 = \\sqrt{\\frac{g}{l}}, \\quad \\omega_2 = \\sqrt{\\frac{g}{l} + \\frac{2kd^2}{ml^2}}"
+    ],
+    "has_columns": false,
+    "is_scan": false
+  },
+  "two_column_article": {
+    "doc_id": "two_column_article",
+    "file": "two_column_article.pdf",
+    "expected_columns": 2,
+    "expected_equations": [
+      "\\vec{q} = -\\frac{\\kappa}{\\mu} \\nabla p",
+      "\\vec{q} = -\\frac{\\kappa}{\\mu} (\\nabla p - \\rho \\vec{g})",
+      "\\kappa = \\frac{\\phi^3}{c_0 S_v^2 (1 - \\phi)^2}"
+    ],
+    "has_vector_figure": true,
+    "is_scan": false
+  },
+  "mixed_math_assignment": {
+    "doc_id": "mixed_math_assignment",
+    "file": "mixed_math_assignment.pdf",
+    "expected_equations": [
+      "\\iint_S \\mathbf{F} \\cdot d\\mathbf{S} = \\iiint_V (\\nabla \\cdot \\mathbf{F}) \\, dV",
+      "\\oint_C \\mathbf{F} \\cdot d\\mathbf{r} = \\iint_S (\\nabla \\times \\mathbf{F}) \\cdot d\\mathbf{S}"
+    ],
+    "has_table": true,
+    "is_scan": false
+  },
+  "vector_figure_circuit": {
+    "doc_id": "vector_figure_circuit",
+    "file": "vector_figure_circuit.pdf",
+    "has_vector_figure": true,
+    "is_scan": false
+  },
+  "scanned_page_noisy": {
+    "doc_id": "scanned_page_noisy",
+    "file": "scanned_page_noisy.pdf",
+    "is_scan": true
+  },
+  "hostile_oversized": {
+    "doc_id": "hostile_oversized",
+    "file": "hostile_oversized.pdf",
+    "is_hostile": true
+  },
+  "hostile_huge_image": {
+    "doc_id": "hostile_huge_image",
+    "file": "hostile_huge_image.pdf",
+    "is_hostile": true
+  },
+  "hostile_malformed": {
+    "doc_id": "hostile_malformed",
+    "file": "hostile_malformed.pdf",
+    "is_hostile": true
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "doc_id": "scanned_page_noisy",
+  "source_filename": "scanned_page_noisy.pdf",
+  "page_count": 1,
+  "total_blocks": 18,
+  "extraction_duration_s": 5.205,
+  "status": "ok",
+  "warnings": [],
+  "pages": [
+    {
+      "page_idx": 0,
+      "width_pt": 587.52,
+      "height_pt": 760.32,
+      "is_scanned": true,
+      "blocks": [
+        {
+          "block_id": "p0_ocr_0",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 0,
+          "bbox": {
+            "x0": 54.46,
+            "y0": 595.86,
+            "x1": 497.09,
+            "y1": 699.83
+          },
+          "text": "Harmonic Oscillations in Coupled Pendulums PenPress Benchmark Series * Assignment 1 1. Theoretical Foundation Consider two identical pendulums of mass m and length | suspended from a rigid horizontal beam. The",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_1",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 1,
+          "bbox": {
+            "x0": 54.96,
+            "y0": 581.36,
+            "x1": 520.57,
+            "y1": 596.86
+          },
+          "text": "pendulums are coupled by a linear spring of spring constant k attached at distance d below the pivot points. In",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_2",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 2,
+          "bbox": {
+            "x0": 54.96,
+            "y0": 568.37,
+            "x1": 506.09,
+            "y1": 584.86
+          },
+          "text": "the small-angle approximation, the equations of motion decouple into symmetric and antisymmetric normal",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_3",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 3,
+          "bbox": {
+            "x0": 55.45,
+            "y0": 556.37,
+            "x1": 85.93,
+            "y1": 563.37
+          },
+          "text": "modes.",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_4",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 4,
+          "bbox": {
+            "x0": 74.94,
+            "y0": 533.87,
+            "x1": 488.1,
+            "y1": 547.37
+          },
+          "text": "Equation 1: $$\\ddot {\\theta}_1 + \\omega_0*2 \\theta_l + \\kappa (\\theta_l -",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_5",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 5,
+          "bbox": {
+            "x0": 75.44,
+            "y0": 521.88,
+            "x1": 160.37,
+            "y1": 530.87
+          },
+          "text": "\\theta_2) = 0$$",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_6",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 6,
+          "bbox": {
+            "x0": 75.44,
+            "y0": 501.38,
+            "x1": 488.6,
+            "y1": 514.38
+          },
+          "text": "Equation 2: $$\\ddot {\\theta}_2 + \\omega_0*2 \\theta_2 - \\kappa (\\theta_l -",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_7",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 7,
+          "bbox": {
+            "x0": 75.94,
+            "y0": 489.38,
+            "x1": 160.87,
+            "y1": 497.88
+          },
+          "text": "\\theta_2) = 0$$",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_8",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 8,
+          "bbox": {
+            "x0": 56.95,
+            "y0": 459.39,
+            "x1": 238.8,
+            "y1": 472.39
+          },
+          "text": "2. Normal Mode Frequencies",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_9",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 9,
+          "bbox": {
+            "x0": 57.45,
+            "y0": 439.4,
+            "x1": 526.57,
+            "y1": 454.39
+          },
+          "text": "By taking the sum and difference of the coordinates, we define the in-phase coordinate eta = theta_1 + theta_2",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_10",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 10,
+          "bbox": {
+            "x0": 56.95,
+            "y0": 426.4,
+            "x1": 526.57,
+            "y1": 440.9
+          },
+          "text": "and the out-of-phase coordinate zeta = theta_1 - theta_2. The eigenfrequencies of the normal modes are given",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_11",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 11,
+          "bbox": {
+            "x0": 57.45,
+            "y0": 412.4,
+            "x1": 68.94,
+            "y1": 421.4
+          },
+          "text": "by:",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_12",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 12,
+          "bbox": {
+            "x0": 76.94,
+            "y0": 391.91,
+            "x1": 528.07,
+            "y1": 406.9
+          },
+          "text": "Equation 3: $$\\omega_l = \\sart{\\frac{g}{1}}, \\quad \\omega_2 = \\sart{\\frac{g}{1}",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_13",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 13,
+          "bbox": {
+            "x0": 77.44,
+            "y0": 379.41,
+            "x1": 208.33,
+            "y1": 389.91
+          },
+          "text": "+ \\frac{2kd*2}{m1*2}}$$",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_14",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 14,
+          "bbox": {
+            "x0": 58.45,
+            "y0": 348.42,
+            "x1": 227.31,
+            "y1": 362.91
+          },
+          "text": "3. Experimental Procedure",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_15",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 15,
+          "bbox": {
+            "x0": 58.95,
+            "y0": 329.92,
+            "x1": 513.58,
+            "y1": 344.92
+          },
+          "text": "4. Displace both pendulums by identical angle theta_0 = 5 deg in the same direction and record period T_1.",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_16",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 16,
+          "bbox": {
+            "x0": 58.95,
+            "y0": 288.43,
+            "x1": 489.6,
+            "y1": 323.42
+          },
+          "text": "2. Displace both pendulums by opposite angles theta_1 = -theta_2 = 5 deg and record period T_2. 3. Release pendulum 1 from theta_0 while pendulum 2 remains at rest, measuring the beat frequency",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_ocr_17",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 17,
+          "bbox": {
+            "x0": 58.95,
+            "y0": 273.94,
+            "x1": 100.92,
+            "y1": 283.43
+          },
+          "text": "omega_b.",
+          "latex": "",
+          "confidence": 0.88,
+          "metadata": {}
+        }
+      ]
+    }
+  ]
+}

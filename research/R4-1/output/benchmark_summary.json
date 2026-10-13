@@ -1,0 +1,129 @@
+{
+  "benchmark_timestamp": "2026-10-13T14:56:38Z",
+  "total_documents": 8,
+  "total_duration_s": 6.148,
+  "results": {
+    "single_column_academic": {
+      "doc_id": "single_column_academic",
+      "status": "ok",
+      "duration_s": 0.0464,
+      "page_count": 1,
+      "total_blocks": 13,
+      "warnings": [],
+      "overlay_image": "docs/screenshots/r41/single_column_academic_overlay.png",
+      "found_equations_count": 6,
+      "expected_equations_count": 3,
+      "reading_order_strictly_monotonic": true,
+      "figure_blocks_count": 0,
+      "block_types": {
+        "title": 1,
+        "paragraph": 2,
+        "list_item": 4,
+        "equation": 6
+      }
+    },
+    "two_column_article": {
+      "doc_id": "two_column_article",
+      "status": "ok",
+      "duration_s": 0.0112,
+      "page_count": 1,
+      "total_blocks": 11,
+      "warnings": [],
+      "overlay_image": "docs/screenshots/r41/two_column_article_overlay.png",
+      "found_equations_count": 3,
+      "expected_equations_count": 3,
+      "reading_order_strictly_monotonic": true,
+      "figure_blocks_count": 1,
+      "figure_vector_paths": 7,
+      "block_types": {
+        "paragraph": 5,
+        "figure_vector": 1,
+        "list_item": 2,
+        "equation": 3
+      }
+    },
+    "mixed_math_assignment": {
+      "doc_id": "mixed_math_assignment",
+      "status": "ok",
+      "duration_s": 0.0127,
+      "page_count": 1,
+      "total_blocks": 24,
+      "warnings": [],
+      "overlay_image": "docs/screenshots/r41/mixed_math_assignment_overlay.png",
+      "found_equations_count": 7,
+      "expected_equations_count": 2,
+      "reading_order_strictly_monotonic": true,
+      "figure_blocks_count": 1,
+      "figure_vector_paths": 11,
+      "block_types": {
+        "title": 1,
+        "heading": 2,
+        "paragraph": 13,
+        "equation": 7,
+        "figure_vector": 1
+      }
+    },
+    "vector_figure_circuit": {
+      "doc_id": "vector_figure_circuit",
+      "status": "ok",
+      "duration_s": 0.0059,
+      "page_count": 1,
+      "total_blocks": 6,
+      "warnings": [],
+      "overlay_image": "docs/screenshots/r41/vector_figure_circuit_overlay.png",
+      "found_equations_count": 0,
+      "expected_equations_count": 0,
+      "reading_order_strictly_monotonic": true,
+      "figure_blocks_count": 1,
+      "figure_vector_paths": 14,
+      "block_types": {
+        "paragraph": 5,
+        "figure_vector": 1
+      }
+    },
+    "scanned_page_noisy": {
+      "doc_id": "scanned_page_noisy",
+      "status": "ok",
+      "duration_s": 5.2049,
+      "page_count": 1,
+      "total_blocks": 18,
+      "warnings": [],
+      "overlay_image": "docs/screenshots/r41/scanned_page_noisy_overlay.png",
+      "found_equations_count": 0,
+      "expected_equations_count": 0,
+      "reading_order_strictly_monotonic": true,
+      "figure_blocks_count": 0,
+      "block_types": {
+        "paragraph": 18
+      }
+    },
+    "hostile_oversized": {
+      "doc_id": "hostile_oversized",
+      "status": "ok",
+      "duration_s": 0.0029,
+      "page_count": 1,
+      "total_blocks": 1,
+      "warnings": [
+        "Page 1 dimensions (5000.0x5000.0 pt) exceed safe threshold 2500.0 pt."
+      ]
+    },
+    "hostile_huge_image": {
+      "doc_id": "hostile_huge_image",
+      "status": "ok",
+      "duration_s": 0.1943,
+      "page_count": 1,
+      "total_blocks": 0,
+      "warnings": []
+    },
+    "hostile_malformed": {
+      "doc_id": "hostile_malformed",
+      "status": "error: malformed_pdf (PdfiumError)",
+      "duration_s": 0.0001,
+      "page_count": 0,
+      "total_blocks": 0,
+      "warnings": [
+        "Failed to load document (PDFium: Data format error)."
+      ]
+    }
+  }
+}

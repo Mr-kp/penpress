@@ -1,0 +1,120 @@
+{
+  "doc_id": "vector_figure_circuit",
+  "source_filename": "vector_figure_circuit.pdf",
+  "page_count": 1,
+  "total_blocks": 6,
+  "extraction_duration_s": 0.006,
+  "status": "ok",
+  "warnings": [],
+  "pages": [
+    {
+      "page_idx": 0,
+      "width_pt": 612.0,
+      "height_pt": 792.0,
+      "is_scanned": false,
+      "blocks": [
+        {
+          "block_id": "p0_b0",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 0,
+          "bbox": {
+            "x0": 54.0,
+            "y0": 717.93,
+            "x1": 379.67,
+            "y1": 750.69
+          },
+          "text": "RLC Resonant Circuit Schematic\nVector stroke preservation benchmark for electronic schematic extraction.",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b3",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 1,
+          "bbox": {
+            "x0": 416.0,
+            "y0": 685.93,
+            "x1": 466.3,
+            "y1": 695.93
+          },
+          "text": "C = 100 nF",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b2",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 2,
+          "bbox": {
+            "x0": 330.0,
+            "y0": 681.93,
+            "x1": 380.3,
+            "y1": 691.93
+          },
+          "text": "L = 2.5 mH",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b1",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 3,
+          "bbox": {
+            "x0": 215.0,
+            "y0": 679.93,
+            "x1": 270.3,
+            "y1": 689.93
+          },
+          "text": "R = 50 Ohm",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_fig5",
+          "block_type": "figure_vector",
+          "page_idx": 0,
+          "reading_order": 4,
+          "bbox": {
+            "x0": 84.0,
+            "y0": 492.0,
+            "x1": 500.0,
+            "y1": 687.0
+          },
+          "text": "",
+          "latex": "",
+          "confidence": 0.95,
+          "metadata": {
+            "path_count": 14,
+            "stroke_segments": 26
+          },
+          "vector_paths_count": 14,
+          "vector_points_total": 40
+        },
+        {
+          "block_id": "p0_b4",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 5,
+          "bbox": {
+            "x0": 100.0,
+            "y0": 465.14,
+            "x1": 306.07,
+            "y1": 474.14
+          },
+          "text": "Figure 2: Series RLC resonant filter circuit topology.",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        }
+      ]
+    }
+  ]
+}

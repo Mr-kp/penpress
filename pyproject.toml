@@ -7,6 +7,8 @@ requires-python = ">=3.11"
 license = { text = "MIT" }
 dependencies = [
     "pillow>=12.3.0",
+    "pypdfium2>=4.30.0",
+    "pdfminer-six>=20240706",
 ]
 
 [project.scripts]
@@ -31,7 +33,7 @@ packages = ["src/penpress"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra --strict-markers"
-pythonpath = ["scripts", "research/R0-1", "research/R1-1", "research/R2-1", "research/R3-1", "research/R5-1"]
+pythonpath = ["scripts", "research/R0-1", "research/R1-1", "research/R2-1", "research/R3-1", "research/R4-1", "research/R5-1"]
 
 [tool.coverage.run]
 branch = true

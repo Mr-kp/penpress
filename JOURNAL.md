@@ -38,3 +38,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T12:06:26Z [agent] [R3-1] Claimed R3-1: Camera calibration, paper quad, clip keepout, homography, and confidence gating
 - 2026-10-13T14:45:19Z [agent] [R3-1] R3-1 completed: paper quad detection 0.33mm error across 300 scenes, 0% false accept rate on negative fixtures, clip handle segmentation, CLI suite, ADR-0003 accepted. Moved to review.
 - 2026-10-13T14:49:09Z [agent] [R3-1] R3-1 reviewed by director-adversarial-review: paper quad error 0.33mm, 0% false accept rate, ADR-0003 accepted, CI 38416137949 100% green across all platforms. Marked done.
+- 2026-10-13T14:49:54Z [agent] [R4-1] Claimed R4-1: PDF and document ingest research spike (digital/scans, formulas, vector figures, hostile PDFs, ADR-0004)
+- 2026-10-13T15:00:24Z [agent] [R4-1] R4-1 completed: PDF ingest pipeline with tiered fallback (pypdfium2/pdfminer fast path + Tesseract OCR), vector figure preservation, hostile PDF defenses, 6 overlay screenshots, ADR-0004 accepted. Moved to review.

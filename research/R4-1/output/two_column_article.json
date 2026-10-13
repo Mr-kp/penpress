@@ -1,0 +1,200 @@
+{
+  "doc_id": "two_column_article",
+  "source_filename": "two_column_article.pdf",
+  "page_count": 1,
+  "total_blocks": 11,
+  "extraction_duration_s": 0.011,
+  "status": "ok",
+  "warnings": [],
+  "pages": [
+    {
+      "page_idx": 0,
+      "width_pt": 612.0,
+      "height_pt": 792.0,
+      "is_scanned": false,
+      "blocks": [
+        {
+          "block_id": "p0_b0",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 0,
+          "bbox": {
+            "x0": 54.0,
+            "y0": 713.93,
+            "x1": 388.06,
+            "y1": 746.27
+          },
+          "text": "Microfluidic Transport in Porous Media\nDepartment of Mechanical Engineering (cid:127) Fluid Dynamics Review",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_fig10",
+          "block_type": "figure_vector",
+          "page_idx": 0,
+          "reading_order": 1,
+          "bbox": {
+            "x0": 54.0,
+            "y0": 540.0,
+            "x1": 558.0,
+            "y1": 706.0
+          },
+          "text": "",
+          "latex": "",
+          "confidence": 0.95,
+          "metadata": {
+            "path_count": 7,
+            "stroke_segments": 15
+          },
+          "vector_paths_count": 7,
+          "vector_points_total": 22
+        },
+        {
+          "block_id": "p0_b1",
+          "block_type": "list_item",
+          "page_idx": 0,
+          "reading_order": 2,
+          "bbox": {
+            "x0": 54.0,
+            "y0": 679.52,
+            "x1": 178.04,
+            "y1": 691.52
+          },
+          "text": "1. Darcy Flow Regime",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b2",
+          "block_type": "list_item",
+          "page_idx": 0,
+          "reading_order": 3,
+          "bbox": {
+            "x0": 330.0,
+            "y0": 679.52,
+            "x1": 512.06,
+            "y1": 691.52
+          },
+          "text": "2. Permeability Characterization",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b3",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 4,
+          "bbox": {
+            "x0": 54.0,
+            "y0": 612.14,
+            "x1": 303.32,
+            "y1": 673.14
+          },
+          "text": "Flow through a packed porous bed satisfies Darcy's law\nwhen the Reynolds number based on mean grain diameter\nremains well below unity (Re < 1). The macroscopic superficial\nvelocity vector q depends on hydraulic permeability kappa\nand dynamic fluid viscosity mu:",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b6",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 5,
+          "bbox": {
+            "x0": 330.0,
+            "y0": 651.14,
+            "x1": 601.12,
+            "y1": 673.14
+          },
+          "text": "The Kozeny-Carman empirical equation estimates permeability\nfrom bed porosity phi and specific surface area per unit volume S_v:",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b7",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 6,
+          "bbox": {
+            "x0": 340.0,
+            "y0": 632.25,
+            "x1": 620.8,
+            "y1": 641.25
+          },
+          "text": "$$ \\kappa = \\frac{\\phi^3}{c_0 S_v^2 (1 - \\phi)^2} $$",
+          "latex": "\\kappa = \\frac{\\phi^3}{c_0 S_v^2 (1 - \\phi)^2}",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b4",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 7,
+          "bbox": {
+            "x0": 74.0,
+            "y0": 593.25,
+            "x1": 311.6,
+            "y1": 602.25
+          },
+          "text": "$$ \\vec{q} = -\\frac{\\kappa}{\\mu} \\nabla p $$",
+          "latex": "\\vec{q} = -\\frac{\\kappa}{\\mu} \\nabla p",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b5",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 8,
+          "bbox": {
+            "x0": 54.0,
+            "y0": 560.14,
+            "x1": 306.13,
+            "y1": 582.14
+          },
+          "text": "In the presence of gravitational acceleration g along the vertical\naxis, the pressure gradient is augmented by hydrostatic head:",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b8",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 9,
+          "bbox": {
+            "x0": 64.0,
+            "y0": 541.25,
+            "x1": 393.4,
+            "y1": 550.25
+          },
+          "text": "$$ \\vec{q} = -\\frac{\\kappa}{\\mu} (\\nabla p - \\rho \\vec{g}) $$",
+          "latex": "\\vec{q} = -\\frac{\\kappa}{\\mu} (\\nabla p - \\rho \\vec{g})",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b9",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 10,
+          "bbox": {
+            "x0": 355.0,
+            "y0": 528.34,
+            "x1": 495.06,
+            "y1": 536.34
+          },
+          "text": "Figure 1: Tortuous pore network model.",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        }
+      ]
+    }
+  ]
+}

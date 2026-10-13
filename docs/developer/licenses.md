@@ -24,7 +24,9 @@ Rule: record the verdict **before** adding a dependency. Product binaries may on
 | MathWriting dataset | **UNVERIFIED** | R2 | Verify before use; likely evaluation-only |
 | Blender | GPL | synthetic rendering tool | Subprocess tool only; rendered images are fine |
 | Pillow (PIL) | HPND | Image rasterisation for tests/OCR | OK (permissive, 2026-10-13) |
-| `techninja/hersheytextjs` (`hersheytext.min.json`) | MIT / Public Domain (Hershey) | Single-stroke fallback font data | OK (MIT wrapper of public domain font, 2026-10-13) |
+| `pypdfium2` | Apache-2.0 / BSD-3-Clause | PDF parsing and rendering | OK (permissive, 2026-10-13) |
+| `pdfminer.six` | MIT | PDF layout and stream extraction | OK (permissive, 2026-10-13) |
+| `reportlab` | BSD-like (ReportLab licence) | Benchmark PDF fixture generation | OK (permissive, 2026-10-13) |
 
 Agents: append rows as you add dependencies. Include licence URL and date checked.
 

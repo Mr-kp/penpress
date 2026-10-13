@@ -1,0 +1,227 @@
+{
+  "doc_id": "single_column_academic",
+  "source_filename": "single_column_academic.pdf",
+  "page_count": 1,
+  "total_blocks": 13,
+  "extraction_duration_s": 0.046,
+  "status": "ok",
+  "warnings": [],
+  "pages": [
+    {
+      "page_idx": 0,
+      "width_pt": 612.0,
+      "height_pt": 792.0,
+      "is_scanned": false,
+      "blocks": [
+        {
+          "block_id": "p0_b0",
+          "block_type": "title",
+          "page_idx": 0,
+          "reading_order": 0,
+          "bbox": {
+            "x0": 89.28,
+            "y0": 707.86,
+            "x1": 522.72,
+            "y1": 727.86
+          },
+          "text": "Harmonic Oscillations in Coupled Pendulums",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b1",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 1,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 683.93,
+            "x1": 253.96,
+            "y1": 693.93
+          },
+          "text": "PenPress Benchmark Series (cid:127) Assignment 1",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b2",
+          "block_type": "list_item",
+          "page_idx": 0,
+          "reading_order": 2,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 642.1,
+            "x1": 230.37,
+            "y1": 656.1
+          },
+          "text": "1. Theoretical Foundation",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b3",
+          "block_type": "paragraph",
+          "page_idx": 0,
+          "reading_order": 3,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 580.93,
+            "x1": 545.81,
+            "y1": 632.93
+          },
+          "text": "Consider two identical pendulums of mass m and length l suspended from a rigid horizontal beam. The\npendulums are coupled by a linear spring of spring constant k attached at distance d below the pivot points. In\nthe small-angle approximation, the equations of motion decouple into symmetric and antisymmetric normal\nmodes.",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b4",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 4,
+          "bbox": {
+            "x0": 80.0,
+            "y0": 546.06,
+            "x1": 512.0,
+            "y1": 569.06
+          },
+          "text": "Equation 1: $$\\ddot{\\theta}_1 + \\omega_0^2 \\theta_1 + \\kappa (\\theta_1 -\n\\theta_2) = 0$$",
+          "latex": "\\ddot{\\theta}_1 + \\omega_0^2 \\theta_1 + \\kappa (\\theta_1 -\n\\theta_2) = 0",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b5",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 5,
+          "bbox": {
+            "x0": 80.0,
+            "y0": 512.06,
+            "x1": 512.0,
+            "y1": 535.06
+          },
+          "text": "Equation 2: $$\\ddot{\\theta}_2 + \\omega_0^2 \\theta_2 - \\kappa (\\theta_1 -\n\\theta_2) = 0$$",
+          "latex": "\\ddot{\\theta}_2 + \\omega_0^2 \\theta_2 - \\kappa (\\theta_1 -\n\\theta_2) = 0",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b6",
+          "block_type": "list_item",
+          "page_idx": 0,
+          "reading_order": 6,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 480.1,
+            "x1": 250.61,
+            "y1": 494.1
+          },
+          "text": "2. Normal Mode Frequencies",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b7",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 7,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 432.93,
+            "x1": 550.0,
+            "y1": 470.93
+          },
+          "text": "By taking the sum and difference of the coordinates, we define the in-phase coordinate eta = theta_1 + theta_2\nand the out-of-phase coordinate zeta = theta_1 - theta_2. The eigenfrequencies of the normal modes are given\nby:",
+          "latex": "By taking the sum and difference of the coordinates, we define the in-phase coordinate eta = theta_1 + theta_2\nand the out-of-phase coordinate zeta = theta_1 - theta_2. The eigenfrequencies of the normal modes are given\nby:",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b8",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 8,
+          "bbox": {
+            "x0": 80.0,
+            "y0": 398.06,
+            "x1": 552.0,
+            "y1": 421.06
+          },
+          "text": "Equation 3: $$\\omega_1 = \\sqrt{\\frac{g}{l}}, \\quad \\omega_2 = \\sqrt{\\frac{g}{l}\n+ \\frac{2kd^2}{ml^2}}$$",
+          "latex": "\\omega_1 = \\sqrt{\\frac{g}{l}}, \\quad \\omega_2 = \\sqrt{\\frac{g}{l}\n+ \\frac{2kd^2}{ml^2}}",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b9",
+          "block_type": "list_item",
+          "page_idx": 0,
+          "reading_order": 9,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 366.1,
+            "x1": 236.62,
+            "y1": 380.1
+          },
+          "text": "3. Experimental Procedure",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b10",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 10,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 346.93,
+            "x1": 534.97,
+            "y1": 356.93
+          },
+          "text": "1. Displace both pendulums by identical angle theta_0 = 5 deg in the same direction and record period T_1.",
+          "latex": "1. Displace both pendulums by identical angle theta_0 = 5 deg in the same direction and record period T_1.",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b11",
+          "block_type": "equation",
+          "page_idx": 0,
+          "reading_order": 11,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 324.93,
+            "x1": 494.14,
+            "y1": 334.93
+          },
+          "text": "2. Displace both pendulums by opposite angles theta_1 = -theta_2 = 5 deg and record period T_2.",
+          "latex": "2. Displace both pendulums by opposite angles theta_1 = -theta_2 = 5 deg and record period T_2.",
+          "confidence": 0.98,
+          "metadata": {}
+        },
+        {
+          "block_id": "p0_b12",
+          "block_type": "list_item",
+          "page_idx": 0,
+          "reading_order": 12,
+          "bbox": {
+            "x0": 60.0,
+            "y0": 288.93,
+            "x1": 509.1,
+            "y1": 312.93
+          },
+          "text": "3. Release pendulum 1 from theta_0 while pendulum 2 remains at rest, measuring the beat frequency\nomega_b.",
+          "latex": "",
+          "confidence": 0.98,
+          "metadata": {}
+        }
+      ]
+    }
+  ]
+}
