@@ -19,3 +19,4 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T10:22:41Z [agent] [P1-3] P1-3 reviewed by director-adversarial-review: mutation test passed, golden files matched, throughput 1.08M seg/s, CI 100% green. P1-3 marked done. Unlocked P1-4.
 - 2026-10-13T10:24:07Z [agent] [P1-4] Starting P1-4: Virtual Marlin simulator and toolpath renderer design and implementation
 - 2026-10-13T10:29:48Z [agent] [P1-4] P1-4 completed: Virtual Marlin simulator, trapezoidal timing, serial resend protocol, and toolpath renderer implemented. Evidence recorded and card moved to review.
+- 2026-10-13T10:33:10Z [agent] [P1-4] P1-4 reviewed and marked done by director-adversarial-review. CI 100% green across all platforms. Unlocked P1-5.

@@ -49,3 +49,14 @@ uv run python -c "from pathlib import Path; from penpress.core.hershey import He
 none
 
 ## Reviewer notes
+- Reviewer: director-adversarial-review (2026-10-13)
+- Verification on clean tree:
+  - All 7 gate steps passed: ruff lint clean, ruff format clean, mypy strict clean (17 source files), forbid scanner clean, state board clean, docs check clean.
+  - Pytest: 89 tests passed, total coverage 93.95% (meets >= 85% requirement).
+  - Zone boundaries verified: only files under `src/penpress/plan/sim.py`, `tests/unit/plan/test_sim.py`, `docs/evidence/P1-4/`, and meta files modified.
+- Negative test table verified: all 8 violation categories yield distinct typed error codes.
+- Mathematical timing verified: 3 hand-calculated trapezoid/triangular cases verified with 1e-5 relative precision.
+- Serial resend protocol verified: XOR checksums and sequential line-numbers correctly enforce `Resend: N`.
+- Visual proof inspected: `docs/evidence/P1-4/sim_pangram_toolpath.png` opened and confirmed clean Linear/macOS graphite rendering with zero visual defects.
+- Cross-platform CI verification: GitHub Actions run `38383869645` completed 100% GREEN across Ubuntu, Windows, and macOS runners.
+- Verdict: PASS. Approved and ready to mark `done`.
