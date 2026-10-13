@@ -44,3 +44,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T15:13:52Z [agent] [P0-4] Claimed P0-4: Independent dossier review of verified-landscape.md and licenses.md
 - 2026-10-13T15:15:57Z [agent] [P0-4] P0-4 completed: independent verification of landscape and license claims across 20 repositories, MathWriting CC BY-NC-SA 4.0 confirmed, vickianand verified, licenses.md updated. Moved to review.
 - 2026-10-13T15:17:29Z [agent] [P0-4] P0-4 reviewed by director-adversarial-review: landscape claims verified with primary sources, MathWriting CC BY-NC-SA 4.0 confirmed, licenses.md updated, gate passed. P0-4 marked done.
+- 2026-10-13T15:20:27Z [agent] [X-1] Claimed X-1: Expansion gate - synthesizing ADRs 0001-0005 into concrete implementation cards for Phases P2-P9
+- 2026-10-13T15:23:55Z [agent] [X-1] X-1 reviewed by director-adversarial-review: ROADMAP mapped to 11 concrete implementation cards across P2-P9 with numeric acceptance criteria and anti-shortcuts, state.py check passed with 0 errors across 27 cards. X-1 marked done.
