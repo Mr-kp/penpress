@@ -5,7 +5,7 @@ Generated from `tasks/*.md` by `make state`. **Do not edit the board by hand**; 
 Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expansion -> P2..P9.
 
 <!-- BOARD:START -->
-**Summary:** todo: 9 / doing: 0 / review: 0 / done: 18 / blocked: 0
+**Summary:** todo: 8 / doing: 0 / review: 0 / done: 19 / blocked: 0
 
 ### Board
 | ID | Title | Zone | Status | Depends | Implemented-by | Reviewed-by |
@@ -21,7 +21,7 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [P1-5](tasks/P1-5.md) | First end-to-end: text to strokes to G-code to simulator image to OCR | plan | **done** | P1-2, P1-4 | worker-plan-e2e | director-adversarial-review |
 | [P2-1](tasks/P2-1.md) | Handwriting profile generator and sample sheet ingestion engine | profile | **done** | X-1, R1-1, P1-1 | worker-profile-p21 | director-adversarial-reviewer |
 | [P2-2](tasks/P2-2.md) | Interactive canvas and tablet stroke capture studio with local-first quality scoring | profile | **done** | X-1, P2-1 | worker-canvas-p22 | director-adversarial-reviewer |
-| [P3-1](tasks/P3-1.md) | Organic humanizer engine with multi-scale jitter, baseline wander, and slant drift | profile | **todo** | X-1, P2-1, P1-2 | - | - |
+| [P3-1](tasks/P3-1.md) | Organic humanizer engine with multi-scale jitter, baseline wander, and slant drift | profile | **done** | X-1, P2-1, P1-2 | worker-synth-p31 | director-adversarial-reviewer |
 | [P4-1](tasks/P4-1.md) | Mathematical formula handwriting layout and symbol synthesis engine | core | **todo** | X-1, R2-1, P1-1, P1-2 | - | - |
 | [P5-1](tasks/P5-1.md) | Document ingest pipeline and structured block parser | ingest | **todo** | X-1, R4-1, P1-1 | - | - |
 | [P5-2](tasks/P5-2.md) | Page composer and layout typesetter for ruled and blank stationery | ingest | **todo** | X-1, P5-1, R5-1, P3-1 | - | - |
@@ -39,7 +39,6 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [X-1](tasks/X-1.md) | Expansion: turn research ADRs into concrete implementation cards for P2-P9 | meta | **done** | R1-1, R2-1, R3-1, R4-1, R5-1, P1-5 | chief-system-architect | director-adversarial-review |
 
 ### Available to start (all dependencies done)
-- [P3-1](tasks/P3-1.md): Organic humanizer engine with multi-scale jitter, baseline wander, and slant drift
 - [P4-1](tasks/P4-1.md): Mathematical formula handwriting layout and symbol synthesis engine
 - [P5-1](tasks/P5-1.md): Document ingest pipeline and structured block parser
 - [P7-1](tasks/P7-1.md): Robust serial driver, line checksum protocol, and hardware recovery engine

@@ -27,6 +27,7 @@ All notable changes are recorded here (Keep a Changelog). Every change under `sr
 - 2026-10-13T15:44:00Z: Declared runtime profile dependencies (`opencv-python-headless`, `scikit-image`, `scipy`, `reportlab`, `numpy`) and added typed context override for `sheet_ingest.py`.
 - 2026-10-13T15:58:00Z: Added resilient git executable path resolution with `shutil.which` in `scripts/docs_check.py` for cross-platform Windows runner compatibility.
 - 2026-10-13T16:18:00Z: Interactive canvas and tablet stroke capture studio with local-first quality scoring in `src/penpress/profile/` (`canvas_capture.py` online pointer event normalization, velocity tracking, multi-stroke character preservation; `quality.py` completeness gating across 62 standard alphanumerics, stroke smoothness scoring, micro-scribble rejection; 0-egress network isolation verified).
+- 2026-10-13T16:28:00Z: Organic humanizer engine with multi-scale jitter, baseline wander, and slant drift in `src/penpress/synth/` (`humanizer.py` sinusoidal baseline wander, Perlin micro-wobble, word-level slant drift; `variant.py` anti-repetition variant sampling; `dynamics.py` curvature-dependent feedrate modulation and bold multi-pass toolpaths; 0.00% OCR CER verified).
 
 
 
