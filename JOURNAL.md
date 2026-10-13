@@ -61,3 +61,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T16:46:03Z [agent] [P5-1] Claimed P5-1: Document ingest pipeline and structured block parser
 - 2026-10-13T16:59:34Z [agent] [P5-1] P5-1 implemented: DocumentIngestEngine, markdown_parser, layout column detection, 93.7 pages/s throughput, moved to review
 - 2026-10-13T16:59:54Z [agent] [P5-1] P5-1 approved by director-adversarial-reviewer: marked done
+- 2026-10-13T17:20:07Z [agent] [P5-2] Claimed P5-2: Page composer and layout typesetter for ruled and blank stationery
+- 2026-10-13T17:27:26Z [agent] [P5-2] completed P5-2: page composer and ruled layout typesetter with A5/A4 presets and keepouts
