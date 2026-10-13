@@ -49,3 +49,6 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T15:28:23Z [agent] [P2-1] Claimed P2-1: Handwriting profile generator and sample sheet ingestion engine
 - 2026-10-13T15:39:07Z [agent] [P2-1] P2-1 implemented: sheet_gen, sheet_ingest, profile models, 1.903px Chamfer distance, gate passes
 - 2026-10-13T15:50:27Z [agent] [P2-1] P2-1 approved by director-adversarial-reviewer: marked done
+- 2026-10-13T16:13:19Z [agent] [P2-2] Claimed P2-2: Interactive canvas and tablet stroke capture studio with local-first quality scoring
+- 2026-10-13T16:18:53Z [agent] [P2-2] P2-2 implemented: canvas_capture, quality audit, zero-egress verified, moved to review
+- 2026-10-13T16:19:52Z [agent] [P2-2] P2-2 approved by director-adversarial-reviewer: marked done

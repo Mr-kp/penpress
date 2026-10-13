@@ -26,6 +26,7 @@ All notable changes are recorded here (Keep a Changelog). Every change under `sr
 - 2026-10-13T15:38:00Z: Handwriting profile generator and sample sheet ingestion engine in `src/penpress/profile/` (`HandwritingProfile` versioned schema, `sheet_gen.py` ArUco calibration PDF generator, `sheet_ingest.py` perspective rectification, skeleton graph centerline tracing with RDP simplification achieving 1.903 px Chamfer distance, and unit test suite).
 - 2026-10-13T15:44:00Z: Declared runtime profile dependencies (`opencv-python-headless`, `scikit-image`, `scipy`, `reportlab`, `numpy`) and added typed context override for `sheet_ingest.py`.
 - 2026-10-13T15:58:00Z: Added resilient git executable path resolution with `shutil.which` in `scripts/docs_check.py` for cross-platform Windows runner compatibility.
+- 2026-10-13T16:18:00Z: Interactive canvas and tablet stroke capture studio with local-first quality scoring in `src/penpress/profile/` (`canvas_capture.py` online pointer event normalization, velocity tracking, multi-stroke character preservation; `quality.py` completeness gating across 62 standard alphanumerics, stroke smoothness scoring, micro-scribble rejection; 0-egress network isolation verified).
 
 
 

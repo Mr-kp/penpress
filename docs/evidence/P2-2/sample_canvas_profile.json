@@ -1,0 +1,72 @@
+{
+  "profile_id": "sample_canvas_user",
+  "user_name": "Demo User",
+  "created_at": "2026-10-13T00:00:00Z",
+  "schema_version": "1.0.0",
+  "metrics": {
+    "slant_deg": 0.0,
+    "baseline_jitter_mm": 0.06,
+    "spacing_jitter_mm": 0.15,
+    "stroke_width_mean_mm": 0.4,
+    "x_height_mm": 3.5,
+    "ascent_mm": 2.0,
+    "descent_mm": 1.5
+  },
+  "total_glyphs": 1,
+  "total_variants": 1,
+  "metadata": {},
+  "glyph_bank": {
+    "A": [
+      [
+        {
+          "pts": [
+            {
+              "x": 0.0,
+              "y": 7.93749,
+              "p": 0.5,
+              "t": 0.0
+            },
+            {
+              "x": 2.64583,
+              "y": 0.0,
+              "p": 0.6,
+              "t": 0.05
+            }
+          ]
+        },
+        {
+          "pts": [
+            {
+              "x": 2.64583,
+              "y": 0.0,
+              "p": 0.6,
+              "t": 0.0
+            },
+            {
+              "x": 5.29166,
+              "y": 7.93749,
+              "p": 0.5,
+              "t": 0.04
+            }
+          ]
+        },
+        {
+          "pts": [
+            {
+              "x": 1.058332,
+              "y": 4.762494,
+              "p": 0.5,
+              "t": 0.0
+            },
+            {
+              "x": 4.233328,
+              "y": 4.762494,
+              "p": 0.5,
+              "t": 0.03
+            }
+          ]
+        }
+      ]
+    ]
+  }
+}
