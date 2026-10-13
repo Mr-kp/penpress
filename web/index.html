@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PenPress Studio</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <div class="brand-symbol"></div>
+        <span class="brand-title">PenPress</span>
+      </div>
+
+      <nav class="nav-menu">
+        <button class="nav-item active" data-view="document-view" id="nav-document">
+          <span class="nav-indicator"></span>
+          <span class="nav-label">Document Studio</span>
+        </button>
+        <button class="nav-item" data-view="profile-view" id="nav-profile">
+          <span class="nav-indicator"></span>
+          <span class="nav-label">Profile Studio</span>
+        </button>
+        <button class="nav-item" data-view="calibration-view" id="nav-calibration">
+          <span class="nav-indicator"></span>
+          <span class="nav-label">Calibration Wizard</span>
+        </button>
+        <button class="nav-item" data-view="monitor-view" id="nav-monitor">
+          <span class="nav-indicator"></span>
+          <span class="nav-label">Plot Monitor</span>
+        </button>
+        <button class="nav-item" data-view="settings-view" id="nav-settings">
+          <span class="nav-indicator"></span>
+          <span class="nav-label">Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="connection-pill status-idle" id="global-status-pill">
+          <span class="status-dot"></span>
+          <span class="status-text" id="global-status-text">Ready</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Workspaces -->
+    <main class="content-area">
+      <!-- 1. Document Studio -->
+      <section class="workspace-view active" id="document-view">
+        <header class="view-header">
+          <div>
+            <h1 class="view-title">Document Studio</h1>
+            <p class="view-subtitle">Typeset Markdown assignments, LaTeX formulas, and handwritten notes</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="btn-load-sample">Load Assignment</button>
+            <button class="btn btn-primary" id="btn-compose-doc">Compose Pages</button>
+          </div>
+        </header>
+
+        <div class="split-pane">
+          <div class="card editor-card">
+            <div class="card-header">
+              <span class="card-title">Markdown Source</span>
+              <span class="badge">A5 Ruled (7 mm)</span>
+            </div>
+            <textarea class="code-editor" id="doc-markdown-input" spellcheck="false"># Physics 201: Classical Dynamics
+
+## Harmonic Oscillator
+The equation of motion for a damped oscillator is given by:
+
+$$\frac{d^2x}{dt^2} + 2\gamma \frac{dx}{dt} + \omega_0^2 x = 0$$
+
+Where $\omega_0 = \sqrt{\frac{k}{m}}$ denotes natural angular frequency.</textarea>
+          </div>
+
+          <div class="card preview-card">
+            <div class="card-header">
+              <span class="card-title">Typeset Preview</span>
+              <span class="badge" id="preview-page-count">Page 1 of 1</span>
+            </div>
+            <div class="preview-viewport">
+              <div class="ruled-sheet" id="ruled-page-preview">
+                <div class="sheet-margin-line"></div>
+                <div class="sheet-content" id="sheet-rendered-text">
+                  <p class="handwritten-sample font-heading">Physics 201: Classical Dynamics</p>
+                  <p class="handwritten-sample">The equation of motion for a damped oscillator is given by:</p>
+                  <p class="handwritten-sample math-equation">d^2x/dt^2 + 2\gamma dx/dt + \omega_0^2 x = 0</p>
+                  <p class="handwritten-sample">Where \omega_0 = \sqrt{k/m} denotes natural angular frequency.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Profile Studio -->
+      <section class="workspace-view" id="profile-view">
+        <header class="view-header">
+          <div>
+            <h1 class="view-title">Profile Studio</h1>
+            <p class="view-subtitle">Handwriting glyph bank, stylus capture, and organic variance tuning</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="btn-clear-canvas">Clear Canvas</button>
+            <button class="btn btn-primary" id="btn-save-profile">Save Glyph</button>
+          </div>
+        </header>
+
+        <div class="split-pane">
+          <div class="card capture-card">
+            <div class="card-header">
+              <span class="card-title">Tactile Stylus Canvas</span>
+              <span class="badge">Character: 'a'</span>
+            </div>
+            <div class="canvas-container">
+              <canvas id="handwriting-canvas" width="600" height="400"></canvas>
+            </div>
+          </div>
+
+          <div class="card telemetry-card">
+            <div class="card-header">
+              <span class="card-title">Quality Telemetry</span>
+              <span class="badge">Completeness: 100%</span>
+            </div>
+            <div class="metric-grid">
+              <div class="metric-box">
+                <span class="metric-label">Smoothness Score</span>
+                <span class="metric-value">0.96</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-label">Stroke Chamfer Dist</span>
+                <span class="metric-value">1.88 px</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-label">Organic Slant Drift</span>
+                <span class="metric-value">±2.4°</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-label">Baseline Wobble</span>
+                <span class="metric-value">0.12 mm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Calibration Wizard -->
+      <section class="workspace-view" id="calibration-view">
+        <header class="view-header">
+          <div>
+            <h1 class="view-title">Calibration Wizard</h1>
+            <p class="view-subtitle">Dual-mode camera homography & tactile jog alignment</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="btn-switch-mode">Mode: Manual Tactile</button>
+            <button class="btn btn-primary" id="btn-next-step">Confirm Step</button>
+          </div>
+        </header>
+
+        <div class="split-pane">
+          <div class="card camera-card">
+            <div class="card-header">
+              <span class="card-title">Bed Alignment View</span>
+              <span class="badge">Ender 3 Pro (235×235 mm)</span>
+            </div>
+            <div class="bed-view-container">
+              <canvas id="bed-canvas" width="500" height="500"></canvas>
+            </div>
+          </div>
+
+          <div class="card wizard-card">
+            <div class="card-header">
+              <span class="card-title">Tactile Calibration Flow</span>
+              <span class="badge" id="wizard-step-badge">Step 1/4</span>
+            </div>
+            <div class="wizard-steps-list">
+              <div class="step-card active" id="step-1-card">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                  <h4>Top-Left Paper Corner</h4>
+                  <p>Jog pen tip over the Top-Left corner of paper sheet.</p>
+                </div>
+              </div>
+              <div class="step-card" id="step-2-card">
+                <div class="step-num">2</div>
+                <div class="step-body">
+                  <h4>Top-Right Paper Corner</h4>
+                  <p>Jog pen tip over the Top-Right corner of paper sheet.</p>
+                </div>
+              </div>
+              <div class="step-card" id="step-3-card">
+                <div class="step-num">3</div>
+                <div class="step-body">
+                  <h4>Bottom-Left Paper Corner</h4>
+                  <p>Jog pen tip over the Bottom-Left corner of paper sheet.</p>
+                </div>
+              </div>
+              <div class="step-card" id="step-4-card">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                  <h4>Z Contact Paper Drag Check</h4>
+                  <p>Slide paper under pen; lower Z until slight friction is felt.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Plot Monitor -->
+      <section class="workspace-view" id="monitor-view">
+        <header class="view-header">
+          <div>
+            <h1 class="view-title">Plot Monitor</h1>
+            <p class="view-subtitle">Live kinematic toolpath execution & serial flow control</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-secondary" id="btn-pause-job">Pause</button>
+            <button class="btn btn-danger" id="btn-cancel-job">Cancel</button>
+          </div>
+        </header>
+
+        <div class="split-pane">
+          <div class="card monitor-canvas-card">
+            <div class="card-header">
+              <span class="card-title">Live Toolpath Simulation</span>
+              <span class="badge" id="plot-speed-badge">60 FPS WebGL</span>
+            </div>
+            <div class="toolpath-viewport">
+              <canvas id="toolpath-canvas" width="600" height="450"></canvas>
+            </div>
+          </div>
+
+          <div class="card telemetry-card">
+            <div class="card-header">
+              <span class="card-title">Printer Telemetry</span>
+              <span class="badge" id="telemetry-conn-badge">Online (115200)</span>
+            </div>
+            <div class="metric-grid">
+              <div class="metric-box">
+                <span class="metric-label">X Coordinate</span>
+                <span class="metric-value" id="tel-pos-x">117.5 mm</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-label">Y Coordinate</span>
+                <span class="metric-value" id="tel-pos-y">117.5 mm</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-label">Z Height</span>
+                <span class="metric-value" id="tel-pos-z">3.50 mm</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-label">Feedrate</span>
+                <span class="metric-value" id="tel-feedrate">3600 mm/min</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-label">Progress</span>
+                <span class="metric-value" id="tel-progress">42.8%</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-label">Buffer Depth</span>
+                <span class="metric-value" id="tel-buffer">16 / 16</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Settings -->
+      <section class="workspace-view" id="settings-view">
+        <header class="view-header">
+          <div>
+            <h1 class="view-title">Settings</h1>
+            <p class="view-subtitle">Hardware safety parameters, kinematics, and serial connection</p>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="btn-save-settings">Save Settings</button>
+          </div>
+        </header>
+
+        <div class="card settings-card">
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label>Bed Width (X mm)</label>
+              <input type="number" class="input-text" id="setting-bed-x" value="235.0">
+            </div>
+            <div class="setting-item">
+              <label>Bed Height (Y mm)</label>
+              <input type="number" class="input-text" id="setting-bed-y" value="235.0">
+            </div>
+            <div class="setting-item">
+              <label>Z Write Height (mm)</label>
+              <input type="number" class="input-text" id="setting-z-write" value="0.50" step="0.05">
+            </div>
+            <div class="setting-item">
+              <label>Z Lift Travel Height (mm)</label>
+              <input type="number" class="input-text" id="setting-z-lift" value="3.50" step="0.1">
+            </div>
+            <div class="setting-item">
+              <label>Max Drawing Speed (mm/min)</label>
+              <input type="number" class="input-text" id="setting-speed" value="3600">
+            </div>
+            <div class="setting-item">
+              <label>Serial Baudrate</label>
+              <select class="input-select" id="setting-baudrate">
+                <option value="115200" selected>115200 (Standard)</option>
+                <option value="250000">250000 (High Speed)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

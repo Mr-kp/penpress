@@ -69,3 +69,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T22:53:03Z [agent] [P7-1] P7-1 complete: robust Marlin serial driver with checksum flow control and persistent recovery engine
 - 2026-10-13T22:59:31Z [agent] [P8-1] Claimed P8-1: Dual-mode calibration wizard with camera homography and manual tactile jog alignment
 - 2026-10-13T23:04:03Z [agent] [P8-1] P8-1 complete: Dual-mode calibration wizard with camera homography and manual tactile jog alignment
+- 2026-10-13T23:08:44Z [agent] [P9-1] Claimed P9-1: Minimalist dark studio UI and REST API with live toolpath telemetry
+- 2026-10-13T23:17:11Z [agent] [P9-1] P9-1 complete: Minimalist dark studio UI and REST API with live toolpath telemetry
