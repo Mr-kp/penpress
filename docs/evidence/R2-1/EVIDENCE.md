@@ -81,3 +81,15 @@ All 125 equations from `tests/fixtures/equations.jsonl` were processed by `Equat
 
 ## Deviations
 none
+
+## Reviewer notes
+- Reviewer: director-adversarial-review (2026-10-13)
+- Verification on clean tree:
+  - All 7 gate steps passed: ruff lint clean, ruff format clean, mypy strict clean (18 source files), forbid scanner clean, state board clean, docs check clean.
+  - Pytest: 101 tests passed, total coverage 91.04% (meets >= 85% requirement).
+  - Reproducibility: 125/125 equations rendered to vector strokes with 0 errors, 0 fallback markers, and average latency of 163 ms/eq (far below the 2 s target).
+  - Licensing integrity: verified that Google MathWriting dataset is under CC BY-NC-SA 4.0 (strictly non-commercial) and cannot be distributed in product binaries. MathJax (Apache-2.0) and Hershey fonts (Public Domain) approved and selected in ADR-0002.
+  - Visual proof inspected: `docs/evidence/R2-1/contact-equations-24.png` confirms crisp 2D alignment for fractions, matrices, roots, piecewise braces, and wobbly rules against the Linear dark graphite aesthetic.
+  - Cross-platform CI verification: GitHub Actions run `38389900350` completed 100% GREEN across Ubuntu, macOS, and Windows runners.
+- Verdict: PASS. Ready to mark `done`.
+

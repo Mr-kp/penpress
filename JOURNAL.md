@@ -28,3 +28,4 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T11:02:56Z [agent] [R0-1] R0-1 reviewed by director-adversarial-review: deterministic sha256 passed, CI 38387254911 100% green across Linux, Windows, macOS. R0-1 marked done. Unlocked R1-1, R3-1, R4-1.
 - 2026-10-13T11:03:16Z [agent] [R2-1] Claimed R2-1: Equations in handwriting research spike (LaTeX to 2D stroke layout, symbol coverage, CROHME/MathWriting evaluation, round-trip benchmark, and ADR-0002)
 - 2026-10-13T11:16:19Z [agent] [R2-1] R2-1 completed: equation handwriting synthesis engine, 100% compilation on 125 equations, 20.4s total, 0 fallbacks, contact sheet inspected, ADR-0002 accepted. Moved to review.
+- 2026-10-13T11:26:55Z [agent] [R2-1] R2-1 reviewed by director-adversarial-review: 125/125 equations rendered with 0 errors, 163ms latency, ADR-0002 accepted, CI 38389900350 100% green across all platforms. R2-1 marked done.
