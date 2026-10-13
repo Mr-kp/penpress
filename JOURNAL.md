@@ -32,3 +32,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T11:30:04Z [agent] [R5-1] Claimed R5-1: Physical limits of Ender 3 Pro pen plotter (kinematics, Z-touch, paper fit, hardware test protocol, and ADR-0005)
 - 2026-10-13T11:34:25Z [agent] [R5-1] R5-1 completed: physical limits and kinematics simulation, hardware test protocol, JSON schema validator, ADR-0005 accepted. Moved to review.
 - 2026-10-13T11:37:49Z [agent] [R5-1] R5-1 reviewed by director-adversarial-review: kinematic math verified, hardware protocol in docs/user/, schema validated, ADR-0005 accepted, CI 38391185347 100% green across all platforms. R5-1 marked done.
+- 2026-10-13T11:42:30Z [agent] [R1-1] Claimed R1-1: Handwriting cloning research spike (offline-to-online, 3 approaches benchmark, UX proposal, ADR-0001)
+- 2026-10-13T12:00:50Z [agent] [R1-1] R1-1 completed: 3 handwriting cloning approaches benchmarked on 30 hold-out sentences, stroke recovery Chamfer 1.90px, ADR-0001 accepted, moved to review

@@ -1,0 +1,4 @@
+approach,mean_cer_percent,speed_s_per_100_words,total_path_length_m,total_pen_lifts,strokes_per_char,profile_build_s
+Approach_A_GlyphBank,38.73,0.06,3.16,3593,2.16,0.177
+Approach_B_GravesRNN,92.81,26.82,71.46,871,0.52,0.177
+Approach_C_Hybrid,93.32,26.18,87.21,1069,0.64,0.177
