@@ -26,8 +26,14 @@ from pathlib import Path
 # Commercial constraints: Maximum allowable job stream size (50 MB)
 MAX_JOB_BYTES = 50 * 1024 * 1024
 
-# Default spool directory for queued jobs
-DEFAULT_SPOOL_DIR = Path.home() / ".penpress" / "spool"
+def get_default_spool_dir() -> Path:
+    """Resolve default spool directory with robust fallbacks for all operating systems."""
+    try:
+        return Path.home() / ".penpress" / "spool"
+    except Exception:
+        # Fallback to temp directory if home directory cannot be determined
+        base = os.environ.get("USERPROFILE") or os.environ.get("HOME") or os.environ.get("TEMP") or "/tmp"
+        return Path(base) / ".penpress" / "spool"
 
 
 def print_discovery() -> int:
@@ -50,7 +56,7 @@ def process_print_job(
     spool_dir: Path | None = None,
 ) -> int:
     """Process incoming print job stream with safety bounds and spooling."""
-    target_spool = spool_dir or DEFAULT_SPOOL_DIR
+    target_spool = spool_dir if spool_dir is not None else get_default_spool_dir()
     target_spool.mkdir(parents=True, exist_ok=True)
 
     sanitized_title = "".join(c for c in title if c.isalnum() or c in ("-", "_", ".")).strip() or "job"

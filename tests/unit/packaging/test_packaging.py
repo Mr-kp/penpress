@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -39,7 +40,7 @@ def test_cups_discovery_mode() -> None:
 def test_cups_spool_job_from_stdin(tmp_path: Path) -> None:
     """Verify print job spooling from standard input stream."""
     sample_pdf_payload = b"%PDF-1.4\n1 0 obj\n<< /Type /Catalog >>\nendobj\n%%EOF\n"
-    env = {"PENPRESS_SPOOL_DIR": str(tmp_path)}
+    env = {**os.environ, "PENPRESS_SPOOL_DIR": str(tmp_path)}
 
     cmd = [
         sys.executable,
@@ -78,7 +79,7 @@ def test_cups_spool_job_from_file(tmp_path: Path) -> None:
     input_file = tmp_path / "input.ps"
     input_file.write_bytes(b"%!PS-Adobe-3.0\n%%Title: Test Page\nshowpage\n")
 
-    env = {"PENPRESS_SPOOL_DIR": str(spool_dir)}
+    env = {**os.environ, "PENPRESS_SPOOL_DIR": str(spool_dir)}
     cmd = [
         sys.executable,
         str(CUPS_BACKEND),
@@ -101,7 +102,7 @@ def test_cups_spool_job_from_file(tmp_path: Path) -> None:
 def test_cups_rejects_oversized_job(tmp_path: Path) -> None:
     """Negative test: Job stream exceeding 50 MB is rejected with spooler error."""
     spool_dir = tmp_path / "spool"
-    env = {"PENPRESS_SPOOL_DIR": str(spool_dir)}
+    env = {**os.environ, "PENPRESS_SPOOL_DIR": str(spool_dir)}
 
     # Simulate streaming an oversized job directly via stdin
     oversized_file = tmp_path / "large_job.dat"
