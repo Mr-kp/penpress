@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  gate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v5
+      - name: Install
+        run: uv sync --python 3.12
+      - name: Set docs-check base
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "GATE_BASE=origin/${{ github.base_ref }}" >> "$GITHUB_ENV"
+          else
+            BEFORE="${{ github.event.before }}"
+            if [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ]; then
+              echo "GATE_BASE=$BEFORE" >> "$GITHUB_ENV"
+            else
+              echo "GATE_BASE=HEAD~1" >> "$GITHUB_ENV"
+            fi
+          fi
+      - name: Gate (lint, types, forbid, board, docs, tests, coverage)
+        run: uv run python scripts/gate.py

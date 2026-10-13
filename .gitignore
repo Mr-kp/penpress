@@ -1,0 +1,32 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# secrets / env
+.env
+.env.*
+*.pem
+*.key
+
+# research clones, datasets, weights: never committed (see docs/developer/compute.md)
+research/*/vendor/
+research/*/data/
+datasets/
+models/*.pt
+models/*.pth
+models/*.ckpt
+models/*.safetensors
+models/*.onnx
+*.gcode.tmp
+
+# local profiles and job output
+.penpress/
+out/

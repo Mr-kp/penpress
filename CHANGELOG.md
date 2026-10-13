@@ -1,0 +1,13 @@
+# Changelog
+
+All notable changes are recorded here (Keep a Changelog). Every change under `src/`, `scripts/` or `web/` needs an entry with an ISO timestamp.
+
+## [Unreleased]
+
+### Added
+- 2026-10-12T18:55:00Z: Repository bootstrap: uv project, package skeleton, `penpress --version`.
+- 2026-10-12T18:55:00Z: Agent governance: `AGENTS.md`, `BRIEF.md`, task cards (`tasks/`), generated board (`STATE.md`), append-only `JOURNAL.md`.
+- 2026-10-12T18:55:00Z: Tooling: `scripts/gate.py`, `forbid.py` (anti-toy scanner), `state.py` (board integrity + evidence + independent-review enforcement), `docs_check.py`, `briefing.py`, `journal.py`; Makefile entry points; tests for all of it.
+- 2026-10-12T18:55:00Z: CI workflow (Linux, macOS, Windows) running the full gate.
+- 2026-10-12T18:55:00Z: Research dossier with verified repos and licences, licence register, compute strategy, ADR template, checklists.
+- 2026-10-12T18:55:00Z: Task cards: R0-1 fixtures, R1-1 handwriting cloning, R2-1 equations, R3-1 vision/calibration, R4-1 PDF ingest, R5-1 physical limits, P1-1..P1-5 core vertical slice, X-1 expansion gate.
