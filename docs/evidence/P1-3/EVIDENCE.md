@@ -62,7 +62,15 @@ M84 ; Disable steppers
 - Golden G-code tests for 3 fixed pages: PASS
 - Compiler throughput >= 20k segments/s: PASS (measured 1,088,251 segments/s)
 
-## Deviations
-None.
-
 ## Reviewer notes
+- Reviewer: director-adversarial-review (2026-10-13)
+- Verification on clean tree:
+  - All 7 gate steps passed: ruff lint clean, ruff format clean, mypy strict clean (16 source files), forbid scanner clean, state board clean, docs check clean.
+  - Pytest: 84 tests passed, total coverage 94.59%, `src/penpress/plan` 88% (meets >= 85% requirement).
+  - Zone boundaries verified: only files under `src/penpress/plan/`, `tests/unit/plan/`, `tests/golden/`, `machine-profiles/`, and meta/evidence docs modified.
+- Mutation check performed:
+  - Mutated `z_write` emission in `GcodeCompiler.compile` to emit `z_write_min - 0.5` -> `test_compiler_hypothesis_safety_properties` caught the hardware floor breach immediately and failed with `AssertionError: Z -0.4 dropped below safety floor 0.1`.
+- Throughput verified: 1,088,251 segments/sec on T0 (exceeds >= 20k threshold by >50x).
+- CI Matrix verification: GitHub Actions run 38382635756 completed 100% GREEN across Ubuntu, Windows, and macOS runners.
+- Verdict: PASS. Approved and ready to mark `done`.
+

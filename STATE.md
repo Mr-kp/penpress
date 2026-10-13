@@ -5,7 +5,7 @@ Generated from `tasks/*.md` by `make state`. **Do not edit the board by hand**; 
 Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expansion -> P2..P9.
 
 <!-- BOARD:START -->
-**Summary:** todo: 10 / doing: 0 / review: 1 / done: 5 / blocked: 0
+**Summary:** todo: 9 / doing: 0 / review: 1 / done: 6 / blocked: 0
 
 ### Board
 | ID | Title | Zone | Status | Depends | Implemented-by | Reviewed-by |
@@ -16,8 +16,8 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [P0-4](tasks/P0-4.md) | Dossier review: independent verification of landscape and licence claims | research | **todo** | P0-1, P0-2 | - | - |
 | [P1-1](tasks/P1-1.md) | Core types: Stroke, Path, Page, units, transforms | core | **done** | P0-3 | worker-core-p1 | director-adversarial-review |
 | [P1-2](tasks/P1-2.md) | Single-stroke fallback font (public domain Hershey) with Greek and math coverage | core | **done** | P1-1 | worker-core-font | director-adversarial-review |
-| [P1-3](tasks/P1-3.md) | Machine profile and G-code compiler (Marlin, Ender 3 Pro) | plan | **review** | P1-1 | worker-plan-gcode | - |
-| [P1-4](tasks/P1-4.md) | Marlin simulator and toolpath renderer | plan | **todo** | P1-3 | - | - |
+| [P1-3](tasks/P1-3.md) | Machine profile and G-code compiler (Marlin, Ender 3 Pro) | plan | **done** | P1-1 | worker-plan-gcode | director-adversarial-review |
+| [P1-4](tasks/P1-4.md) | Marlin simulator and toolpath renderer | plan | **review** | P1-3 | worker-plan-sim | - |
 | [P1-5](tasks/P1-5.md) | First end-to-end: text to strokes to G-code to simulator image to OCR | plan | **todo** | P1-2, P1-4 | - | - |
 | [R0-1](tasks/R0-1.md) | Synthetic fixture factory (handwriting sheets, bed photos, equations, PDFs) | research | **todo** | P0-3 | - | - |
 | [R1-1](tasks/R1-1.md) | Handwriting cloning research spike (photo or canvas sample to plottable strokes) | research | **todo** | R0-1 | - | - |
@@ -34,7 +34,7 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 - [R5-1](tasks/R5-1.md): Physical limits of the Ender 3 Pro pen plotter (kinematics, Z-touch, paper fit, hardware test protocol)
 
 ### Waiting for review
-- [P1-3](tasks/P1-3.md): Machine profile and G-code compiler (Marlin, Ender 3 Pro), needs a reviewer other than worker-plan-gcode
+- [P1-4](tasks/P1-4.md): Marlin simulator and toolpath renderer, needs a reviewer other than worker-plan-sim
 
 ### Blocked
 - (none)

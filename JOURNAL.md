@@ -16,3 +16,6 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T10:12:13Z [agent] [P1-2] P1-2 reviewed by director-adversarial-review: mutation test passed, Tesseract CER 0.00% verified, visual inspection passed, CI 100% green. P1-2 marked done.
 - 2026-10-13T10:15:07Z [agent] [P1-3] Claimed P1-3 (machine profile loader, Marlin G-code compiler, safety preambles, Hypothesis property tests, golden tests) by worker-plan-gcode
 - 2026-10-13T10:19:04Z [agent] [P1-3] P1-3 completed: Marlin G-code compiler implemented with safety preambles, Hypothesis property tests, golden tests, throughput >1M segments/s. Card moved to review.
+- 2026-10-13T10:22:41Z [agent] [P1-3] P1-3 reviewed by director-adversarial-review: mutation test passed, golden files matched, throughput 1.08M seg/s, CI 100% green. P1-3 marked done. Unlocked P1-4.
+- 2026-10-13T10:24:07Z [agent] [P1-4] Starting P1-4: Virtual Marlin simulator and toolpath renderer design and implementation
+- 2026-10-13T10:29:48Z [agent] [P1-4] P1-4 completed: Virtual Marlin simulator, trapezoidal timing, serial resend protocol, and toolpath renderer implemented. Evidence recorded and card moved to review.
