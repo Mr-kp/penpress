@@ -5,7 +5,7 @@ Generated from `tasks/*.md` by `make state`. **Do not edit the board by hand**; 
 Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expansion -> P2..P9.
 
 <!-- BOARD:START -->
-**Summary:** todo: 2 / doing: 0 / review: 0 / done: 14 / blocked: 0
+**Summary:** todo: 1 / doing: 0 / review: 0 / done: 15 / blocked: 0
 
 ### Board
 | ID | Title | Zone | Status | Depends | Implemented-by | Reviewed-by |
@@ -13,7 +13,7 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [P0-1](tasks/P0-1.md) | Repository, tooling, package skeleton | meta | **done** | - | antigravity-orchestrator | director-adversarial-review |
 | [P0-2](tasks/P0-2.md) | Governance docs: AGENTS, BRIEF, tasks, STATE, JOURNAL, licences, compute, ADR, checklists | meta | **done** | - | antigravity-orchestrator | director-adversarial-review |
 | [P0-3](tasks/P0-3.md) | CI green on Linux, macOS, Windows | meta | **done** | - | antigravity-orchestrator | director-adversarial-review |
-| [P0-4](tasks/P0-4.md) | Dossier review: independent verification of landscape and licence claims | research | **todo** | P0-1, P0-2 | - | - |
+| [P0-4](tasks/P0-4.md) | Dossier review: independent verification of landscape and licence claims | research | **done** | P0-1, P0-2 | auditor-dossier | director-adversarial-review |
 | [P1-1](tasks/P1-1.md) | Core types: Stroke, Path, Page, units, transforms | core | **done** | P0-3 | worker-core-p1 | director-adversarial-review |
 | [P1-2](tasks/P1-2.md) | Single-stroke fallback font (public domain Hershey) with Greek and math coverage | core | **done** | P1-1 | worker-core-font | director-adversarial-review |
 | [P1-3](tasks/P1-3.md) | Machine profile and G-code compiler (Marlin, Ender 3 Pro) | plan | **done** | P1-1 | worker-plan-gcode | director-adversarial-review |
@@ -28,7 +28,6 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [X-1](tasks/X-1.md) | Expansion: turn research ADRs into concrete implementation cards for P2-P9 | meta | **todo** | R1-1, R2-1, R3-1, R4-1, R5-1, P1-5 | - | - |
 
 ### Available to start (all dependencies done)
-- [P0-4](tasks/P0-4.md): Dossier review: independent verification of landscape and licence claims
 - [X-1](tasks/X-1.md): Expansion: turn research ADRs into concrete implementation cards for P2-P9
 
 ### Waiting for review

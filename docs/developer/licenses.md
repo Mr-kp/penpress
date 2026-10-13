@@ -21,7 +21,7 @@ Rule: record the verdict **before** adding a dependency. Product binaries may on
 | pix2tex (LaTeX-OCR), pix2text | MIT | math round-trip checks | OK |
 | KaTeX / MathJax | MIT / Apache-2.0 | LaTeX layout | OK (Node subprocess) |
 | Tesseract | Apache-2.0 | OCR round-trip | OK (subprocess) |
-| MathWriting dataset | **UNVERIFIED** | R2 | Verify before use; likely evaluation-only |
+| MathWriting dataset (Google) | CC BY-NC-SA 4.0 (data) / Apache-2.0 (code) | R2 math handwriting | Evaluation only (Non-commercial clause prevents commercial bundling) |
 | Blender | GPL | synthetic rendering tool | Subprocess tool only; rendered images are fine |
 | Pillow (PIL) | HPND | Image rasterisation for tests/OCR | OK (permissive, 2026-10-13) |
 | `pypdfium2` | Apache-2.0 / BSD-3-Clause | PDF parsing and rendering | OK (permissive, 2026-10-13) |

@@ -41,3 +41,6 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T14:49:54Z [agent] [R4-1] Claimed R4-1: PDF and document ingest research spike (digital/scans, formulas, vector figures, hostile PDFs, ADR-0004)
 - 2026-10-13T15:00:24Z [agent] [R4-1] R4-1 completed: PDF ingest pipeline with tiered fallback (pypdfium2/pdfminer fast path + Tesseract OCR), vector figure preservation, hostile PDF defenses, 6 overlay screenshots, ADR-0004 accepted. Moved to review.
 - 2026-10-13T15:10:20Z [agent] [R4-1] R4-1 reviewed by director-adversarial-review: tiered fast path verified (<50ms digital, Tesseract fallback for scans), vector figures preserved, hostile PDFs trapped safely, CI 38419104231 100% green across all platforms. R4-1 marked done.
+- 2026-10-13T15:13:52Z [agent] [P0-4] Claimed P0-4: Independent dossier review of verified-landscape.md and licenses.md
+- 2026-10-13T15:15:57Z [agent] [P0-4] P0-4 completed: independent verification of landscape and license claims across 20 repositories, MathWriting CC BY-NC-SA 4.0 confirmed, vickianand verified, licenses.md updated. Moved to review.
+- 2026-10-13T15:17:29Z [agent] [P0-4] P0-4 reviewed by director-adversarial-review: landscape claims verified with primary sources, MathWriting CC BY-NC-SA 4.0 confirmed, licenses.md updated, gate passed. P0-4 marked done.

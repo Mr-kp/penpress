@@ -19,7 +19,7 @@ Method: every row below was checked with `gh api repos/OWNER/REPO` or by fetchin
 | `dailenson/One-DM` (ECCV 2024) | MIT | 571 | 2025-10 | raster image | One-shot diffusion. Needs skeleton and stroke-order recovery to plot. |
 | `koninik/DiffusionPen` (ECCV 2024) | MIT | 108 | 2024-10 | raster image | Few-shot latent diffusion, IAM. |
 | `X-rayLaser/pytorch-handwriting-synthesis-toolkit` | MIT | 120 | 2024-01 | online strokes | Graves RNN (LSTM+MDN+attention), trainable, style priming. |
-| `vickianand/handwriting-synthesis` | MIT | ? | ? | online strokes | PyTorch Graves port (used by handcode). Verify. |
+| `vickianand/handwriting-synthesis` | MIT | 6 | 2019-04 | online strokes | PyTorch Graves port (used by handcode). Verified active fork. |
 | `sjvasquez/handwriting-synthesis` | **none (all rights reserved)** | 4.8k | 2024-01 | online strokes | Study the architecture; **do not copy code or ship its weights** without permission. |
 | `reshamgaire/HandFonted` | MIT | 49 | 2026-05 | vector glyphs | Single image to font: segmentation, classification, skeletonize, RDP. Useful reference for the glyph-bank path. |
 | `MengLi-l1/StrokeExtraction` | none | 41 | 2023-11 | stroke order from raster | Research code, no license: reference only. |
@@ -37,7 +37,7 @@ Data needed for training/fine-tuning online models: IAM-OnDB (registration, rese
 
 | Resource | License | Notes |
 |---|---|---|
-| Google MathWriting (in `google-research/google-research` under `mathwriting/`, code Apache-2.0) | **dataset license UNVERIFIED** | Online handwritten math, InkML. Agents must open the dataset page and record the license; likely non-commercial, so may be usable only for evaluation. |
+| Google MathWriting (in `google-research/google-research` under `mathwriting/`) | **Dataset: CC BY-NC-SA 4.0; Code: Apache-2.0** | Online handwritten math, InkML (verified 2026-10-13). Non-commercial license strictly restricts distribution; evaluation only. |
 | CROHME / CROHME 2023 | research | Online math InkML benchmark. |
 | `lukas-blecher/LaTeX-OCR` (pix2tex) | MIT | Image to LaTeX; use for round-trip checking. |
 | `breezedeus/pix2text` | MIT | Text + math OCR. |
