@@ -20,6 +20,7 @@ from __future__ import annotations
 import os
 import shutil
 import subprocess
+import tempfile
 import time
 from pathlib import Path
 
@@ -50,13 +51,31 @@ MAX_PAGE_COUNT = 250
 MAX_PAGE_DIMENSION_PT = 2500.0  # Above this is treated as oversized architectural print
 
 
+def _find_tesseract() -> str:
+    """Finds tesseract binary across PATH and standard cross-platform install locations."""
+    found = shutil.which("tesseract")
+    if found:
+        return found
+    candidates = [
+        "/opt/homebrew/bin/tesseract",
+        "/usr/local/bin/tesseract",
+        "/usr/bin/tesseract",
+        r"C:\Program Files\Tesseract-OCR\tesseract.exe",
+        r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe",
+    ]
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return "tesseract"
+
+
 class IngestError(ValueError):
     """Raised when PDF or Markdown document is corrupted, malformed, or exceeds safety bounds."""
 
 
 class DocumentIngestEngine:
     def __init__(self, tesseract_cmd: str | None = None) -> None:
-        self.tesseract_cmd = tesseract_cmd or shutil.which("tesseract") or "tesseract"
+        self.tesseract_cmd = tesseract_cmd or _find_tesseract()
         self.md_parser = MarkdownParser()
 
     def ingest_document(self, file_path: str | Path) -> IngestedDocument:
@@ -236,8 +255,9 @@ class DocumentIngestEngine:
         try:
             # Render page to PIL image at 150 DPI
             pil_image = pdfium_page.render(scale=150 / 72.0).to_pil()
-            temp_img = f"/tmp/penpress_ocr_p{page_idx}_{os.getpid()}.png"
-            pil_image.save(temp_img)
+            with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as f:
+                temp_img = f.name
+                pil_image.save(temp_img)
 
             cmd = [self.tesseract_cmd, temp_img, "stdout", "--psm", "6", "tsv"]
             proc = subprocess.run(cmd, capture_output=True, text=True, check=False)

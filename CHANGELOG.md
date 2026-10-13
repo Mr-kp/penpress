@@ -30,6 +30,8 @@ All notable changes are recorded here (Keep a Changelog). Every change under `sr
 - 2026-10-13T16:28:00Z: Organic humanizer engine with multi-scale jitter, baseline wander, and slant drift in `src/penpress/synth/` (`humanizer.py` sinusoidal baseline wander, Perlin micro-wobble, word-level slant drift; `variant.py` anti-repetition variant sampling; `dynamics.py` curvature-dependent feedrate modulation and bold multi-pass toolpaths; 0.00% OCR CER verified).
 - 2026-10-13T16:38:00Z: Mathematical formula handwriting layout and symbol synthesis engine in `src/penpress/core/` (`math_engine.py` MathJax/KaTeX layout bridge, 3-tier fallback chain; `math_symbols.py` stretchy brackets, radicals, wobbly rules; 100% compilation across all 125 fixture equations at 284 eq/s).
 - 2026-10-13T16:59:00Z: Document ingest pipeline and structured block parser in `src/penpress/ingest/` (`DocumentIngestEngine` supporting PDF and Markdown; `markdown_parser.py` converting headings, lists, paragraphs, display LaTeX; `layout.py` multi-column detection and monotonic reading order ordering; `figures.py` vector drawing polyline clustering and raster skeleton tracing; `schema.py` versioned document block representation; 93.7 pages/s throughput and hostile PDF defenses verified).
+- 2026-10-13T17:11:00Z: Fixed cross-platform tesseract path resolution (`_find_tesseract`) and tempfile handling in `src/penpress/ingest/engine.py` for macOS and Windows runner compatibility.
+
 
 
 
