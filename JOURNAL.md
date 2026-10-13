@@ -14,3 +14,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T09:56:20Z [agent] [P1-2] Claimed P1-2 (single-stroke fallback font: Hershey loader, Greek/math coverage, line layout, OCR CER validation) by worker-core-font
 - 2026-10-13T10:02:35Z [agent] [P1-2] P1-2 completed: Hershey single-stroke loader, Greek/math symbols, layout engine, OCR CER 0.00% verified. Card moved to review.
 - 2026-10-13T10:12:13Z [agent] [P1-2] P1-2 reviewed by director-adversarial-review: mutation test passed, Tesseract CER 0.00% verified, visual inspection passed, CI 100% green. P1-2 marked done.
+- 2026-10-13T10:15:07Z [agent] [P1-3] Claimed P1-3 (machine profile loader, Marlin G-code compiler, safety preambles, Hypothesis property tests, golden tests) by worker-plan-gcode
+- 2026-10-13T10:19:04Z [agent] [P1-3] P1-3 completed: Marlin G-code compiler implemented with safety preambles, Hypothesis property tests, golden tests, throughput >1M segments/s. Card moved to review.

@@ -1,0 +1,39 @@
+# Ender 3 Pro Pen Plotter Machine Profile (Marlin 2.0+)
+# All dimensions in millimetres, speeds in mm/min, accelerations in mm/s^2.
+
+[machine]
+name = "Ender 3 Pro (Pen Plotter)"
+firmware = "marlin"
+
+# Bed travel limits (printable/reachable envelope in mm)
+bed_width_mm = 235.0
+bed_height_mm = 235.0
+
+# Usable safe margins (e.g. binder clip keepouts, mechanical edge margin)
+margin_left_mm = 10.0
+margin_right_mm = 10.0
+margin_bottom_mm = 10.0
+margin_top_mm = 10.0
+
+[pen]
+# Toolhead offset: distance from nozzle origin to pen tip (mm)
+offset_x_mm = 0.0
+offset_y_mm = 0.0
+
+# Z heights in mm (Marlin absolute coordinates)
+z_lift_mm = 3.5          # Safe travel clearance above paper
+z_write_mm = 0.5         # Nominal contact height with paper
+z_write_min_mm = 0.1     # Hardware safety floor (compiler rejects any Z below this)
+
+[speeds]
+travel_feedrate_mm_min = 6000.0   # Fast XY travel when pen is lifted (G0)
+draw_feedrate_mm_min = 2400.0     # Writing speed on paper (G1)
+z_lift_feedrate_mm_min = 1200.0   # Z raise speed
+z_drop_feedrate_mm_min = 800.0    # Z lower speed to paper
+
+[safety]
+disable_heaters = true   # Emit M104 S0 and M140 S0 in preamble
+disable_fans = true      # Emit M107 in preamble
+lift_z_first = true      # Ensure first motion command raises Z before any XY travel
+home_xy_first = true     # Home sequence G28
+disable_steppers_on_finish = true # M84 on finish
