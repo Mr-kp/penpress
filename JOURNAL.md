@@ -67,3 +67,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T17:39:18Z [agent] [P6-1] completed P6-1: path optimizer, TSP 2-opt sort (42.8% travel reduction), collinear merger, and bilinear bed mesh Z-compensation
 - 2026-10-13T17:44:54Z [agent] [P7-1] claimed P7-1: robust serial driver, Marlin line checksum protocol, and hardware recovery engine
 - 2026-10-13T22:53:03Z [agent] [P7-1] P7-1 complete: robust Marlin serial driver with checksum flow control and persistent recovery engine
+- 2026-10-13T22:59:31Z [agent] [P8-1] Claimed P8-1: Dual-mode calibration wizard with camera homography and manual tactile jog alignment
+- 2026-10-13T23:04:03Z [agent] [P8-1] P8-1 complete: Dual-mode calibration wizard with camera homography and manual tactile jog alignment

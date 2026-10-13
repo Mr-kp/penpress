@@ -5,7 +5,7 @@ Generated from `tasks/*.md` by `make state`. **Do not edit the board by hand**; 
 Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expansion -> P2..P9.
 
 <!-- BOARD:START -->
-**Summary:** todo: 3 / doing: 0 / review: 0 / done: 24 / blocked: 0
+**Summary:** todo: 2 / doing: 0 / review: 0 / done: 25 / blocked: 0
 
 ### Board
 | ID | Title | Zone | Status | Depends | Implemented-by | Reviewed-by |
@@ -27,7 +27,7 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [P5-2](tasks/P5-2.md) | Page composer and layout typesetter for ruled and blank stationery | ingest | **done** | X-1, P5-1, R5-1, P3-1 | worker-layout-p52 | director-adversarial-reviewer |
 | [P6-1](tasks/P6-1.md) | Path optimization, traveling salesperson sort, and bed mesh Z-compensation | plan | **done** | X-1, P1-3, P5-2 | worker-optimizer-p61 | director-adversarial-reviewer |
 | [P7-1](tasks/P7-1.md) | Robust serial driver, line checksum protocol, and hardware recovery engine | plan | **done** | X-1, P1-3, P1-4 | worker-machine-p71 | director-adversarial-p71 |
-| [P8-1](tasks/P8-1.md) | Dual-mode calibration wizard with camera homography and manual tactile jog alignment | vision | **todo** | X-1, R3-1, P7-1 | - | - |
+| [P8-1](tasks/P8-1.md) | Dual-mode calibration wizard with camera homography and manual tactile jog alignment | vision | **done** | X-1, R3-1, P7-1 | worker-vision-p81 | director-adversarial-p81 |
 | [P9-1](tasks/P9-1.md) | Minimalist dark studio UI and REST API with live toolpath telemetry | api | **todo** | X-1, P2-2, P5-2, P6-1, P7-1, P8-1 | - | - |
 | [P9-2](tasks/P9-2.md) | Cross-platform packaging, virtual print driver, and commercial release v0.1.0 | meta | **todo** | X-1, P9-1 | - | - |
 | [R0-1](tasks/R0-1.md) | Synthetic fixture factory (handwriting sheets, bed photos, equations, PDFs) | research | **done** | P0-3 | worker-research-r01 | director-adversarial-review |
@@ -39,7 +39,7 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [X-1](tasks/X-1.md) | Expansion: turn research ADRs into concrete implementation cards for P2-P9 | meta | **done** | R1-1, R2-1, R3-1, R4-1, R5-1, P1-5 | chief-system-architect | director-adversarial-review |
 
 ### Available to start (all dependencies done)
-- [P8-1](tasks/P8-1.md): Dual-mode calibration wizard with camera homography and manual tactile jog alignment
+- [P9-1](tasks/P9-1.md): Minimalist dark studio UI and REST API with live toolpath telemetry
 
 ### Waiting for review
 - (none)
