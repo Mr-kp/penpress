@@ -11,3 +11,4 @@ All notable changes are recorded here (Keep a Changelog). Every change under `sr
 - 2026-10-12T18:55:00Z: CI workflow (Linux, macOS, Windows) running the full gate.
 - 2026-10-12T18:55:00Z: Research dossier with verified repos and licences, licence register, compute strategy, ADR template, checklists.
 - 2026-10-12T18:55:00Z: Task cards: R0-1 fixtures, R1-1 handwriting cloning, R2-1 equations, R3-1 vision/calibration, R4-1 PDF ingest, R5-1 physical limits, P1-1..P1-5 core vertical slice, X-1 expansion gate.
+- 2026-10-13T09:34:00Z: DIRECTOR.md (skeptical director protocol with worker/reviewer prompts).

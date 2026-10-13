@@ -5,14 +5,14 @@ Generated from `tasks/*.md` by `make state`. **Do not edit the board by hand**; 
 Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expansion -> P2..P9.
 
 <!-- BOARD:START -->
-**Summary:** todo: 13 / doing: 1 / review: 2 / done: 0 / blocked: 0
+**Summary:** todo: 13 / doing: 0 / review: 2 / done: 0 / blocked: 1
 
 ### Board
 | ID | Title | Zone | Status | Depends | Implemented-by | Reviewed-by |
 |---|---|---|---|---|---|---|
 | [P0-1](tasks/P0-1.md) | Repository, tooling, package skeleton | meta | **review** | - | antigravity-orchestrator | - |
 | [P0-2](tasks/P0-2.md) | Governance docs: AGENTS, BRIEF, tasks, STATE, JOURNAL, licences, compute, ADR, checklists | meta | **review** | - | antigravity-orchestrator | - |
-| [P0-3](tasks/P0-3.md) | CI green on Linux, macOS, Windows | meta | **doing** | - | antigravity-orchestrator | - |
+| [P0-3](tasks/P0-3.md) | CI green on Linux, macOS, Windows | meta | **blocked** | - | antigravity-orchestrator | - |
 | [P0-4](tasks/P0-4.md) | Dossier review: independent verification of landscape and licence claims | research | **todo** | P0-1, P0-2 | - | - |
 | [P1-1](tasks/P1-1.md) | Core types: Stroke, Path, Page, units, transforms | core | **todo** | P0-3 | - | - |
 | [P1-2](tasks/P1-2.md) | Single-stroke fallback font (public domain Hershey) with Greek and math coverage | core | **todo** | P1-1 | - | - |
@@ -35,5 +35,5 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 - [P0-2](tasks/P0-2.md): Governance docs: AGENTS, BRIEF, tasks, STATE, JOURNAL, licences, compute, ADR, checklists, needs a reviewer other than antigravity-orchestrator
 
 ### Blocked
-- (none)
+- [P0-3](tasks/P0-3.md): CI green on Linux, macOS, Windows
 <!-- BOARD:END -->
