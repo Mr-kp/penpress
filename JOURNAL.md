@@ -7,3 +7,6 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-12T18:55:00Z [antigravity-orchestrator] [P0-2] Decision: research cards R0..R5 run before implementation of P2-P9; X-1 expands roadmap from ADRs. User decisions: local-first, Python+FastAPI, PDF+Markdown inputs, webcam optional, agents must resolve the honest limits.
 - 2026-10-13T09:33:47Z [agent] [P0-3] CI blocked by GitHub billing, not code; local gate green; P0-3 blocked
 - 2026-10-13T09:35:09Z [agent] [P0-3] Local CI on clean clone passed (Linux). README director quick start added.
+- 2026-10-13T09:45:17Z [agent] [P0-3] P0-1, P0-2, P0-3 reviewed by director; all 3 green, CI verified across 3 platforms. Unlocked Phase 1 and Research track.
+- 2026-10-13T09:45:40Z [agent] [P1-1] Claimed P1-1 (core stroke types, transforms, RDP, serialization) by worker-core-p1
+- 2026-10-13T09:52:20Z [agent] [P1-1] P1-1 completed: core types implemented, 1000-page hypothesis test green, gate passed with 98% coverage. Card moved to review.
