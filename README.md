@@ -51,6 +51,21 @@ make briefing
 uv sync                              # Python 3.11+ environment
 uv run python scripts/gate.py        # lint, types, anti-toy scan, board check, docs check, tests + coverage
 uv run penpress --version
+
+# Render text to G-code, simulate Marlin execution, and generate toolpath renders
+uv run penpress render-text input.txt --profile ender3pro --out out/
+```
+
+Example real execution output:
+```text
+Rendered input.txt to out/
+Pages: 1
+Strokes: 1262
+Total Pen Lifts: 1262
+Estimated Time: 1271.0s
+G-code: out/input.gcode
+Simulator Image: out/input.png
+Simulator SVG: out/input.svg
 ```
 
 Quality gates (`scripts/gate.py`): ruff (lint + format), mypy `--strict`, `forbid.py` (no stubs/TODOs/mocks in `src/`, no skipped or vacuous tests), `state.py --check` (board integrity, evidence and independent reviewer required for `done`), `docs_check.py` (code changes need a CHANGELOG entry), pytest with coverage >= 85%.

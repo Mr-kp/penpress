@@ -20,3 +20,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T10:24:07Z [agent] [P1-4] Starting P1-4: Virtual Marlin simulator and toolpath renderer design and implementation
 - 2026-10-13T10:29:48Z [agent] [P1-4] P1-4 completed: Virtual Marlin simulator, trapezoidal timing, serial resend protocol, and toolpath renderer implemented. Evidence recorded and card moved to review.
 - 2026-10-13T10:33:10Z [agent] [P1-4] P1-4 reviewed and marked done by director-adversarial-review. CI 100% green across all platforms. Unlocked P1-5.
+- 2026-10-13T10:36:19Z [agent] [P1-5] Claimed P1-5: First vertical slice end-to-end pipeline (text to strokes to G-code to simulator image to OCR)
+- 2026-10-13T10:42:10Z [agent] [P1-5] P1-5 completed: text to Hershey strokes to G-code to Marlin simulation to Tesseract OCR (0.12% CER) verified. Card moved to review.
