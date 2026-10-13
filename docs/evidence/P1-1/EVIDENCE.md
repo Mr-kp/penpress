@@ -122,7 +122,15 @@ uv run python -c "import json; from penpress.core import get_schema; print(json.
 - `mypy --strict` clean: PASS
 - Coverage of `core/` >= 95%: PASS (measured 98.5%)
 
-## Deviations
-None.
-
 ## Reviewer notes
+- Reviewer: director-adversarial-review (2026-10-13)
+- Verification on clean tree:
+  - All 7 gate steps passed: ruff lint clean, ruff format 54 files clean, mypy strict clean (12 source files), forbid scanner clean, state board clean, docs check clean.
+  - Pytest: 72 tests passed (including 1000-page hypothesis roundtrip), total coverage 98.45%, `src/penpress/core` 98.5% (exceeds >= 95% requirement).
+  - Zone boundaries verified: only files under `src/penpress/core/`, `tests/unit/core/`, and standard meta/evidence docs modified.
+- Mutation checks performed:
+  1. Mutated `BoundingBox.contains_point` comparison operator (`<=` changed to `>`) -> `test_stroke_bounds_contain_all_points` failed immediately.
+  2. Mutated `Transform2D.inverse` determinant scaling (`1.0 / det` changed to `2.0 / det`) -> `test_transform_inverse_roundtrip` caught 2 distinct Hypothesis failures and failed immediately.
+- CI Matrix verification: GitHub Actions run 38379528270 completed 100% GREEN across Ubuntu, Windows, and macOS runners.
+- Verdict: PASS. Approved and ready to mark `done`.
+

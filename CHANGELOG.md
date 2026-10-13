@@ -14,3 +14,4 @@ All notable changes are recorded here (Keep a Changelog). Every change under `sr
 - 2026-10-13T09:34:00Z: DIRECTOR.md (skeptical director protocol with worker/reviewer prompts).
 - 2026-10-13T09:36:00Z: README Director quick start (dispatch order, rules, known facts).
 - 2026-10-13T09:52:00Z: Core stroke geometry primitives in `src/penpress/core/` (immutable `Point`, `BoundingBox`, `Transform2D`, `Stroke`, `Path`, `Page`, RDP simplification, uniform polyline arc-length resampling, versioned JSON serialization and schema).
+- 2026-10-13T10:02:00Z: Single-stroke typography engine in `src/penpress/core/hershey.py` (Hershey public domain vector font loader, ASCII/Greek/Math coverage, text line layout, Tesseract OCR verification).

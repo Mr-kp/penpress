@@ -23,5 +23,8 @@ Rule: record the verdict **before** adding a dependency. Product binaries may on
 | Tesseract | Apache-2.0 | OCR round-trip | OK (subprocess) |
 | MathWriting dataset | **UNVERIFIED** | R2 | Verify before use; likely evaluation-only |
 | Blender | GPL | synthetic rendering tool | Subprocess tool only; rendered images are fine |
+| Pillow (PIL) | HPND | Image rasterisation for tests/OCR | OK (permissive, 2026-10-13) |
+| `techninja/hersheytextjs` (`hersheytext.min.json`) | MIT / Public Domain (Hershey) | Single-stroke fallback font data | OK (MIT wrapper of public domain font, 2026-10-13) |
 
 Agents: append rows as you add dependencies. Include licence URL and date checked.
+

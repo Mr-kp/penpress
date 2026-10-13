@@ -10,3 +10,6 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T09:45:17Z [agent] [P0-3] P0-1, P0-2, P0-3 reviewed by director; all 3 green, CI verified across 3 platforms. Unlocked Phase 1 and Research track.
 - 2026-10-13T09:45:40Z [agent] [P1-1] Claimed P1-1 (core stroke types, transforms, RDP, serialization) by worker-core-p1
 - 2026-10-13T09:52:20Z [agent] [P1-1] P1-1 completed: core types implemented, 1000-page hypothesis test green, gate passed with 98% coverage. Card moved to review.
+- 2026-10-13T09:56:02Z [agent] [P1-1] P1-1 reviewed by director-adversarial-review: mutation tests passed, coverage 98.5%, CI 100% green. P1-1 marked done. Unlocked P1-2 and P1-3.
+- 2026-10-13T09:56:20Z [agent] [P1-2] Claimed P1-2 (single-stroke fallback font: Hershey loader, Greek/math coverage, line layout, OCR CER validation) by worker-core-font
+- 2026-10-13T10:02:35Z [agent] [P1-2] P1-2 completed: Hershey single-stroke loader, Greek/math symbols, layout engine, OCR CER 0.00% verified. Card moved to review.
