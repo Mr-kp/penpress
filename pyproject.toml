@@ -9,7 +9,13 @@ dependencies = [
     "pillow>=12.3.0",
     "pypdfium2>=4.30.0",
     "pdfminer-six>=20240706",
+    "numpy>=2.0.0",
+    "opencv-python-headless>=4.10.0",
+    "scikit-image>=0.24.0",
+    "scipy>=1.14.0",
+    "reportlab>=4.2.0",
 ]
+
 
 [project.scripts]
 penpress = "penpress.__main__:main"
@@ -59,4 +65,10 @@ files = ["src/penpress", "scripts"]
 [[tool.mypy.overrides]]
 module = ["reportlab.*"]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["penpress.profile.sheet_ingest"]
+disallow_untyped_calls = false
+
+
 

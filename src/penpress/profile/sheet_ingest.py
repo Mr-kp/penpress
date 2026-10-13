@@ -199,7 +199,7 @@ def trace_cell_strokes(
         return []
 
     # Skeletonize to single-pixel centerlines
-    skel_bool = skeletonize(binary > 0)  # type: ignore[no-untyped-call]
+    skel_bool = skeletonize(binary > 0)
     rows, cols = skel_bool.shape
 
     skel_pts: set[tuple[int, int]] = set()
