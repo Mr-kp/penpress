@@ -26,3 +26,6 @@ uv run penpress --version
 Cards P0-2/P0-3 have no dependency on P0-1 (bootstrap exception) so the board is valid before anything is `done`.
 
 ## Reviewer notes
+
+## Local CI run (2026-10-13)
+Clean clone (`git clone . .ci-local`), `uv sync --python 3.12`, `GATE_BASE=HEAD~1 uv run python scripts/gate.py`: all 7 steps passed, 33 tests, coverage 88.24%, `penpress --version` printed `penpress 0.0.1`. Linux only: macOS and Windows jobs have not run (GitHub billing block).
