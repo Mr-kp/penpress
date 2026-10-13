@@ -1,16 +1,27 @@
 // Bridge script: convert LaTeX math string into a structured layout tree of glyphs and rules.
 // Runs using Node.js and MathJax-full liteAdaptor.
 
-const mathjax = require('./vendor/node_modules/mathjax-full/js/mathjax.js').mathjax;
-const TeX = require('./vendor/node_modules/mathjax-full/js/input/tex.js').TeX;
-const SVG = require('./vendor/node_modules/mathjax-full/js/output/svg.js').SVG;
-const adaptor = require('./vendor/node_modules/mathjax-full/js/adaptors/liteAdaptor.js').liteAdaptor;
-const RegisterHTMLHandler = require('./vendor/node_modules/mathjax-full/js/handlers/html.js').RegisterHTMLHandler;
+const path = require('path');
+const vendorDir = path.resolve(__dirname, 'node_modules');
+
+function resolveModule(subpath) {
+  try {
+    return require(path.join(vendorDir, subpath));
+  } catch {
+    return require(subpath);
+  }
+}
+
+const mathjax = resolveModule('mathjax-full/js/mathjax.js').mathjax;
+const TeX = resolveModule('mathjax-full/js/input/tex.js').TeX;
+const SVG = resolveModule('mathjax-full/js/output/svg.js').SVG;
+const adaptor = resolveModule('mathjax-full/js/adaptors/liteAdaptor.js').liteAdaptor;
+const RegisterHTMLHandler = resolveModule('mathjax-full/js/handlers/html.js').RegisterHTMLHandler;
 
 const htmlAdaptor = adaptor();
 RegisterHTMLHandler(htmlAdaptor);
 
-const AllPackages = require('./vendor/node_modules/mathjax-full/js/input/tex/AllPackages.js').AllPackages;
+const AllPackages = resolveModule('mathjax-full/js/input/tex/AllPackages.js').AllPackages;
 const texPackages = AllPackages.filter(p => !['noerrors', 'noundefined'].includes(p));
 
 const tex = new TeX({

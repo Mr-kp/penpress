@@ -17,6 +17,8 @@ build/
 *.key
 
 # research clones, datasets, weights: never committed (see docs/developer/compute.md)
+node_modules/
+research/*/node_modules/
 research/*/vendor/
 research/*/data/
 datasets/

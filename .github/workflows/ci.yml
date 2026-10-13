@@ -17,7 +17,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: astral-sh/setup-uv@v5
-      - name: Install System Dependencies (Tesseract OCR)
+      - name: Install System Dependencies (Tesseract OCR, Node.js packages)
         shell: bash
         run: |
           if [ "${{ runner.os }}" = "Linux" ]; then
@@ -27,6 +27,9 @@ jobs:
           elif [ "${{ runner.os }}" = "Windows" ]; then
             choco install tesseract --no-progress
             echo "C:\Program Files\Tesseract-OCR" >> "$GITHUB_PATH"
+          fi
+          if [ -f "research/R2-1/package.json" ]; then
+            npm install --prefix research/R2-1/
           fi
       - name: Install Python Environment
         run: uv sync --python 3.12
