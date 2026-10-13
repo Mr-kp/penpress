@@ -31,7 +31,7 @@ packages = ["src/penpress"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra --strict-markers"
-pythonpath = ["scripts", "research/R0-1", "research/R1-1", "research/R2-1", "research/R5-1"]
+pythonpath = ["scripts", "research/R0-1", "research/R1-1", "research/R2-1", "research/R3-1", "research/R5-1"]
 
 [tool.coverage.run]
 branch = true

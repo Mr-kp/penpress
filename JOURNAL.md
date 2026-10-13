@@ -35,3 +35,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T11:42:30Z [agent] [R1-1] Claimed R1-1: Handwriting cloning research spike (offline-to-online, 3 approaches benchmark, UX proposal, ADR-0001)
 - 2026-10-13T12:00:50Z [agent] [R1-1] R1-1 completed: 3 handwriting cloning approaches benchmarked on 30 hold-out sentences, stroke recovery Chamfer 1.90px, ADR-0001 accepted, moved to review
 - 2026-10-13T12:06:11Z [agent] [R1-1] R1-1 reviewed by director-adversarial-review: 3 approaches benchmarked, Chamfer 1.90px, ADR-0001 accepted, CI 38394449245 100% green across all platforms. Marked done.
+- 2026-10-13T12:06:26Z [agent] [R3-1] Claimed R3-1: Camera calibration, paper quad, clip keepout, homography, and confidence gating
+- 2026-10-13T14:45:19Z [agent] [R3-1] R3-1 completed: paper quad detection 0.33mm error across 300 scenes, 0% false accept rate on negative fixtures, clip handle segmentation, CLI suite, ADR-0003 accepted. Moved to review.

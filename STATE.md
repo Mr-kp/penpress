@@ -5,7 +5,7 @@ Generated from `tasks/*.md` by `make state`. **Do not edit the board by hand**; 
 Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expansion -> P2..P9.
 
 <!-- BOARD:START -->
-**Summary:** todo: 4 / doing: 0 / review: 0 / done: 12 / blocked: 0
+**Summary:** todo: 3 / doing: 0 / review: 1 / done: 12 / blocked: 0
 
 ### Board
 | ID | Title | Zone | Status | Depends | Implemented-by | Reviewed-by |
@@ -22,18 +22,17 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [R0-1](tasks/R0-1.md) | Synthetic fixture factory (handwriting sheets, bed photos, equations, PDFs) | research | **done** | P0-3 | worker-research-r01 | director-adversarial-review |
 | [R1-1](tasks/R1-1.md) | Handwriting cloning research spike (photo or canvas sample to plottable strokes) | research | **done** | R0-1 | worker-research-r11 | director-adversarial-review |
 | [R2-1](tasks/R2-1.md) | Equations in the user's handwriting (research spike) | research | **done** | P0-3 | worker-research-r21 | director-adversarial-review |
-| [R3-1](tasks/R3-1.md) | Camera calibration, paper and border detection (simulated + real images) | research | **todo** | R0-1 | - | - |
+| [R3-1](tasks/R3-1.md) | Camera calibration, paper and border detection (simulated + real images) | research | **review** | R0-1 | worker-research-r31 | - |
 | [R4-1](tasks/R4-1.md) | PDF and document ingest (any PDF to structured blocks with LaTeX and figures) | research | **todo** | R0-1 | - | - |
 | [R5-1](tasks/R5-1.md) | Physical limits of the Ender 3 Pro pen plotter (kinematics, Z-touch, paper fit, hardware test protocol) | research | **done** | P0-3 | worker-research-r51 | director-adversarial-review |
 | [X-1](tasks/X-1.md) | Expansion: turn research ADRs into concrete implementation cards for P2-P9 | meta | **todo** | R1-1, R2-1, R3-1, R4-1, R5-1, P1-5 | - | - |
 
 ### Available to start (all dependencies done)
 - [P0-4](tasks/P0-4.md): Dossier review: independent verification of landscape and licence claims
-- [R3-1](tasks/R3-1.md): Camera calibration, paper and border detection (simulated + real images)
 - [R4-1](tasks/R4-1.md): PDF and document ingest (any PDF to structured blocks with LaTeX and figures)
 
 ### Waiting for review
-- (none)
+- [R3-1](tasks/R3-1.md): Camera calibration, paper and border detection (simulated + real images), needs a reviewer other than worker-research-r31
 
 ### Blocked
 - (none)
