@@ -25,9 +25,17 @@ jobs:
           elif [ "${{ runner.os }}" = "macOS" ]; then
             brew install tesseract
           elif [ "${{ runner.os }}" = "Windows" ]; then
-            choco install tesseract --no-progress
-            echo "C:\Program Files\Tesseract-OCR" >> "$GITHUB_PATH"
+            choco install tesseract --no-progress --retry 3 || winget install --id UB-Mannheim.TesseractOCR -e --source winget --accept-package-agreements --accept-source-agreements || true
+            for p in "C:\Program Files\Tesseract-OCR" "C:\Program Files (x86)\Tesseract-OCR"; do
+              if [ -d "$p" ]; then
+                echo "$p" >> "$GITHUB_PATH"
+                echo "PATH=$p;$PATH" >> "$GITHUB_ENV"
+                break
+              fi
+            done
           fi
+
+
           if [ -f "research/R2-1/package.json" ]; then
             (cd research/R2-1 && npm install)
           fi
