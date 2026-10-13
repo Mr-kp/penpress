@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 from penpress import __version__
+from penpress.api.server import run_server
 from penpress.plan.render import execute_render_pipeline
 
 
@@ -70,14 +71,62 @@ def build_parser() -> argparse.ArgumentParser:
         help="Render simulator PNG in high-contrast black-on-white mode optimized for OCR.",
     )
 
+    # serve subcommand
+    serve_parser = subparsers.add_parser(
+        "serve",
+        help="Launch the PenPress Studio web interface and REST API daemon.",
+    )
+    serve_parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        help="Host interface to bind (default: 127.0.0.1).",
+    )
+    serve_parser.add_argument(
+        "--port",
+        type=int,
+        default=8080,
+        help="Port to listen on (default: 8080).",
+    )
+
     return parser
+
+
+def _handle_serve(args: argparse.Namespace) -> int:
+    try:
+        run_server(host=args.host, port=args.port)
+        return 0
+    except Exception as exc:
+        print(f"Error starting server: {exc}", file=sys.stderr)
+        return 1
+
+
+def _handle_render_text(args: argparse.Namespace) -> int:
+    try:
+        profile_arg = str(args.profile)
+        profile_path = Path(profile_arg) if profile_arg.endswith(".toml") else None
+        profile_name = profile_arg if not profile_arg.endswith(".toml") else "custom"
+
+        execute_render_pipeline(
+            text_file=args.file,
+            output_dir=args.out_dir,
+            profile_path=profile_path,
+            profile_name=profile_name,
+            font_size_mm=args.font_size,
+            line_height_mm=args.line_height,
+            paginate=args.paginate,
+            ocr_mode=args.ocr_mode,
+            out_stream=sys.stdout,
+        )
+        return 0
+    except Exception as exc:
+        print(f"Error: {exc}", file=sys.stderr)
+        return 1
 
 
 def main(argv: list[str] | None = None) -> int:
     """Run the CLI."""
     args_list = sys.argv[1:] if argv is None else argv
 
-    # Explicit --version handling for test compatibility and clean exit code return
     if args_list and args_list[0] in {"--version", "-V"}:
         print(f"penpress {__version__}")
         return 0
@@ -89,32 +138,12 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(args_list)
 
-    if not args.subcommand:
-        parser.print_help(sys.stderr)
-        return 2
-
+    if args.subcommand == "serve":
+        return _handle_serve(args)
     if args.subcommand == "render-text":
-        try:
-            profile_arg = str(args.profile)
-            profile_path = Path(profile_arg) if profile_arg.endswith(".toml") else None
-            profile_name = profile_arg if not profile_arg.endswith(".toml") else "custom"
+        return _handle_render_text(args)
 
-            execute_render_pipeline(
-                text_file=args.file,
-                output_dir=args.out_dir,
-                profile_path=profile_path,
-                profile_name=profile_name,
-                font_size_mm=args.font_size,
-                line_height_mm=args.line_height,
-                paginate=args.paginate,
-                ocr_mode=args.ocr_mode,
-                out_stream=sys.stdout,
-            )
-            return 0
-        except Exception as exc:
-            print(f"Error: {exc}", file=sys.stderr)
-            return 1
-
+    parser.print_help(sys.stderr)
     return 2
 
 

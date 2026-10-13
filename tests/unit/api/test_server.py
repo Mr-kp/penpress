@@ -17,6 +17,7 @@ from __future__ import annotations
 
 from fastapi.testclient import TestClient
 
+from penpress import __version__
 from penpress.api.server import app
 
 client = TestClient(app)
@@ -73,7 +74,7 @@ def test_telemetry_and_health_endpoints() -> None:
     resp_health = client.get("/api/health", headers={"Host": "localhost"})
     assert resp_health.status_code == 200
     health_data = resp_health.json()
-    assert health_data["version"] == "0.0.1"
+    assert health_data["version"] == __version__
     assert "pos" in health_data
 
     resp_tel = client.get("/api/telemetry", headers={"Host": "localhost"})

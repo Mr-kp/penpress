@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PenPress
+GenericName=Pen Plotter Studio
+Comment=Plot assignments in authentic handwriting on Marlin 3D plotters
+Exec=penpress serve
+Icon=penpress
+Terminal=false
+Categories=Graphics;Publishing;Utility;
+Keywords=handwriting;plotter;ender3pro;gcode;assignment;math;
+StartupNotify=true
+StartupWMClass=penpress

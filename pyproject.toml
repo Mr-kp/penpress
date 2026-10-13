@@ -1,6 +1,6 @@
 [project]
 name = "penpress"
-version = "0.0.1"
+version = "0.1.0"
 description = "Write assignments in your own handwriting with an Ender 3 Pro pen plotter"
 readme = "README.md"
 requires-python = ">=3.11"

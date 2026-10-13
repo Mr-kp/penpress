@@ -1,0 +1,170 @@
+#!/usr/bin/env python3
+"""CUPS virtual print backend for PenPress.
+
+When installed into /usr/lib/cups/backend/penpress-print (or macOS equivalents),
+this script receives print jobs spooled from desktop applications (Word, LibreOffice,
+browsers, or PDF viewers) via standard CUPS backend execution conventions.
+
+CUPS Backend Protocol:
+  - Invocation with 0 arguments: Report device discovery line:
+      direct penpress-print "PenPress Virtual Plotter" "PenPress Virtual Plotter" "MFG:PenPress;MDL:Ender3Pro;CMD:GCODE;"
+  - Invocation with 5 or 6 arguments:
+      argv[1]: job-id
+      argv[2]: user
+      argv[3]: title
+      argv[4]: copies
+      argv[5]: options
+      argv[6]: (optional) path to file to print; if omitted, print data is streamed via stdin.
+"""
+
+from __future__ import annotations
+
+import os
+import sys
+from pathlib import Path
+
+# Commercial constraints: Maximum allowable job stream size (50 MB)
+MAX_JOB_BYTES = 50 * 1024 * 1024
+
+# Default spool directory for queued jobs
+DEFAULT_SPOOL_DIR = Path.home() / ".penpress" / "spool"
+
+
+def print_discovery() -> int:
+    """Output CUPS backend device discovery record."""
+    device_line = (
+        'direct penpress-print "PenPress Virtual Plotter" "PenPress Virtual Plotter" '
+        '"MFG:PenPress;MDL:Ender3Pro;CMD:GCODE;"'
+    )
+    print(device_line)
+    return 0
+
+
+def process_print_job(
+    job_id: str,
+    user: str,
+    title: str,
+    copies: str,
+    options: str,
+    source_file: str | None = None,
+    spool_dir: Path | None = None,
+) -> int:
+    """Process incoming print job stream with safety bounds and spooling."""
+    target_spool = spool_dir or DEFAULT_SPOOL_DIR
+    target_spool.mkdir(parents=True, exist_ok=True)
+
+    sanitized_title = "".join(c for c in title if c.isalnum() or c in ("-", "_", ".")).strip() or "job"
+    spool_file = target_spool / f"{job_id}_{sanitized_title}.dat"
+    meta_file = target_spool / f"{job_id}_{sanitized_title}.meta"
+
+    total_bytes = 0
+
+    try:
+        if source_file:
+            input_path = Path(source_file)
+            if not input_path.exists():
+                print(f"ERROR: Print job source file not found: {source_file}", file=sys.stderr)
+                return 1
+
+            file_size = input_path.stat().st_size
+            if file_size > MAX_JOB_BYTES:
+                print(
+                    f"ERROR: Print job exceeds maximum limit of 50 MB ({file_size} bytes)",
+                    file=sys.stderr,
+                )
+                return 1
+
+            with input_path.open("rb") as src, spool_file.open("wb") as dst:
+                while chunk := src.read(64 * 1024):
+                    total_bytes += len(chunk)
+                    if total_bytes > MAX_JOB_BYTES:
+                        print(
+                            f"ERROR: Print job exceeds maximum limit of 50 MB ({total_bytes} bytes)",
+                            file=sys.stderr,
+                        )
+                        if spool_file.exists():
+                            spool_file.unlink()
+                        return 1
+                    dst.write(chunk)
+        else:
+            # Read from stdin
+            with spool_file.open("wb") as dst:
+                while chunk := sys.stdin.buffer.read(64 * 1024):
+                    total_bytes += len(chunk)
+                    if total_bytes > MAX_JOB_BYTES:
+                        print(
+                            f"ERROR: Print job exceeds maximum limit of 50 MB ({total_bytes} bytes)",
+                            file=sys.stderr,
+                        )
+                        if spool_file.exists():
+                            spool_file.unlink()
+                        return 1
+                    dst.write(chunk)
+
+        # Write metadata file
+        meta_content = (
+            f"job_id={job_id}\n"
+            f"user={user}\n"
+            f"title={title}\n"
+            f"copies={copies}\n"
+            f"options={options}\n"
+            f"bytes={total_bytes}\n"
+            f"status=enqueued\n"
+        )
+        meta_file.write_text(meta_content, encoding="utf-8")
+
+        print(
+            f"INFO: PenPress spooled job {job_id} ('{title}') successfully ({total_bytes} bytes).",
+            file=sys.stderr,
+        )
+        return 0
+
+    except Exception as exc:
+        print(f"ERROR: Failed to process spool stream: {exc}", file=sys.stderr)
+        if spool_file.exists():
+            spool_file.unlink()
+        if meta_file.exists():
+            meta_file.unlink()
+        return 1
+
+
+def main(argv: list[str] | None = None) -> int:
+    """CUPS backend entry point."""
+    args = sys.argv if argv is None else argv
+
+    # Zero arguments: CUPS discovery mode
+    if len(args) == 1:
+        return print_discovery()
+
+    # CUPS job submission mode (5 or 6 arguments + executable name)
+    if len(args) < 6:
+        print(
+            "Usage: penpress-print job-id user title copies options [file]",
+            file=sys.stderr,
+        )
+        return 1
+
+    job_id = args[1]
+    user = args[2]
+    title = args[3]
+    copies = args[4]
+    options = args[5]
+    source_file = args[6] if len(args) >= 7 else None
+
+    # Check for test override of spool dir
+    spool_override = os.environ.get("PENPRESS_SPOOL_DIR")
+    spool_dir = Path(spool_override) if spool_override else None
+
+    return process_print_job(
+        job_id=job_id,
+        user=user,
+        title=title,
+        copies=copies,
+        options=options,
+        source_file=source_file,
+        spool_dir=spool_dir,
+    )
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

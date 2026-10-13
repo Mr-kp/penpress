@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -222,3 +223,8 @@ def get_index() -> HTMLResponse:
     if index_file.exists():
         return HTMLResponse(content=index_file.read_text(encoding="utf-8"))
     return HTMLResponse("<h1>PenPress Studio</h1><p>Frontend loading...</p>")
+
+
+def run_server(host: str = "127.0.0.1", port: int = 8080) -> None:
+    """Launch the PenPress Studio web server and API daemon."""
+    uvicorn.run(app, host=host, port=port, log_level="info")

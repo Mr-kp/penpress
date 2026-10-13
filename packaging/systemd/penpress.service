@@ -1,0 +1,21 @@
+[Unit]
+Description=PenPress Handwriting Plotter Daemon
+Documentation=https://github.com/penpress/penpress
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/penpress serve --host 127.0.0.1 --port 8080
+Restart=on-failure
+RestartSec=5s
+Environment=PYTHONUNBUFFERED=1
+
+# Security Sandbox Hardening
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%h/.penpress /tmp
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=default.target

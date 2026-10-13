@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141722"/>
+      <stop offset="100%" stop-color="#0d0e12"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="penGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Obsidian Card -->
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="url(#bgGrad)" stroke="#212638" stroke-width="12"/>
+  
+  <!-- Stylized Mechanical Grid / Ruler Marks -->
+  <line x1="80" y1="140" x2="432" y2="140" stroke="#212638" stroke-width="4" stroke-dasharray="16 12"/>
+  <line x1="80" y1="220" x2="432" y2="220" stroke="#212638" stroke-width="4" stroke-dasharray="16 12"/>
+  <line x1="80" y1="300" x2="432" y2="300" stroke="#212638" stroke-width="4" stroke-dasharray="16 12"/>
+  <line x1="80" y1="380" x2="432" y2="380" stroke="#212638" stroke-width="4" stroke-dasharray="16 12"/>
+
+  <!-- Fluid Handwriting Stroke (Vector Wave) -->
+  <path d="M 96 300 C 140 240, 180 340, 230 280 C 270 230, 310 320, 370 260" 
+        fill="none" stroke="url(#accentGrad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Precision Pen Plotter Nib -->
+  <g transform="translate(370, 260) rotate(-45)">
+    <!-- Pen Tip -->
+    <polygon points="0,0 -16,-48 16,-48" fill="url(#accentGrad)"/>
+    <!-- Pen Barrel -->
+    <rect x="-16" y="-180" width="32" height="132" rx="6" fill="url(#penGrad)"/>
+    <!-- Accent Ring -->
+    <rect x="-18" y="-130" width="36" height="14" rx="2" fill="url(#accentGrad)"/>
+  </g>
+</svg>

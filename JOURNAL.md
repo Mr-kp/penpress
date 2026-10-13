@@ -71,3 +71,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T23:04:03Z [agent] [P8-1] P8-1 complete: Dual-mode calibration wizard with camera homography and manual tactile jog alignment
 - 2026-10-13T23:08:44Z [agent] [P9-1] Claimed P9-1: Minimalist dark studio UI and REST API with live toolpath telemetry
 - 2026-10-13T23:17:11Z [agent] [P9-1] P9-1 complete: Minimalist dark studio UI and REST API with live toolpath telemetry
+- 2026-10-13T23:22:19Z [agent] [P9-2] Claimed P9-2: Cross-platform packaging, virtual print driver, and commercial release v0.1.0
+- 2026-10-13T23:34:58Z [agent] [P9-2] P9-2 complete: Standalone binary compilation, CUPS virtual print driver, and commercial release v0.1.0
