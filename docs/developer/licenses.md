@@ -27,6 +27,8 @@ Rule: record the verdict **before** adding a dependency. Product binaries may on
 | `pypdfium2` | Apache-2.0 / BSD-3-Clause | PDF parsing and rendering | OK (permissive, 2026-10-13) |
 | `pdfminer.six` | MIT | PDF layout and stream extraction | OK (permissive, 2026-10-13) |
 | `reportlab` | BSD-like (ReportLab licence) | Benchmark PDF fixture generation | OK (permissive, 2026-10-13) |
+| `pyserial` | BSD-3-Clause | Hardware serial UART communication | OK (permissive, 2026-10-13) |
 
 Agents: append rows as you add dependencies. Include licence URL and date checked.
+
 
