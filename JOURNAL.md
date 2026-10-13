@@ -26,3 +26,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T10:49:48Z [agent] [R0-1] Claimed R0-1: Synthetic fixture factory (deterministic seeded generator for handwriting sheets, bed camera scenes, equations, PDFs, and stroke recovery ground truth)
 - 2026-10-13T11:00:12Z [agent] [R0-1] R0-1 completed: synthetic fixture factory, 125 equations, 4 OFL sample sheets, 3 bed scenes with homography, 4 negative fixtures, 3.0MB size, deterministic sha256 verified. Moved to review.
 - 2026-10-13T11:02:56Z [agent] [R0-1] R0-1 reviewed by director-adversarial-review: deterministic sha256 passed, CI 38387254911 100% green across Linux, Windows, macOS. R0-1 marked done. Unlocked R1-1, R3-1, R4-1.
+- 2026-10-13T11:03:16Z [agent] [R2-1] Claimed R2-1: Equations in handwriting research spike (LaTeX to 2D stroke layout, symbol coverage, CROHME/MathWriting evaluation, round-trip benchmark, and ADR-0002)
+- 2026-10-13T11:16:19Z [agent] [R2-1] R2-1 completed: equation handwriting synthesis engine, 100% compilation on 125 equations, 20.4s total, 0 fallbacks, contact sheet inspected, ADR-0002 accepted. Moved to review.
