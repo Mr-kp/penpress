@@ -5,7 +5,7 @@ Generated from `tasks/*.md` by `make state`. **Do not edit the board by hand**; 
 Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expansion -> P2..P9.
 
 <!-- BOARD:START -->
-**Summary:** todo: 5 / doing: 0 / review: 0 / done: 22 / blocked: 0
+**Summary:** todo: 4 / doing: 0 / review: 0 / done: 23 / blocked: 0
 
 ### Board
 | ID | Title | Zone | Status | Depends | Implemented-by | Reviewed-by |
@@ -25,7 +25,7 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [P4-1](tasks/P4-1.md) | Mathematical formula handwriting layout and symbol synthesis engine | core | **done** | X-1, R2-1, P1-1, P1-2 | worker-math-p41 | director-adversarial-reviewer |
 | [P5-1](tasks/P5-1.md) | Document ingest pipeline and structured block parser | ingest | **done** | X-1, R4-1, P1-1 | worker-ingest-p51 | director-adversarial-reviewer |
 | [P5-2](tasks/P5-2.md) | Page composer and layout typesetter for ruled and blank stationery | ingest | **done** | X-1, P5-1, R5-1, P3-1 | worker-layout-p52 | director-adversarial-reviewer |
-| [P6-1](tasks/P6-1.md) | Path optimization, traveling salesperson sort, and bed mesh Z-compensation | plan | **todo** | X-1, P1-3, P5-2 | - | - |
+| [P6-1](tasks/P6-1.md) | Path optimization, traveling salesperson sort, and bed mesh Z-compensation | plan | **done** | X-1, P1-3, P5-2 | worker-optimizer-p61 | director-adversarial-reviewer |
 | [P7-1](tasks/P7-1.md) | Robust serial driver, line checksum protocol, and hardware recovery engine | plan | **todo** | X-1, P1-3, P1-4 | - | - |
 | [P8-1](tasks/P8-1.md) | Dual-mode calibration wizard with camera homography and manual tactile jog alignment | vision | **todo** | X-1, R3-1, P7-1 | - | - |
 | [P9-1](tasks/P9-1.md) | Minimalist dark studio UI and REST API with live toolpath telemetry | api | **todo** | X-1, P2-2, P5-2, P6-1, P7-1, P8-1 | - | - |
@@ -39,7 +39,6 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [X-1](tasks/X-1.md) | Expansion: turn research ADRs into concrete implementation cards for P2-P9 | meta | **done** | R1-1, R2-1, R3-1, R4-1, R5-1, P1-5 | chief-system-architect | director-adversarial-review |
 
 ### Available to start (all dependencies done)
-- [P6-1](tasks/P6-1.md): Path optimization, traveling salesperson sort, and bed mesh Z-compensation
 - [P7-1](tasks/P7-1.md): Robust serial driver, line checksum protocol, and hardware recovery engine
 
 ### Waiting for review
