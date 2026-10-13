@@ -101,8 +101,20 @@ function extractElements(mathNode) {
   return elements;
 }
 
+const katexModule = (function() {
+  try {
+    return resolveModule('katex');
+  } catch {
+    return null;
+  }
+})();
+
 function processLatex(latexString) {
   try {
+    if (katexModule) {
+      katexModule.renderToString(latexString, {throwOnError: true});
+    }
+
     const rendered = doc.convert(latexString, {display: true});
     // In MathJax, root SVG has a g transform='scale(1,-1)'.
     // If we traverse starting from rendered, every coordinate receives scaleY = -1.

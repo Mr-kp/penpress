@@ -55,3 +55,6 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T16:23:20Z [agent] [P3-1] Claimed P3-1: Organic humanizer engine with multi-scale jitter, baseline wander, and slant drift
 - 2026-10-13T16:28:41Z [agent] [P3-1] P3-1 implemented: OrganicHumanizer, VariantBank, dynamics, Gaussian baseline jitter verified, moved to review
 - 2026-10-13T16:29:16Z [agent] [P3-1] P3-1 approved by director-adversarial-reviewer: marked done
+- 2026-10-13T16:33:28Z [agent] [P4-1] Claimed P4-1: Mathematical formula handwriting layout and symbol synthesis engine
+- 2026-10-13T16:39:40Z [agent] [P4-1] P4-1 implemented: MathEngine, math_symbols, 125/125 equations compiled at 284 eq/s, moved to review
+- 2026-10-13T16:40:15Z [agent] [P4-1] P4-1 approved by director-adversarial-reviewer: marked done
