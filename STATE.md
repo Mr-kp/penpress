@@ -5,7 +5,7 @@ Generated from `tasks/*.md` by `make state`. **Do not edit the board by hand**; 
 Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expansion -> P2..P9.
 
 <!-- BOARD:START -->
-**Summary:** todo: 5 / doing: 0 / review: 1 / done: 10 / blocked: 0
+**Summary:** todo: 5 / doing: 0 / review: 0 / done: 11 / blocked: 0
 
 ### Board
 | ID | Title | Zone | Status | Depends | Implemented-by | Reviewed-by |
@@ -24,7 +24,7 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 | [R2-1](tasks/R2-1.md) | Equations in the user's handwriting (research spike) | research | **done** | P0-3 | worker-research-r21 | director-adversarial-review |
 | [R3-1](tasks/R3-1.md) | Camera calibration, paper and border detection (simulated + real images) | research | **todo** | R0-1 | - | - |
 | [R4-1](tasks/R4-1.md) | PDF and document ingest (any PDF to structured blocks with LaTeX and figures) | research | **todo** | R0-1 | - | - |
-| [R5-1](tasks/R5-1.md) | Physical limits of the Ender 3 Pro pen plotter (kinematics, Z-touch, paper fit, hardware test protocol) | research | **review** | P0-3 | worker-research-r51 | - |
+| [R5-1](tasks/R5-1.md) | Physical limits of the Ender 3 Pro pen plotter (kinematics, Z-touch, paper fit, hardware test protocol) | research | **done** | P0-3 | worker-research-r51 | director-adversarial-review |
 | [X-1](tasks/X-1.md) | Expansion: turn research ADRs into concrete implementation cards for P2-P9 | meta | **todo** | R1-1, R2-1, R3-1, R4-1, R5-1, P1-5 | - | - |
 
 ### Available to start (all dependencies done)
@@ -34,7 +34,7 @@ Phase flow: P0 (governance) -> R0..R5 research + P1 core (parallel) -> X-1 expan
 - [R4-1](tasks/R4-1.md): PDF and document ingest (any PDF to structured blocks with LaTeX and figures)
 
 ### Waiting for review
-- [R5-1](tasks/R5-1.md): Physical limits of the Ender 3 Pro pen plotter (kinematics, Z-touch, paper fit, hardware test protocol), needs a reviewer other than worker-research-r51
+- (none)
 
 ### Blocked
 - (none)

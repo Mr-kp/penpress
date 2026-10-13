@@ -53,3 +53,16 @@ The motion simulator (`research/R5-1/motion_sim.py`) correctly computes cornerin
 
 ## Deviations
 none
+
+## Reviewer notes
+- Reviewer: director-adversarial-review (2026-10-13)
+- Verification on clean tree:
+  - All 7 gate steps passed: ruff lint clean, ruff format clean, mypy strict clean (18 source files), forbid scanner clean, state board clean, docs check clean.
+  - Pytest: 107 tests passed, total coverage 91.04% (meets >= 85% requirement).
+  - Kinematic simulator: trapezoidal math and junction deviation verified against theoretical physics equations.
+  - Sourced parameters: Creality Ender 3 Pro specifications and Marlin 2.0 default steps/mm and feedrates quoted with primary sources in `docs/developer/research/R5-1.md`.
+  - Protocol & Schema: `docs/user/hardware-test-protocol.md` and `hardware_schema.json` verified.
+  - A4 two-pass error budget: alignment error budget demonstrates $\pm 0.85$ mm exceeds $\le 0.25$ mm inter-line limit; decision to support A5 single-pass accepted in ADR-0005.
+  - Cross-platform CI verification: GitHub Actions run `38391185347` completed 100% GREEN across Ubuntu, macOS, and Windows runners.
+- Verdict: PASS. Ready to mark `done`.
+

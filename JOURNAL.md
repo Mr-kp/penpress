@@ -31,3 +31,4 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T11:26:55Z [agent] [R2-1] R2-1 reviewed by director-adversarial-review: 125/125 equations rendered with 0 errors, 163ms latency, ADR-0002 accepted, CI 38389900350 100% green across all platforms. R2-1 marked done.
 - 2026-10-13T11:30:04Z [agent] [R5-1] Claimed R5-1: Physical limits of Ender 3 Pro pen plotter (kinematics, Z-touch, paper fit, hardware test protocol, and ADR-0005)
 - 2026-10-13T11:34:25Z [agent] [R5-1] R5-1 completed: physical limits and kinematics simulation, hardware test protocol, JSON schema validator, ADR-0005 accepted. Moved to review.
+- 2026-10-13T11:37:49Z [agent] [R5-1] R5-1 reviewed by director-adversarial-review: kinematic math verified, hardware protocol in docs/user/, schema validated, ADR-0005 accepted, CI 38391185347 100% green across all platforms. R5-1 marked done.
