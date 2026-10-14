@@ -190,10 +190,13 @@ def test_tesseract_ocr_on_humanized_synthetic_page(tmp_path: Path) -> None:
     out_png = tmp_path / "humanized_ocr.png"
     img.save(out_png)
 
-    # Save evidence copy
-    evidence_dir = Path("docs/evidence/P3-1")
-    evidence_dir.mkdir(parents=True, exist_ok=True)
-    img.save(evidence_dir / "humanized_ocr.png")
+    # Save evidence copy if writable
+    try:
+        evidence_dir = Path("docs/evidence/P3-1")
+        evidence_dir.mkdir(parents=True, exist_ok=True)
+        img.save(evidence_dir / "humanized_ocr.png")
+    except OSError:
+        pass
 
     # OCR with PSM 7 (single text line)
     proc = subprocess.run(

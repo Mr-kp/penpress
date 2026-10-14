@@ -73,3 +73,5 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T23:17:11Z [agent] [P9-1] P9-1 complete: Minimalist dark studio UI and REST API with live toolpath telemetry
 - 2026-10-13T23:22:19Z [agent] [P9-2] Claimed P9-2: Cross-platform packaging, virtual print driver, and commercial release v0.1.0
 - 2026-10-13T23:34:58Z [agent] [P9-2] P9-2 complete: Standalone binary compilation, CUPS virtual print driver, and commercial release v0.1.0
+- 2026-10-14T08:38:07Z [agent] [P9-2] P9-2 reset to doing: completing full cross-platform builds, standalone serve test, CUPS queue integration, and independent review
+- 2026-10-14T08:57:45Z [worker-release-p92] [P9-2] P9-2 implemented: PyInstaller MEIPASS asset resolution, standalone serve verified, spool queue endpoints, e2e simulation script, all quality gates passing, moved to review

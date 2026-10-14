@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -21,7 +23,9 @@ from penpress.plan.profile import MachineProfile
 from penpress.vision.calibrator import CameraCalibrator
 from penpress.vision.manual_wizard import ManualJogWizard
 
-WEB_DIR = Path(__file__).resolve().parents[3] / "web"
+# Locate web directory with PyInstaller bundle support
+_bundle_dir = getattr(sys, "_MEIPASS", None)
+WEB_DIR = Path(_bundle_dir) / "web" if _bundle_dir else Path(__file__).resolve().parents[3] / "web"
 
 app = FastAPI(
     title="PenPress Studio API",
@@ -140,6 +144,61 @@ def compose_document(req: DocumentRenderRequest) -> dict[str, Any]:
         }
     except Exception as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.get("/api/jobs")
+def list_spool_jobs() -> dict[str, Any]:
+    """List spooled print jobs waiting in the spool directory."""
+    spool_override = os.environ.get("PENPRESS_SPOOL_DIR")
+    if spool_override:
+        spool_dir = Path(spool_override)
+    else:
+        try:
+            spool_dir = Path.home() / ".penpress" / "spool"
+        except Exception:
+            spool_dir = Path("/tmp") / ".penpress" / "spool"
+
+    jobs: list[dict[str, str]] = []
+    if spool_dir.exists():
+        for meta_file in sorted(spool_dir.glob("*.meta")):
+            job_info: dict[str, str] = {}
+            for line in meta_file.read_text(encoding="utf-8").splitlines():
+                if "=" in line:
+                    k, v = line.split("=", 1)
+                    job_info[k.strip()] = v.strip()
+            if job_info:
+                jobs.append(job_info)
+
+    return {"count": len(jobs), "jobs": jobs}
+
+
+@app.post("/api/jobs/{job_id}/process")
+def process_spool_job(job_id: str) -> dict[str, Any]:
+    """Ingest and prepare a spooled print job."""
+    spool_override = os.environ.get("PENPRESS_SPOOL_DIR")
+    if spool_override:
+        spool_dir = Path(spool_override)
+    else:
+        try:
+            spool_dir = Path.home() / ".penpress" / "spool"
+        except Exception:
+            spool_dir = Path("/tmp") / ".penpress" / "spool"
+
+    matching_meta = list(spool_dir.glob(f"{job_id}_*.meta"))
+    if not matching_meta:
+        raise HTTPException(status_code=404, detail=f"Job {job_id} not found in spool directory")
+
+    meta_file = matching_meta[0]
+    data_file = meta_file.with_suffix(".dat")
+    if not data_file.exists():
+        raise HTTPException(status_code=404, detail=f"Data for job {job_id} not found")
+
+    return {
+        "job_id": job_id,
+        "status": "ready",
+        "data_file": str(data_file),
+        "size_bytes": data_file.stat().st_size,
+    }
 
 
 @app.post("/api/calibration/manual/start")

@@ -33,3 +33,5 @@ models/*.onnx
 .penpress/
 out/
 .ci-local/
+.print_state.json
+*.spec

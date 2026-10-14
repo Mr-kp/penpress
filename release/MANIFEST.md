@@ -6,7 +6,7 @@ Commercial distribution artifacts for PenPress v0.1.0.
 
 | Artifact | Size | SHA-256 Checksum |
 |---|---|---|
-| `penpress` | 151.69 MB | `f697e978a0fb2811c74ee6124dff28e565f9290bc5d1e5e251ceb375ca1d57b4` |
+| `penpress` | 151.69 MB | `ad6a5ab46ae1ca5ae4f843bee7e324f9ce057aa6da72a769137327f59d029b25` |
 
 ## Verification Command
 ```bash

@@ -32,7 +32,7 @@ penpress serve --host 127.0.0.1 --port 8080
 ```
 Open your browser to `http://127.0.0.1:8080`.
 
-![Document Studio](/docs/screenshots/ui/01_document_studio.png)
+![Document Studio](../screenshots/ui/01_document_studio.png)
 
 ### Quick Workflow (3-Step Plotting)
 1. **Document Ingest**: Drop in Markdown, LaTeX, or PDF files. PenPress extracts headings, text, mathematical formulas, and vector diagrams into continuous single-stroke paths.
@@ -57,7 +57,7 @@ If camera lighting is poor or no camera is attached, the tactile wizard provides
 3. **Height Point**: Jog pen along Y-axis to top-left corner.
 4. **Z-Touch (Paper Drag Test)**: Lower Z in 0.1 mm increments until a sheet of paper placed under the pen tip encounters gentle friction.
 
-![Calibration Wizard](/docs/screenshots/ui/04_calibration_wizard.png)
+![Calibration Wizard](../screenshots/ui/04_calibration_wizard.png)
 
 ---
 

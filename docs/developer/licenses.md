@@ -31,6 +31,7 @@ Rule: record the verdict **before** adding a dependency. Product binaries may on
 | `fastapi` | MIT | Web/REST API framework | OK (permissive, 2026-10-13) |
 | `uvicorn` | BSD-3-Clause | ASGI web server | OK (permissive, 2026-10-13) |
 | `httpx` | BSD-3-Clause | HTTP test client and asynchronous requests | OK (permissive, 2026-10-13) |
+| `pyinstaller` | GPL-2.0 with Special Exception for Bootloader | Developer packaging tool (binaries produced are NOT contaminated) | OK (dev dependency only, 2026-10-14) |
 
 Agents: append rows as you add dependencies. Include licence URL and date checked.
 

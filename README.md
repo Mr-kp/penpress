@@ -2,7 +2,7 @@
 
 Write assignments in **your own handwriting** with an Ender 3 Pro and a pen. Drop in a PDF or Markdown/LaTeX; get a page of natural handwriting with equations and figures, calibrated against your actual paper, optionally by webcam or phone.
 
-> **Status: pre-alpha (research + foundations).** Nothing prints yet. Live progress: [STATE.md](STATE.md). Product contract: [BRIEF.md](BRIEF.md).
+> **Status: Commercial Release v0.1.0.** Full simulation, hardware recovery, calibration wizard, REST API & Web Studio, standalone binaries, and CUPS virtual print driver. Live progress: [STATE.md](STATE.md). Product contract: [BRIEF.md](BRIEF.md). Quickstart & Assembly: [docs/user/quickstart.md](docs/user/quickstart.md).
 
 ## Director quick start (read this first)
 
@@ -52,8 +52,14 @@ uv sync                              # Python 3.11+ environment
 uv run python scripts/gate.py        # lint, types, anti-toy scan, board check, docs check, tests + coverage
 uv run penpress --version
 
+# Launch the Web Studio and REST API daemon
+uv run penpress serve --host 127.0.0.1 --port 8080
+
 # Render text to G-code, simulate Marlin execution, and generate toolpath renders
 uv run penpress render-text input.txt --profile ender3pro --out out/
+
+# Build standalone distribution binary
+uv run python scripts/package.py --release
 ```
 
 Example real execution output:

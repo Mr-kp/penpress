@@ -14,9 +14,9 @@ PY = sys.executable
 COVERAGE_MIN = "85"
 
 STEPS: list[tuple[str, list[str]]] = [
-    ("ruff lint", [PY, "-m", "ruff", "check", "."]),
-    ("ruff format", [PY, "-m", "ruff", "format", "--check", "."]),
-    ("mypy", [PY, "-m", "mypy", "src/penpress", "scripts"]),
+    ("ruff lint", [PY, "-m", "ruff", "check", "--no-cache", "."]),
+    ("ruff format", [PY, "-m", "ruff", "format", "--check", "--no-cache", "."]),
+    ("mypy", [PY, "-m", "mypy", "--cache-dir=/tmp/.mypy_cache", "src/penpress", "scripts"]),
     ("forbid", [PY, "scripts/forbid.py"]),
     ("board", [PY, "scripts/state.py", "--check"]),
     ("docs", [PY, "scripts/docs_check.py"]),
@@ -27,6 +27,8 @@ STEPS: list[tuple[str, list[str]]] = [
             "-m",
             "pytest",
             "-q",
+            "-o",
+            "cache_dir=/tmp/.pytest_cache",
             "--cov=src/penpress",
             f"--cov-fail-under={COVERAGE_MIN}",
             "--cov-report=term-missing:skip-covered",

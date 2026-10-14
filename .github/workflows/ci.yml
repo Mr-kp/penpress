@@ -56,3 +56,15 @@ jobs:
           fi
       - name: Gate (lint, types, forbid, board, docs, tests, coverage)
         run: uv run python scripts/gate.py
+      - name: Build & Verify Standalone Executable
+        shell: bash
+        run: |
+          uv run python scripts/package.py --release
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            ./dist/penpress.exe --version
+            ./dist/penpress.exe render-text tests/fixtures/p1_5_text_120words.txt --out out_ci
+          else
+            ./dist/penpress --version
+            ./dist/penpress render-text tests/fixtures/p1_5_text_120words.txt --out out_ci
+          fi
+

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import os
 import subprocess
 import sys
@@ -171,3 +172,12 @@ def test_release_manifest_and_checksums() -> None:
 
     checksums_text = CHECKSUM_FILE.read_text(encoding="utf-8")
     assert len(checksums_text.strip()) > 0
+
+    dist_binary = ROOT / "dist" / "penpress"
+    if dist_binary.is_file():
+        hasher = hashlib.sha256()
+        with dist_binary.open("rb") as f:
+            while chunk := f.read(65536):
+                hasher.update(chunk)
+        expected_digest = hasher.hexdigest()
+        assert expected_digest in checksums_text

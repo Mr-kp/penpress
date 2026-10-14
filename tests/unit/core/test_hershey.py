@@ -174,11 +174,14 @@ def test_tesseract_ocr_rendering_pangram(tmp_path: Path) -> None:
     out_png = tmp_path / "hershey_pangram.png"
     img.save(out_png)
 
-    # Also save evidence copy in docs/evidence/P1-2/hershey_pangram.png
-    evidence_dir = Path("docs/evidence/P1-2")
-    evidence_dir.mkdir(parents=True, exist_ok=True)
-    evidence_png = evidence_dir / "hershey_pangram.png"
-    img.save(evidence_png)
+    # Also save evidence copy in docs/evidence/P1-2/hershey_pangram.png if writable
+    try:
+        evidence_dir = Path("docs/evidence/P1-2")
+        evidence_dir.mkdir(parents=True, exist_ok=True)
+        evidence_png = evidence_dir / "hershey_pangram.png"
+        img.save(evidence_png)
+    except OSError:
+        pass
 
     # Run Tesseract OCR
     res = subprocess.run(

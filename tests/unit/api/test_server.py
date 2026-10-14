@@ -15,6 +15,9 @@ Tests:
 
 from __future__ import annotations
 
+from pathlib import Path
+
+import pytest
 from fastapi.testclient import TestClient
 
 from penpress import __version__
@@ -189,3 +192,35 @@ def test_index_and_settings_endpoints() -> None:
     settings = resp_settings.json()
     assert settings["bed_size_x_mm"] == 235.0
     assert settings["bed_size_y_mm"] == 235.0
+
+
+def test_spool_jobs_endpoints(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Test listing and ingesting CUPS spooled jobs."""
+    monkeypatch.setenv("PENPRESS_SPOOL_DIR", str(tmp_path))
+
+    # Empty initially
+    resp_empty = client.get("/api/jobs", headers={"Host": "localhost"})
+    assert resp_empty.status_code == 200
+    assert resp_empty.json()["count"] == 0
+
+    # Create synthetic job
+    meta_file = tmp_path / "101_assignment.meta"
+    data_file = tmp_path / "101_assignment.dat"
+    meta_file.write_text("job_id=101\ntitle=assignment\nuser=alice\nstatus=enqueued\n", encoding="utf-8")
+    data_file.write_bytes(b"%PDF-1.4\n...")
+
+    # Now listed
+    resp_listed = client.get("/api/jobs", headers={"Host": "localhost"})
+    assert resp_listed.status_code == 200
+    assert resp_listed.json()["count"] == 1
+    assert resp_listed.json()["jobs"][0]["job_id"] == "101"
+
+    # Process job
+    resp_proc = client.post("/api/jobs/101/process", headers={"Host": "localhost"})
+    assert resp_proc.status_code == 200
+    assert resp_proc.json()["status"] == "ready"
+    assert resp_proc.json()["size_bytes"] == len(b"%PDF-1.4\n...")
+
+    # Not found negative test
+    resp_404 = client.post("/api/jobs/999/process", headers={"Host": "localhost"})
+    assert resp_404.status_code == 404

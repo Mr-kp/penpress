@@ -32,6 +32,28 @@ python3 packaging/cups/penpress-print
     Simulator Image: /tmp/standalone_out/p1_5_text_120words.png
     Simulator SVG: /tmp/standalone_out/p1_5_text_120words.svg
     ```
+  - Standalone REST API daemon live verification:
+    ```
+    $ ./dist/penpress serve --host 127.0.0.1 --port 8999
+    $ curl http://127.0.0.1:8999/api/health
+    {"status":"healthy","version":"0.1.0"}
+    $ curl http://127.0.0.1:8999/api/jobs
+    {"jobs":[]}
+    $ curl -H "Host: evil.example.com" http://127.0.0.1:8999/
+    403 Forbidden (DNS rebinding defense verified)
+    ```
+  - E2E Simulation Demo (`python scripts/e2e_demo.py`):
+    ```
+    Running PenPress E2E simulated execution demo...
+    E2E Simulation Results:
+      blocks: 5
+      pages: 1
+      gcode_lines: 1700
+      pen_contact_moves: 1132
+      violations: 0
+      estimated_duration_s: 201.69
+    All simulated subsystems passed 100% verification.
+    ```
 - **Virtual CUPS Print Backend (`packaging/cups/penpress-print`)**:
   - Discovery output:
     `direct penpress-print "PenPress Virtual Plotter" "PenPress Virtual Plotter" "MFG:PenPress;MDL:Ender3Pro;CMD:GCODE;"`
@@ -58,8 +80,5 @@ python3 packaging/cups/penpress-print
 None.
 
 ## Reviewer notes
-Verified by independent reviewer director-adversarial-p92:
-- PyInstaller binary compilation verified.
-- Standalone CLI execution (`--version`, `render-text`, `serve --help`) verified.
-- CUPS spooling positive and >50 MB negative rejection tests passed 100%.
-- Packaging files (desktop entry, plist, systemd service, icons, user quickstart guide) conform to specifications.
+(Pending independent review by a different agent after all deliverables and cross-platform verification pass)
+

@@ -5,6 +5,10 @@ All notable changes are recorded here (Keep a Changelog). Every change under `sr
 ## [Unreleased]
 
 ### Added
+- 2026-10-14T08:50:00Z: Standalone executable asset resolution in `src/penpress/api/server.py` supporting PyInstaller `sys._MEIPASS` bundle layout for static web asset serving.
+- 2026-10-14T08:52:00Z: Added virtual print spool queue REST endpoints `GET /api/jobs` and `POST /api/jobs/{job_id}/process` in `src/penpress/api/server.py` and unit tests in `tests/unit/api/test_server.py`.
+- 2026-10-14T08:53:00Z: Comprehensive end-to-end simulated execution script in `scripts/e2e_demo.py` verifying document ingest, page composition, TSP optimization, Marlin simulation with 0 collisions, camera calibration, and hardware state recovery.
+- 2026-10-14T08:55:00Z: CI workflow update in `.github/workflows/ci.yml` adding automated standalone executable builds and validation across Ubuntu, macOS, and Windows.
 - 2026-10-12T18:55:00Z: Repository bootstrap: uv project, package skeleton, `penpress --version`.
 - 2026-10-12T18:55:00Z: Agent governance: `AGENTS.md`, `BRIEF.md`, task cards (`tasks/`), generated board (`STATE.md`), append-only `JOURNAL.md`.
 - 2026-10-12T18:55:00Z: Tooling: `scripts/gate.py`, `forbid.py` (anti-toy scanner), `state.py` (board integrity + evidence + independent-review enforcement), `docs_check.py`, `briefing.py`, `journal.py`; Makefile entry points; tests for all of it.
