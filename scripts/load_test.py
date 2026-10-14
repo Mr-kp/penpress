@@ -8,9 +8,12 @@ Verifies:
 
 from __future__ import annotations
 
-import resource
+import sys
 import time
 from pathlib import Path
+
+if sys.platform != "win32":
+    import resource
 
 from fastapi.testclient import TestClient
 
@@ -29,8 +32,10 @@ def get_fd_count() -> int:
 
 def get_rss_kb() -> int:
     """Return max RSS in KB."""
-    usage = resource.getrusage(resource.RUSAGE_SELF)
-    return usage.ru_maxrss
+    if sys.platform != "win32":
+        usage = resource.getrusage(resource.RUSAGE_SELF)
+        return int(usage.ru_maxrss)
+    return 0
 
 
 def run_load_test() -> None:
