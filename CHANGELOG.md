@@ -5,6 +5,7 @@ All notable changes are recorded here (Keep a Changelog). Every change under `sr
 ## [Unreleased]
 
 ### Fixed
+- 2026-10-14T16:26:00Z: Replaced fixed sleep with polling retry loop for background server health check in `.github/workflows/ci.yml` to prevent race conditions during PyInstaller archive decompression on Windows runners.
 - 2026-10-14T16:05:00Z: Guarded `resource.getrusage` import and usage behind `sys.platform != "win32"` in `scripts/load_test.py` to ensure cross-platform mypy type checking passes on Windows runners.
 
 ### Added

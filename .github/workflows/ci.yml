@@ -65,16 +65,37 @@ jobs:
             ./dist/penpress.exe render-text tests/fixtures/p1_5_text_120words.txt --out out_ci
             ./dist/penpress.exe serve --host 127.0.0.1 --port 8999 &
             SERVER_PID=$!
-            sleep 6
-            curl -s -f http://127.0.0.1:8999/api/health
+            READY=0
+            for i in $(seq 1 30); do
+              if curl -s -f http://127.0.0.1:8999/api/health; then
+                READY=1
+                break
+              fi
+              sleep 1
+            done
             kill $SERVER_PID || true
+            if [ "$READY" -ne 1 ]; then
+              echo "Server failed to respond to /api/health within 30s"
+              exit 1
+            fi
           else
             ./dist/penpress --version
             ./dist/penpress render-text tests/fixtures/p1_5_text_120words.txt --out out_ci
             ./dist/penpress serve --host 127.0.0.1 --port 8999 &
             SERVER_PID=$!
-            sleep 6
-            curl -s -f http://127.0.0.1:8999/api/health
+            READY=0
+            for i in $(seq 1 30); do
+              if curl -s -f http://127.0.0.1:8999/api/health; then
+                READY=1
+                break
+              fi
+              sleep 1
+            done
             kill $SERVER_PID || true
+            if [ "$READY" -ne 1 ]; then
+              echo "Server failed to respond to /api/health within 30s"
+              exit 1
+            fi
           fi
+
 
