@@ -173,6 +173,8 @@ def test_tesseract_ocr_rendering_pangram(tmp_path: Path) -> None:
 
     out_png = tmp_path / "hershey_pangram.png"
     img.save(out_png)
+    assert out_png.is_file()
+    assert out_png.stat().st_size > 0
 
     # Also save evidence copy in docs/evidence/P1-2/hershey_pangram.png if writable
     try:

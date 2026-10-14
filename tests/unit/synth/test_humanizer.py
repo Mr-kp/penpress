@@ -189,6 +189,8 @@ def test_tesseract_ocr_on_humanized_synthetic_page(tmp_path: Path) -> None:
 
     out_png = tmp_path / "humanized_ocr.png"
     img.save(out_png)
+    assert out_png.is_file()
+    assert out_png.stat().st_size > 0
 
     # Save evidence copy if writable
     try:

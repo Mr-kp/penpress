@@ -5,9 +5,14 @@ Usage: python scripts/gate.py [--fast]    (--fast skips pytest coverage threshol
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
+
+# Ensure cache/coverage files use /tmp in sandbox or read-only workspaces
+os.environ.setdefault("COVERAGE_FILE", "/tmp/.coverage")
+os.environ.setdefault("RUFF_CACHE_DIR", "/tmp/.ruff_cache")
 
 ROOT = Path(__file__).resolve().parent.parent
 PY = sys.executable

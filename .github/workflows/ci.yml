@@ -63,8 +63,18 @@ jobs:
           if [ "${{ runner.os }}" = "Windows" ]; then
             ./dist/penpress.exe --version
             ./dist/penpress.exe render-text tests/fixtures/p1_5_text_120words.txt --out out_ci
+            ./dist/penpress.exe serve --host 127.0.0.1 --port 8999 &
+            SERVER_PID=$!
+            sleep 6
+            curl -s -f http://127.0.0.1:8999/api/health
+            kill $SERVER_PID || true
           else
             ./dist/penpress --version
             ./dist/penpress render-text tests/fixtures/p1_5_text_120words.txt --out out_ci
+            ./dist/penpress serve --host 127.0.0.1 --port 8999 &
+            SERVER_PID=$!
+            sleep 6
+            curl -s -f http://127.0.0.1:8999/api/health
+            kill $SERVER_PID || true
           fi
 

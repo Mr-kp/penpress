@@ -2,7 +2,7 @@
 
 Write assignments in **your own handwriting** with an Ender 3 Pro and a pen. Drop in a PDF or Markdown/LaTeX; get a page of natural handwriting with equations and figures, calibrated against your actual paper, optionally by webcam or phone.
 
-> **Status: Commercial Release v0.1.0.** Full simulation, hardware recovery, calibration wizard, REST API & Web Studio, standalone binaries, and CUPS virtual print driver. Live progress: [STATE.md](STATE.md). Product contract: [BRIEF.md](BRIEF.md). Quickstart & Assembly: [docs/user/quickstart.md](docs/user/quickstart.md).
+> **Status: Commercial MVP v0.1.0.** Full simulation, hardware recovery, calibration wizard, REST API & Web Studio, standalone binaries, and CUPS virtual print driver. 100% verified in virtual kinematics and simulation; physical hardware verification on actual Ender 3 Pro follows [docs/user/hardware-test-protocol.md](docs/user/hardware-test-protocol.md). Live progress: [STATE.md](STATE.md). Product contract: [BRIEF.md](BRIEF.md). Quickstart & Assembly: [docs/user/quickstart.md](docs/user/quickstart.md).
 
 ## Director quick start (read this first)
 
