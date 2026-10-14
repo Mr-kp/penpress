@@ -75,3 +75,4 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-13T23:34:58Z [agent] [P9-2] P9-2 complete: Standalone binary compilation, CUPS virtual print driver, and commercial release v0.1.0
 - 2026-10-14T08:38:07Z [agent] [P9-2] P9-2 reset to doing: completing full cross-platform builds, standalone serve test, CUPS queue integration, and independent review
 - 2026-10-14T08:57:45Z [worker-release-p92] [P9-2] P9-2 implemented: PyInstaller MEIPASS asset resolution, standalone serve verified, spool queue endpoints, e2e simulation script, all quality gates passing, moved to review
+- 2026-10-14T09:10:45Z [director-adversarial-p92] [P9-2] P9-2 independently verified and approved: standalone binary, CUPS spooling and oversize rejection, CI run 38539123963 100% green, marked done
