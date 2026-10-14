@@ -4,6 +4,9 @@ All notable changes are recorded here (Keep a Changelog). Every change under `sr
 
 ## [Unreleased]
 
+### Fixed
+- 2026-10-14T16:05:00Z: Guarded `resource.getrusage` import and usage behind `sys.platform != "win32"` in `scripts/load_test.py` to ensure cross-platform mypy type checking passes on Windows runners.
+
 ### Added
 - 2026-10-14T15:52:00Z: High-frequency pulsing load and resource leak verification script in `scripts/load_test.py` (2,000 API requests at 934 req/s and 10,000 Marlin G-code commands with zero file descriptor leaks and bounded memory).
 - 2026-10-14T15:54:00Z: ADR 0006 in `docs/developer/adr/0006-network-emulation-scope.md` defining transport simulation boundaries for serial hardware vs. local loopback.
