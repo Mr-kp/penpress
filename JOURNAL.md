@@ -83,3 +83,7 @@ Add entries with: `make journal MSG="what/why" CARD=<ID>`. One line per meaningf
 - 2026-10-16T16:54:09Z [agent] [P10-1] Claimed P10-1: Unified CLI pipeline for PDF/Markdown with math and humanizer
 - 2026-10-16T17:14:49Z [agent] [P10-1] P10-1 implemented: unified CLI render pipeline for PDF/Markdown/txt with math/humanizer/TSP, math engine fallback layout, and comprehensive tests; moved to review
 - 2026-10-16T17:18:37Z [agent] [P10-1] P10-1 independently verified and approved: verified unified CLI render pipeline, PDF/Markdown math rendering, and gate tests; marked done
+- 2026-10-16T17:20:00Z [agent] [P10-2] Claimed P10-2: End-to-end interactive Web Studio UI overhaul and REST API wiring
+- 2026-10-16T17:43:41Z [agent] [P10-2] P10-2 implementation complete: overhauled web studio UI with Linear/CAD craft aesthetic, wired REST API, verified zero console errors across 5 views, inspected screenshots, passed make gate; moved to review
+- 2026-10-16T17:48:28Z [agent] [P10-2] P10-2 independently verified and approved: verified API endpoints, UI overhaul, zero console errors, inspected all 5 screenshots, and passed make gate; marked done
+- 2026-10-16T18:00:19Z [agent] [P10-3] P10-3 independently verified and approved: verified standalone binary render, checklist ticks, UI screenshots, and gate tests; marked done

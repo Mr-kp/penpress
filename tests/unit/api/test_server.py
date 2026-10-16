@@ -224,3 +224,84 @@ def test_spool_jobs_endpoints(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -
     # Not found negative test
     resp_404 = client.post("/api/jobs/999/process", headers={"Host": "localhost"})
     assert resp_404.status_code == 404
+
+
+def test_document_upload_endpoint() -> None:
+    md_content = b"# Calculus\n\n$$\\int_0^1 x dx = \\frac{1}{2}$$\n"
+    files = {"file": ("calc.md", md_content, "text/markdown")}
+    resp = client.post("/api/document/upload", files=files, headers={"Host": "localhost"})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["success"] is True
+    assert data["page_count"] >= 1
+    assert data["total_strokes"] > 0
+    assert "gcode" in data
+    assert "sim_segments" in data
+    assert "telemetry" in data
+
+
+def test_document_upload_negative_oversize() -> None:
+    fake_huge = b"A" * (50 * 1024 * 1024 + 10)
+    files = {"file": ("huge.pdf", fake_huge, "application/pdf")}
+    resp = client.post("/api/document/upload", files=files, headers={"Host": "localhost"})
+    assert resp.status_code == 413
+    assert "exceeds" in resp.json()["detail"]
+
+
+def test_document_upload_negative_bad_format() -> None:
+    files = {"file": ("malicious.exe", b"\x4d\x5a", "application/octet-stream")}
+    resp = client.post("/api/document/upload", files=files, headers={"Host": "localhost"})
+    assert resp.status_code == 400
+    assert "Unsupported" in resp.json()["detail"]
+
+
+def test_profile_glyph_and_sample_sheet() -> None:
+    # 1. Add glyph
+    glyph_payload = {
+        "char": "A",
+        "strokes": [
+            [[10.0, 5.0], [15.0, 25.0]],
+            [[15.0, 25.0], [20.0, 5.0]],
+            [[12.0, 15.0], [18.0, 15.0]],
+        ],
+    }
+    resp = client.post("/api/profile/glyph", json=glyph_payload, headers={"Host": "localhost"})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["success"] is True
+    assert data["char"] == "A"
+    assert "glyph_quality" in data
+    assert "profile_report" in data
+    assert "A" in data["captured_glyphs"]
+
+    # 2. Get sample sheet PDF
+    resp_pdf = client.get("/api/profile/sample-sheet.pdf", headers={"Host": "localhost"})
+    assert resp_pdf.status_code == 200
+    assert resp_pdf.headers["content-type"] == "application/pdf"
+    assert resp_pdf.content.startswith(b"%PDF")
+
+
+def test_camera_calibration_endpoint() -> None:
+    resp = client.post("/api/calibration/camera", headers={"Host": "localhost"})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["valid"] is True
+    assert len(data["paper_corners"]) == 4
+    assert len(data["clip_keepouts"]) > 0
+
+
+def test_update_settings_endpoint() -> None:
+    update_payload = {
+        "bed_size_x_mm": 220.0,
+        "bed_size_y_mm": 220.0,
+        "max_feedrate_xy_mm_min": 7500.0,
+        "z_write_mm": 0.4,
+        "z_lift_mm": 4.0,
+        "z_write_min_mm": 0.1,
+    }
+    resp = client.post("/api/settings", json=update_payload, headers={"Host": "localhost"})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["success"] is True
+    assert data["settings"]["max_feedrate_xy_mm_min"] == 7500.0
+    assert data["settings"]["z_write_mm"] == 0.4

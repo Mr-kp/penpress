@@ -39,6 +39,21 @@ Open your browser to `http://127.0.0.1:8080`.
 2. **Preview & Toolpath Telemetry**: Inspect the simulated pen strokes, pen lift counts, and estimated print duration in real time.
 3. **Stream or Export**: Stream directly over USB serial with Marlin checksum flow control and automatic recovery, or export safe `.gcode` to an SD card.
 
+### Unified Command-Line Rendering
+Prefer CLI automation over the web interface? PenPress renders PDF, Markdown, and LaTeX files directly to G-code and simulated preview images:
+```bash
+# Render a PDF assignment
+penpress render assignment.pdf --out out/
+
+# Render Markdown with LaTeX math on ruled A5 stationery
+penpress render assignment.md --paper A5 --ruled --pitch-mm 7.0 --out out/
+```
+Output files:
+- `<name>_p1.gcode`: Marlin-compliant G-code with strict Z-travel safety.
+- `<name>_p1.png`: Kinematic simulator raster preview showing authentic pen strokes.
+- `<name>_p1.svg`: Scalable vector strokes with millimeter coordinates.
+- `<name>_summary.json`: Telemetry metrics (stroke count, pen lifts, total draw distance, duration).
+
 ---
 
 ## 3. Dual-Mode Calibration Wizard

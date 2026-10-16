@@ -56,39 +56,40 @@ def capture_studio_views() -> None:
 
         # Navigate to Studio
         page.goto("http://127.0.0.1:8000/", wait_until="networkidle")
-        time.sleep(0.5)
+        time.sleep(1.0)
 
         # 1. Document Studio View
         page.click("#nav-document")
-        time.sleep(0.2)
+        page.wait_for_selector("#parsed-block-tree .tree-item", timeout=10000)
+        time.sleep(0.5)
         doc_path = SCREENSHOTS_DIR / "01_document_studio.png"
         page.screenshot(path=str(doc_path))
         print(f"Captured: {doc_path}")
 
         # 2. Profile Studio View
         page.click("#nav-profile")
-        time.sleep(0.2)
+        time.sleep(0.5)
         profile_path = SCREENSHOTS_DIR / "02_profile_studio.png"
         page.screenshot(path=str(profile_path))
         print(f"Captured: {profile_path}")
 
         # 3. Calibration Wizard View
         page.click("#nav-calibration")
-        time.sleep(0.2)
+        time.sleep(0.5)
         calib_path = SCREENSHOTS_DIR / "03_calibration_wizard.png"
         page.screenshot(path=str(calib_path))
         print(f"Captured: {calib_path}")
 
         # 4. Plot Monitor View
         page.click("#nav-monitor")
-        time.sleep(0.2)
+        time.sleep(0.5)
         monitor_path = SCREENSHOTS_DIR / "04_plot_monitor.png"
         page.screenshot(path=str(monitor_path))
         print(f"Captured: {monitor_path}")
 
         # 5. Settings View
         page.click("#nav-settings")
-        time.sleep(0.2)
+        time.sleep(0.5)
         settings_path = SCREENSHOTS_DIR / "05_settings_view.png"
         page.screenshot(path=str(settings_path))
         print(f"Captured: {settings_path}")

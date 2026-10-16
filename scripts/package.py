@@ -99,6 +99,8 @@ def build_standalone_binary(
         "uvicorn.lifespan",
         "--hidden-import",
         "uvicorn.lifespan.on",
+        "--hidden-import",
+        "multipart",
     ]
 
     if onefile:

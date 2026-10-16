@@ -2,7 +2,7 @@
 
 Write assignments in **your own handwriting** with an Ender 3 Pro and a pen. Drop in a PDF or Markdown/LaTeX; get a page of natural handwriting with equations and figures, calibrated against your actual paper, optionally by webcam or phone.
 
-> **Status: Phase P10 End-to-End Integration In Progress (see [FLASH_HANDOFF.md](FLASH_HANDOFF.md)).** Core domain engines (P0–P9) are built and tested; P10-1..P10-3 wire full interactive UI, PDF/Markdown CLI rendering, and standalone MathJax bundling. Live progress: [STATE.md](STATE.md). Product contract: [BRIEF.md](BRIEF.md). Quickstart: [docs/user/quickstart.md](docs/user/quickstart.md). Simulation & Usage Guide: [docs/user/simulation-and-usage-guide.md](docs/user/simulation-and-usage-guide.md).
+> **Status: Release v0.1.0 Ready.** All phases (P0–P10) are complete and independently verified. Features full unified CLI pipeline for PDF/Markdown/LaTeX math rendering, dark graphite Web Studio UI (Linear/Raycast aesthetic, zero console errors), standalone single-binary builds, and 100% green CI. Live progress: [STATE.md](STATE.md). Product contract: [BRIEF.md](BRIEF.md). Quickstart: [docs/user/quickstart.md](docs/user/quickstart.md). Simulation & Usage Guide: [docs/user/simulation-and-usage-guide.md](docs/user/simulation-and-usage-guide.md).
 
 ## Director quick start (read this first)
 
@@ -52,13 +52,14 @@ uv sync                              # Python 3.11+ environment
 uv run python scripts/gate.py        # lint, types, anti-toy scan, board check, docs check, tests + coverage
 uv run penpress --version
 
-# Launch the Web Studio and REST API daemon
+# Launch the Web Studio and REST API daemon (Linear/Raycast graphite UI)
 uv run penpress serve --host 127.0.0.1 --port 8080
 
-# Render text to G-code, simulate Marlin execution, and generate toolpath renders
-uv run penpress render-text input.txt --profile ender3pro --out out/
+# Unified CLI pipeline: Render PDF, Markdown, or LaTeX directly to G-code and simulator
+uv run penpress render assignment.pdf --out out/
+uv run penpress render notes.md --paper A5 --ruled --pitch-mm 7.0 --out out/
 
-# Build standalone distribution binary
+# Build standalone cross-platform distribution binary
 uv run python scripts/package.py --release
 ```
 

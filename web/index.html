@@ -3,319 +3,834 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PenPress Studio</title>
+  <title>PenPress Studio — Physical Handwriting Synthesizer</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <div class="app-layout">
-    <!-- Sidebar Navigation -->
-    <aside class="sidebar">
-      <div class="brand-header">
-        <div class="brand-symbol"></div>
-        <span class="brand-title">PenPress</span>
-      </div>
-
-      <nav class="nav-menu">
-        <button class="nav-item active" data-view="document-view" id="nav-document">
-          <span class="nav-indicator"></span>
-          <span class="nav-label">Document Studio</span>
-        </button>
-        <button class="nav-item" data-view="profile-view" id="nav-profile">
-          <span class="nav-indicator"></span>
-          <span class="nav-label">Profile Studio</span>
-        </button>
-        <button class="nav-item" data-view="calibration-view" id="nav-calibration">
-          <span class="nav-indicator"></span>
-          <span class="nav-label">Calibration Wizard</span>
-        </button>
-        <button class="nav-item" data-view="monitor-view" id="nav-monitor">
-          <span class="nav-indicator"></span>
-          <span class="nav-label">Plot Monitor</span>
-        </button>
-        <button class="nav-item" data-view="settings-view" id="nav-settings">
-          <span class="nav-indicator"></span>
-          <span class="nav-label">Settings</span>
-        </button>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="connection-pill status-idle" id="global-status-pill">
-          <span class="status-dot"></span>
-          <span class="status-text" id="global-status-text">Ready</span>
+    <!-- Top Command Bar (44px) -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <div class="brand">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+            <path d="M2 2l7.586 7.586"/>
+            <circle cx="11" cy="11" r="2"/>
+          </svg>
+          <span class="brand-name">PenPress</span>
+          <span class="brand-badge">Studio</span>
+        </div>
+        <div class="divider-v"></div>
+        <div class="document-badge" id="active-doc-badge">
+          <span class="doc-title" id="doc-title-text">Physics_201_Dynamics.md</span>
+          <span class="doc-format-pill" id="paper-format-badge">A5 Ruled · 148×210 mm</span>
         </div>
       </div>
-    </aside>
 
-    <!-- Main Content Workspaces -->
-    <main class="content-area">
-      <!-- 1. Document Studio -->
-      <section class="workspace-view active" id="document-view">
-        <header class="view-header">
-          <div>
-            <h1 class="view-title">Document Studio</h1>
-            <p class="view-subtitle">Typeset Markdown assignments, LaTeX formulas, and handwritten notes</p>
-          </div>
-          <div class="header-actions">
-            <button class="btn btn-secondary" id="btn-load-sample">Load Assignment</button>
-            <button class="btn btn-primary" id="btn-compose-doc">Compose Pages</button>
-          </div>
-        </header>
+      <div class="top-bar-center">
+        <div class="job-summary-pill" id="job-telemetry-pill">
+          <span class="pulse-indicator"></span>
+          <span id="top-stroke-count">1,248 strokes</span>
+          <span class="dot-sep">·</span>
+          <span id="top-duration">3m 18s est</span>
+          <span class="dot-sep">·</span>
+          <span id="top-distance">1.42 m ink</span>
+        </div>
+      </div>
 
-        <div class="split-pane">
-          <div class="card editor-card">
-            <div class="card-header">
-              <span class="card-title">Markdown Source</span>
-              <span class="badge">A5 Ruled (7 mm)</span>
+      <div class="top-bar-right">
+        <div class="selector-group">
+          <label class="sr-only" for="select-paper-preset">Paper Preset</label>
+          <select id="select-paper-preset" class="select-compact">
+            <option value="A5" selected>A5 Ruled (148×210 mm)</option>
+            <option value="A4">A4 Plain (210×297 mm)</option>
+          </select>
+        </div>
+        <div class="selector-group">
+          <label class="sr-only" for="select-profile">Profile</label>
+          <select id="select-profile" class="select-compact">
+            <option value="default" selected>Profile: My Cursive</option>
+            <option value="formal">Profile: Formal Script</option>
+            <option value="sketch">Profile: Fast Notes</option>
+          </select>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="btn-export-gcode">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Export G-code
+        </button>
+        <button class="btn btn-primary btn-sm" id="btn-quick-plot">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          Plot Job
+        </button>
+      </div>
+    </header>
+
+    <div class="workspace-body">
+      <!-- Left Sidebar Navigation (200px) -->
+      <aside class="sidebar">
+        <nav class="nav-menu">
+          <button class="nav-item active" data-view="document-view" id="nav-document">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            <span class="nav-label">Document</span>
+            <span class="kbd-shortcut">⌘1</span>
+          </button>
+
+          <button class="nav-item" data-view="profile-view" id="nav-profile">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span class="nav-label">Profile</span>
+            <span class="kbd-shortcut">⌘2</span>
+          </button>
+
+          <button class="nav-item" data-view="calibration-view" id="nav-calibration">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="22" y1="12" x2="18" y2="12"/>
+              <line x1="6" y1="12" x2="2" y2="12"/>
+              <line x1="12" y1="6" x2="12" y2="2"/>
+              <line x1="12" y1="22" x2="12" y2="18"/>
+            </svg>
+            <span class="nav-label">Calibration</span>
+            <span class="kbd-shortcut">⌘3</span>
+          </button>
+
+          <button class="nav-item" data-view="monitor-view" id="nav-monitor">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+            <span class="nav-label">Plot Monitor</span>
+            <span class="kbd-shortcut">⌘4</span>
+          </button>
+
+          <button class="nav-item" data-view="settings-view" id="nav-settings">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            <span class="nav-label">Settings</span>
+            <span class="kbd-shortcut">⌘5</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="hw-status-card">
+            <div class="hw-status-header">
+              <span class="status-dot online" id="hw-status-dot"></span>
+              <span class="hw-port" id="hw-port-label">/dev/ttyUSB0</span>
+              <span class="hw-baud">115200</span>
             </div>
-            <textarea class="code-editor" id="doc-markdown-input" spellcheck="false"># Physics 201: Classical Dynamics
+            <div class="hw-meta">Ender 3 Pro · Marlin 2.0.x</div>
+            <div class="hw-coords" id="sidebar-coords">X: 117.5 Y: 117.5 Z: 3.50</div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Workspace Views -->
+      <main class="content-area">
+        <!-- 1. Document Studio View -->
+        <section class="workspace-view active" id="document-view">
+          <div class="studio-split-layout">
+            <!-- Left Editor & Ingest Column (460px) -->
+            <div class="panel-column left-pane">
+              <!-- Upload Drag & Drop Zone -->
+              <div class="upload-dropzone" id="file-dropzone">
+                <input type="file" id="file-input" accept=".md,.markdown,.pdf,.txt" class="file-input-hidden">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17 8 12 3 7 8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <div class="upload-text">
+                  <span class="upload-primary">Drop assignment PDF or Markdown here</span>
+                  <span class="upload-secondary">or click to browse from disk (up to 50 MB)</span>
+                </div>
+              </div>
+
+              <!-- Editor Card -->
+              <div class="card editor-card flex-1">
+                <div class="card-toolbar">
+                  <div class="toolbar-left">
+                    <span class="card-label">Source Document</span>
+                    <span class="badge" id="editor-format-badge">Markdown + LaTeX</span>
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-ghost btn-xs" id="btn-insert-eq" title="Insert Equation">+ Equation</button>
+                    <button class="btn btn-ghost btn-xs" id="btn-insert-physics" title="Insert Physics Sample">+ Physics</button>
+                    <button class="btn btn-ghost btn-xs" id="btn-load-sample" title="Reset to Sample">Reset</button>
+                  </div>
+                </div>
+
+                <div class="editor-container">
+                  <textarea class="code-editor" id="doc-markdown-input" spellcheck="false"># Physics 201: Classical Dynamics
 
 ## Harmonic Oscillator
-The equation of motion for a damped oscillator is given by:
+The equation of motion for a damped linear oscillator is:
 
 $$\frac{d^2x}{dt^2} + 2\gamma \frac{dx}{dt} + \omega_0^2 x = 0$$
 
-Where $\omega_0 = \sqrt{\frac{k}{m}}$ denotes natural angular frequency.</textarea>
-          </div>
+Where $\omega_0 = \sqrt{\frac{k}{m}}$ denotes the natural angular frequency.
 
-          <div class="card preview-card">
-            <div class="card-header">
-              <span class="card-title">Typeset Preview</span>
-              <span class="badge" id="preview-page-count">Page 1 of 1</span>
+### Kinetic Energy
+$$T = \frac{1}{2} m \dot{x}^2$$
+
+In an isolated Hamiltonian system, total energy is strictly conserved.</textarea>
+                </div>
+
+                <div class="editor-footer">
+                  <span class="editor-stats" id="editor-char-stats">325 chars · 42 lines</span>
+                  <button class="btn btn-primary btn-sm" id="btn-compose-doc">
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    Compose Pages (⌘Enter)
+                  </button>
+                </div>
+              </div>
+
+              <!-- Parsed Document Block Tree -->
+              <div class="card parsed-blocks-card">
+                <div class="card-toolbar">
+                  <span class="card-label">Parsed Document Structure</span>
+                  <span class="badge" id="parsed-block-count">5 blocks</span>
+                </div>
+                <div class="block-tree-list" id="parsed-block-tree">
+                  <div class="tree-item"><span class="block-tag tag-title">TITLE</span> <span class="tree-snippet">Physics 201: Classical Dynamics</span></div>
+                  <div class="tree-item"><span class="block-tag tag-heading">HEADING</span> <span class="tree-snippet">Harmonic Oscillator</span></div>
+                  <div class="tree-item"><span class="block-tag tag-text">PARAGRAPH</span> <span class="tree-snippet">The equation of motion for a damped linear oscillator is:</span></div>
+                  <div class="tree-item"><span class="block-tag tag-math">EQUATION</span> <span class="tree-snippet">d²x/dt² + 2γ dx/dt + ω₀² x = 0</span></div>
+                  <div class="tree-item"><span class="block-tag tag-text">PARAGRAPH</span> <span class="tree-snippet">Where ω₀ = √(k/m) denotes the natural angular frequency.</span></div>
+                </div>
+              </div>
             </div>
-            <div class="preview-viewport">
-              <div class="ruled-sheet" id="ruled-page-preview">
-                <div class="sheet-margin-line"></div>
-                <div class="sheet-content" id="sheet-rendered-text">
-                  <p class="handwritten-sample font-heading">Physics 201: Classical Dynamics</p>
-                  <p class="handwritten-sample">The equation of motion for a damped oscillator is given by:</p>
-                  <p class="handwritten-sample math-equation">d^2x/dt^2 + 2\gamma dx/dt + \omega_0^2 x = 0</p>
-                  <p class="handwritten-sample">Where \omega_0 = \sqrt{k/m} denotes natural angular frequency.</p>
+
+            <!-- Right Physical Paper CAD Viewport (Flex 1) -->
+            <div class="panel-column right-pane flex-1">
+              <div class="cad-viewport-card flex-1">
+                <div class="cad-viewport-header">
+                  <div class="cad-title-group">
+                    <span class="cad-title">Physical Paper CAD Viewport</span>
+                    <span class="badge badge-accent" id="cad-page-indicator">Page 1 of 1</span>
+                    <span class="cad-scale-label" id="cad-scale-label">Scale: 100% · 148×210 mm</span>
+                  </div>
+                  <div class="layer-toggles">
+                    <label class="toggle-pill"><input type="checkbox" id="layer-ink" checked><span>Ink Strokes</span></label>
+                    <label class="toggle-pill"><input type="checkbox" id="layer-travel"><span>Rapid Travel</span></label>
+                    <label class="toggle-pill"><input type="checkbox" id="layer-ruled" checked><span>7mm Ruled</span></label>
+                    <label class="toggle-pill"><input type="checkbox" id="layer-keepouts" checked><span>Clip Keepouts</span></label>
+                  </div>
+                </div>
+
+                <div class="cad-canvas-container" id="paper-canvas-wrap">
+                  <!-- Rulers -->
+                  <div class="ruler-top" id="ruler-x"></div>
+                  <div class="ruler-left" id="ruler-y"></div>
+                  <!-- Main Vector Paper Canvas -->
+                  <canvas id="paper-canvas" class="paper-canvas"></canvas>
+                </div>
+
+                <div class="cad-viewport-footer">
+                  <div class="page-switcher">
+                    <button class="btn btn-ghost btn-xs" id="btn-prev-page" disabled>‹ Prev</button>
+                    <span class="page-counter" id="footer-page-counter">Page 1 / 1</span>
+                    <button class="btn btn-ghost btn-xs" id="btn-next-page" disabled>Next ›</button>
+                  </div>
+                  <div class="viewport-stats">
+                    <span id="canvas-stroke-stat">1,248 vector strokes</span>
+                    <span class="dot-sep">·</span>
+                    <span id="canvas-area-stat">7mm Ruled Grid</span>
+                    <span class="dot-sep">·</span>
+                    <span id="canvas-margin-stat">25mm Margin Line</span>
+                  </div>
+                  <div class="viewport-actions">
+                    <button class="btn btn-secondary btn-xs" id="btn-jump-monitor">Open in Plot Monitor →</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- 2. Profile Studio -->
-      <section class="workspace-view" id="profile-view">
-        <header class="view-header">
-          <div>
-            <h1 class="view-title">Profile Studio</h1>
-            <p class="view-subtitle">Handwriting glyph bank, stylus capture, and organic variance tuning</p>
-          </div>
-          <div class="header-actions">
-            <button class="btn btn-secondary" id="btn-clear-canvas">Clear Canvas</button>
-            <button class="btn btn-primary" id="btn-save-profile">Save Glyph</button>
-          </div>
-        </header>
-
-        <div class="split-pane">
-          <div class="card capture-card">
-            <div class="card-header">
-              <span class="card-title">Tactile Stylus Canvas</span>
-              <span class="badge">Character: 'a'</span>
-            </div>
-            <div class="canvas-container">
-              <canvas id="handwriting-canvas" width="600" height="400"></canvas>
-            </div>
-          </div>
-
-          <div class="card telemetry-card">
-            <div class="card-header">
-              <span class="card-title">Quality Telemetry</span>
-              <span class="badge">Completeness: 100%</span>
-            </div>
-            <div class="metric-grid">
-              <div class="metric-box">
-                <span class="metric-label">Smoothness Score</span>
-                <span class="metric-value">0.96</span>
-              </div>
-              <div class="metric-box">
-                <span class="metric-label">Stroke Chamfer Dist</span>
-                <span class="metric-value">1.88 px</span>
-              </div>
-              <div class="metric-box">
-                <span class="metric-label">Organic Slant Drift</span>
-                <span class="metric-value">±2.4°</span>
-              </div>
-              <div class="metric-box">
-                <span class="metric-label">Baseline Wobble</span>
-                <span class="metric-value">0.12 mm</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3. Calibration Wizard -->
-      <section class="workspace-view" id="calibration-view">
-        <header class="view-header">
-          <div>
-            <h1 class="view-title">Calibration Wizard</h1>
-            <p class="view-subtitle">Dual-mode camera homography & tactile jog alignment</p>
-          </div>
-          <div class="header-actions">
-            <button class="btn btn-secondary" id="btn-switch-mode">Mode: Manual Tactile</button>
-            <button class="btn btn-primary" id="btn-next-step">Confirm Step</button>
-          </div>
-        </header>
-
-        <div class="split-pane">
-          <div class="card camera-card">
-            <div class="card-header">
-              <span class="card-title">Bed Alignment View</span>
-              <span class="badge">Ender 3 Pro (235×235 mm)</span>
-            </div>
-            <div class="bed-view-container">
-              <canvas id="bed-canvas" width="500" height="500"></canvas>
-            </div>
-          </div>
-
-          <div class="card wizard-card">
-            <div class="card-header">
-              <span class="card-title">Tactile Calibration Flow</span>
-              <span class="badge" id="wizard-step-badge">Step 1/4</span>
-            </div>
-            <div class="wizard-steps-list">
-              <div class="step-card active" id="step-1-card">
-                <div class="step-num">1</div>
-                <div class="step-body">
-                  <h4>Top-Left Paper Corner</h4>
-                  <p>Jog pen tip over the Top-Left corner of paper sheet.</p>
+        <!-- 2. Profile Studio View -->
+        <section class="workspace-view" id="profile-view">
+          <div class="studio-split-layout">
+            <!-- Left: 62-Character Bank & Interactive Stylus Pad (480px) -->
+            <div class="panel-column left-pane">
+              <div class="card glyph-matrix-card">
+                <div class="card-toolbar">
+                  <span class="card-label">Handwriting Character Bank (62 Glyphs)</span>
+                  <span class="badge" id="glyph-coverage-badge">Coverage: 62 / 62</span>
+                </div>
+                <div class="glyph-bank-grid" id="glyph-bank-grid">
+                  <!-- Populated dynamically: A-Z, a-z, 0-9 -->
                 </div>
               </div>
-              <div class="step-card" id="step-2-card">
-                <div class="step-num">2</div>
-                <div class="step-body">
-                  <h4>Top-Right Paper Corner</h4>
-                  <p>Jog pen tip over the Top-Right corner of paper sheet.</p>
+
+              <div class="card capture-card flex-1">
+                <div class="card-toolbar">
+                  <div class="toolbar-left">
+                    <span class="card-label">Tactile Stylus Pad</span>
+                    <span class="badge badge-accent" id="active-glyph-badge">Selected: 'a'</span>
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-ghost btn-xs" id="btn-clear-canvas">Clear</button>
+                    <button class="btn btn-ghost btn-xs" id="btn-download-sample-sheet">Download A4 PDF</button>
+                    <button class="btn btn-primary btn-xs" id="btn-save-profile">Save Glyph</button>
+                  </div>
                 </div>
-              </div>
-              <div class="step-card" id="step-3-card">
-                <div class="step-num">3</div>
-                <div class="step-body">
-                  <h4>Bottom-Left Paper Corner</h4>
-                  <p>Jog pen tip over the Bottom-Left corner of paper sheet.</p>
+
+                <div class="canvas-container stylus-canvas-wrap">
+                  <canvas id="handwriting-canvas" width="600" height="280"></canvas>
+                  <div class="canvas-guides-legend">
+                    <span class="guide-label guide-asc">Ascender (22mm)</span>
+                    <span class="guide-label guide-cap">Cap Height (18mm)</span>
+                    <span class="guide-label guide-x">x-Height (12mm)</span>
+                    <span class="guide-label guide-base">Baseline (7mm)</span>
+                    <span class="guide-label guide-desc">Descender (0mm)</span>
+                  </div>
                 </div>
-              </div>
-              <div class="step-card" id="step-4-card">
-                <div class="step-num">4</div>
-                <div class="step-body">
-                  <h4>Z Contact Paper Drag Check</h4>
-                  <p>Slide paper under pen; lower Z until slight friction is felt.</p>
+
+                <div class="capture-footer">
+                  <span class="capture-status" id="stylus-telemetry">Points: 0 · Velocity: 0 mm/s · Pressure: 1.0</span>
+                  <span class="capture-tip">Draw with mouse, stylus, or graphic tablet</span>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <!-- 4. Plot Monitor -->
-      <section class="workspace-view" id="monitor-view">
-        <header class="view-header">
-          <div>
-            <h1 class="view-title">Plot Monitor</h1>
-            <p class="view-subtitle">Live kinematic toolpath execution & serial flow control</p>
-          </div>
-          <div class="header-actions">
-            <button class="btn btn-secondary" id="btn-pause-job">Pause</button>
-            <button class="btn btn-danger" id="btn-cancel-job">Cancel</button>
-          </div>
-        </header>
+            <!-- Right: Quality Telemetry & Organic Humanizer Sliders -->
+            <div class="panel-column right-pane flex-1">
+              <div class="card quality-telemetry-card">
+                <div class="card-toolbar">
+                  <span class="card-label">Handwriting Profile Metrics</span>
+                  <span class="badge badge-success" id="overall-quality-pill">Overall Quality: 96 / 100</span>
+                </div>
+                <div class="metric-grid-4">
+                  <div class="metric-card">
+                    <span class="metric-title">Stroke Smoothness</span>
+                    <span class="metric-value" id="val-smoothness">0.96</span>
+                    <span class="metric-sub">Curvature variation</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-title">Chamfer Distance</span>
+                    <span class="metric-value" id="val-chamfer">1.88 mm</span>
+                    <span class="metric-sub">Alignment accuracy</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-title">Baseline Stability</span>
+                    <span class="metric-value" id="val-stability">0.12 mm</span>
+                    <span class="metric-sub">Vertical wander sigma</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-title">Bank Coverage</span>
+                    <span class="metric-value" id="val-coverage">100%</span>
+                    <span class="metric-sub">62 / 62 symbols</span>
+                  </div>
+                </div>
+              </div>
 
-        <div class="split-pane">
-          <div class="card monitor-canvas-card">
-            <div class="card-header">
-              <span class="card-title">Live Toolpath Simulation</span>
-              <span class="badge" id="plot-speed-badge">60 FPS WebGL</span>
-            </div>
-            <div class="toolpath-viewport">
-              <canvas id="toolpath-canvas" width="600" height="450"></canvas>
-            </div>
-          </div>
+              <!-- Organic Humanizer Sliders Card -->
+              <div class="card humanizer-card">
+                <div class="card-toolbar">
+                  <span class="card-label">Organic Humanizer Engine (Sinusoidal Drift & Wobble)</span>
+                  <button class="btn btn-ghost btn-xs" id="btn-reset-humanizer">Reset to Default</button>
+                </div>
+                <div class="slider-grid">
+                  <div class="slider-control">
+                    <div class="slider-header">
+                      <span class="slider-label">Baseline Wander Amplitude</span>
+                      <span class="slider-value" id="val-slider-wander">0.12 mm</span>
+                    </div>
+                    <input type="range" id="slider-wander" min="0" max="0.5" step="0.01" value="0.12" class="slider-range">
+                    <span class="slider-desc">Low-frequency sinusoidal line curve imitating fatigue</span>
+                  </div>
 
-          <div class="card telemetry-card">
-            <div class="card-header">
-              <span class="card-title">Printer Telemetry</span>
-              <span class="badge" id="telemetry-conn-badge">Online (115200)</span>
-            </div>
-            <div class="metric-grid">
-              <div class="metric-box">
-                <span class="metric-label">X Coordinate</span>
-                <span class="metric-value" id="tel-pos-x">117.5 mm</span>
-              </div>
-              <div class="metric-box">
-                <span class="metric-label">Y Coordinate</span>
-                <span class="metric-value" id="tel-pos-y">117.5 mm</span>
-              </div>
-              <div class="metric-box">
-                <span class="metric-label">Z Height</span>
-                <span class="metric-value" id="tel-pos-z">3.50 mm</span>
-              </div>
-              <div class="metric-box">
-                <span class="metric-label">Feedrate</span>
-                <span class="metric-value" id="tel-feedrate">3600 mm/min</span>
-              </div>
-              <div class="metric-box">
-                <span class="metric-label">Progress</span>
-                <span class="metric-value" id="tel-progress">42.8%</span>
-              </div>
-              <div class="metric-box">
-                <span class="metric-label">Buffer Depth</span>
-                <span class="metric-value" id="tel-buffer">16 / 16</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                  <div class="slider-control">
+                    <div class="slider-header">
+                      <span class="slider-label">Slant Drift</span>
+                      <span class="slider-value" id="val-slider-slant">2.5°</span>
+                    </div>
+                    <input type="range" id="slider-slant" min="-15" max="15" step="0.5" value="2.5" class="slider-range">
+                    <span class="slider-desc">Word-level shear variation and forward angle fluctuation</span>
+                  </div>
 
-      <!-- 5. Settings -->
-      <section class="workspace-view" id="settings-view">
-        <header class="view-header">
-          <div>
-            <h1 class="view-title">Settings</h1>
-            <p class="view-subtitle">Hardware safety parameters, kinematics, and serial connection</p>
-          </div>
-          <div class="header-actions">
-            <button class="btn btn-primary" id="btn-save-settings">Save Settings</button>
-          </div>
-        </header>
+                  <div class="slider-control">
+                    <div class="slider-header">
+                      <span class="slider-label">Spacing Micro-Jitter</span>
+                      <span class="slider-value" id="val-slider-spacing">0.15 mm</span>
+                    </div>
+                    <input type="range" id="slider-spacing" min="0" max="0.5" step="0.01" value="0.15" class="slider-range">
+                    <span class="slider-desc">Gaussian horizontal inter-character kerning randomness</span>
+                  </div>
 
-        <div class="card settings-card">
-          <div class="settings-grid">
-            <div class="setting-item">
-              <label>Bed Width (X mm)</label>
-              <input type="number" class="input-text" id="setting-bed-x" value="235.0">
-            </div>
-            <div class="setting-item">
-              <label>Bed Height (Y mm)</label>
-              <input type="number" class="input-text" id="setting-bed-y" value="235.0">
-            </div>
-            <div class="setting-item">
-              <label>Z Write Height (mm)</label>
-              <input type="number" class="input-text" id="setting-z-write" value="0.50" step="0.05">
-            </div>
-            <div class="setting-item">
-              <label>Z Lift Travel Height (mm)</label>
-              <input type="number" class="input-text" id="setting-z-lift" value="3.50" step="0.1">
-            </div>
-            <div class="setting-item">
-              <label>Max Drawing Speed (mm/min)</label>
-              <input type="number" class="input-text" id="setting-speed" value="3600">
-            </div>
-            <div class="setting-item">
-              <label>Serial Baudrate</label>
-              <select class="input-select" id="setting-baudrate">
-                <option value="115200" selected>115200 (Standard)</option>
-                <option value="250000">250000 (High Speed)</option>
-              </select>
+                  <div class="slider-control">
+                    <div class="slider-header">
+                      <span class="slider-label">Continuous Stroke Wobble</span>
+                      <span class="slider-value" id="val-slider-wobble">0.03 mm</span>
+                    </div>
+                    <input type="range" id="slider-wobble" min="0" max="0.15" step="0.005" value="0.03" class="slider-range">
+                    <span class="slider-desc">Perlin-style cubic spline trajectory micro-tremor</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Synthesized Sentence Preview -->
+              <div class="card sentence-preview-card flex-1">
+                <div class="card-toolbar">
+                  <span class="card-label">Live Synthesized Handwriting Preview</span>
+                  <span class="badge">Real-Time Synthesis</span>
+                </div>
+                <div class="preview-canvas-container flex-1">
+                  <canvas id="preview-canvas" width="700" height="180"></canvas>
+                </div>
+                <div class="preview-footer">
+                  <span>Sample: "The quick brown fox jumps over the lazy dog. E = mc²"</span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        <!-- 3. Calibration Wizard View -->
+        <section class="workspace-view" id="calibration-view">
+          <div class="studio-split-layout">
+            <!-- Left: 235x235 Ender 3 Bed CAD View (Flex 1) -->
+            <div class="panel-column left-pane flex-1">
+              <div class="card bed-cad-card flex-1">
+                <div class="card-toolbar">
+                  <div class="toolbar-left">
+                    <span class="card-label">Ender 3 Pro Print Bed CAD (235×235 mm)</span>
+                    <span class="badge" id="bed-origin-badge">Origin (0,0) Bottom-Left</span>
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-secondary btn-xs" id="btn-camera-auto">
+                      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                      </svg>
+                      Auto-Detect via Camera
+                    </button>
+                    <button class="btn btn-ghost btn-xs" id="btn-switch-mode">Mode: Tactile Jog</button>
+                  </div>
+                </div>
+
+                <div class="bed-canvas-wrap flex-1">
+                  <canvas id="bed-canvas" class="bed-canvas" width="600" height="600"></canvas>
+                </div>
+
+                <div class="bed-footer">
+                  <div class="legend-items">
+                    <span class="legend-item"><span class="dot-swatch swatch-bed"></span> Bed Envelope (235×235)</span>
+                    <span class="legend-item"><span class="dot-swatch swatch-paper"></span> A5 Paper Sheet (148×210)</span>
+                    <span class="legend-item"><span class="dot-swatch swatch-keepout"></span> Binder Clip Keepout (+5mm)</span>
+                    <span class="legend-item"><span class="dot-swatch swatch-tool"></span> Toolhead Crosshair</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Interactive Jog Controller & Wizard Flow (460px) -->
+            <div class="panel-column right-pane">
+              <!-- Jog Control Pad -->
+              <div class="card jog-pad-card">
+                <div class="card-toolbar">
+                  <span class="card-label">Interactive Jog Controller</span>
+                  <div class="step-size-selector">
+                    <button class="btn-step active" data-step="0.1">0.1mm</button>
+                    <button class="btn-step" data-step="1.0">1mm</button>
+                    <button class="btn-step" data-step="10.0">10mm</button>
+                  </div>
+                </div>
+
+                <div class="jog-layout">
+                  <div class="jog-dpad">
+                    <button class="btn-jog jog-up" id="jog-y-plus" title="Y+ (Back)">+Y</button>
+                    <div class="jog-row-mid">
+                      <button class="btn-jog jog-left" id="jog-x-minus" title="X- (Left)">-X</button>
+                      <button class="btn-jog jog-home" id="jog-home" title="Home All (G28)">Home</button>
+                      <button class="btn-jog jog-right" id="jog-x-plus" title="X+ (Right)">+X</button>
+                    </div>
+                    <button class="btn-jog jog-down" id="jog-y-minus" title="Y- (Front)">-Y</button>
+                  </div>
+
+                  <div class="jog-z-controls">
+                    <span class="z-label">Z Axis</span>
+                    <button class="btn-jog jog-z" id="jog-z-up" title="Z+ Lift">+Z</button>
+                    <button class="btn-jog jog-z" id="jog-z-down" title="Z- Touch">-Z</button>
+                    <button class="btn btn-ghost btn-xs" id="jog-z-drag">Paper Drag</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 4-Step Tactile Wizard Cards -->
+              <div class="card wizard-card flex-1">
+                <div class="card-toolbar">
+                  <span class="card-label">Tactile Calibration Flow</span>
+                  <span class="badge badge-accent" id="wizard-step-badge">Step 1 of 4</span>
+                </div>
+
+                <div class="wizard-steps-list">
+                  <div class="step-card active" id="step-1-card">
+                    <div class="step-num">1</div>
+                    <div class="step-body">
+                      <h4>Top-Left Paper Corner (TL)</h4>
+                      <p>Jog pen tip over the Top-Left corner of paper. Press Confirm to register (X: 43.5, Y: 222.5).</p>
+                    </div>
+                    <span class="step-check" id="check-step-1">●</span>
+                  </div>
+
+                  <div class="step-card" id="step-2-card">
+                    <div class="step-num">2</div>
+                    <div class="step-body">
+                      <h4>Top-Right Paper Corner (TR)</h4>
+                      <p>Jog pen tip over the Top-Right corner. Calculates sheet width and skew angle.</p>
+                    </div>
+                    <span class="step-check" id="check-step-2">○</span>
+                  </div>
+
+                  <div class="step-card" id="step-3-card">
+                    <div class="step-num">3</div>
+                    <div class="step-body">
+                      <h4>Bottom-Left Paper Corner (BL)</h4>
+                      <p>Jog pen tip over the Bottom-Left corner. Verifies height and Cartesian squareness.</p>
+                    </div>
+                    <span class="step-check" id="check-step-3">○</span>
+                  </div>
+
+                  <div class="step-card" id="step-4-card">
+                    <div class="step-num">4</div>
+                    <div class="step-body">
+                      <h4>Z Contact Paper Drag Check</h4>
+                      <p>Slide slip of paper under pen; lower Z until light tactile friction is felt.</p>
+                    </div>
+                    <span class="step-check" id="check-step-4">○</span>
+                  </div>
+                </div>
+
+                <div class="wizard-actions">
+                  <button class="btn btn-ghost btn-sm" id="btn-prev-step" disabled>‹ Previous Step</button>
+                  <button class="btn btn-primary btn-sm" id="btn-next-step">Confirm Step 1 ›</button>
+                </div>
+              </div>
+
+              <!-- Calibration Readout Table -->
+              <div class="card cal-readout-card">
+                <div class="card-toolbar">
+                  <span class="card-label">Calibrated Geometry Readout</span>
+                  <span class="badge badge-success" id="cal-status-badge">Placement Valid</span>
+                </div>
+                <table class="table-compact">
+                  <thead>
+                    <tr><th>Point / Param</th><th>Measured Bed Coordinate</th><th>Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Corner 1 (TL)</td><td id="cal-tl-val">X: 43.5 mm, Y: 222.5 mm</td><td class="text-success">Locked</td></tr>
+                    <tr><td>Corner 2 (TR)</td><td id="cal-tr-val">X: 191.5 mm, Y: 222.5 mm</td><td class="text-success">Locked</td></tr>
+                    <tr><td>Corner 3 (BL)</td><td id="cal-bl-val">X: 43.5 mm, Y: 12.5 mm</td><td class="text-success">Locked</td></tr>
+                    <tr><td>Corner 4 (BR)</td><td id="cal-br-val">X: 191.5 mm, Y: 12.5 mm</td><td class="text-success">Calculated</td></tr>
+                    <tr><td>Skew / Z-Touch</td><td id="cal-skew-val">0.0° · Z-Touch: 0.85 mm</td><td class="text-success">Z-write: 0.45mm</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Plot Monitor View -->
+        <section class="workspace-view" id="monitor-view">
+          <div class="studio-split-layout">
+            <!-- Left: Kinematic Toolpath Viewport & Scrubber (Flex 1) -->
+            <div class="panel-column left-pane flex-1">
+              <div class="card toolpath-card flex-1">
+                <div class="card-toolbar">
+                  <div class="toolbar-left">
+                    <span class="card-label">Kinematic Toolpath Visualizer</span>
+                    <span class="badge badge-accent" id="plot-state-badge">Idle · Spooled</span>
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="btn btn-secondary btn-xs" id="btn-pause-job">
+                      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="6" y="4" width="4" height="16"/>
+                        <rect x="14" y="4" width="4" height="16"/>
+                      </svg>
+                      Pause
+                    </button>
+                    <button class="btn btn-danger btn-xs" id="btn-cancel-job">
+                      <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                      </svg>
+                      Emergency Stop
+                    </button>
+                  </div>
+                </div>
+
+                <div class="toolpath-canvas-wrap flex-1">
+                  <canvas id="toolpath-canvas" class="toolpath-canvas"></canvas>
+                </div>
+
+                <!-- Interactive Timeline Scrubber Bar -->
+                <div class="scrubber-bar">
+                  <div class="scrubber-controls">
+                    <button class="btn-icon-round" id="btn-scrub-play" title="Play / Pause">
+                      <svg viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                      </svg>
+                    </button>
+                    <div class="scrubber-slider-wrap">
+                      <input type="range" id="timeline-scrubber" min="0" max="100" value="45" class="scrubber-slider">
+                    </div>
+                    <div class="scrubber-readout">
+                      <span id="scrub-progress-text">Stroke 562 / 1,248</span>
+                      <span class="dot-sep">·</span>
+                      <span id="scrub-time-text">01:30 / 03:18</span>
+                    </div>
+                    <div class="speed-selector">
+                      <button class="btn-speed active" data-speed="1">1x</button>
+                      <button class="btn-speed" data-speed="10">10x</button>
+                      <button class="btn-speed" data-speed="50">50x</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Tabular Telemetry & Serial Terminal (460px) -->
+            <div class="panel-column right-pane">
+              <!-- 6 Tabular-Nums Telemetry Metric Cards -->
+              <div class="card telemetry-grid-card">
+                <div class="card-toolbar">
+                  <span class="card-label">Hardware Kinematics Telemetry</span>
+                  <span class="badge" id="telemetry-rate-badge">10 Hz UART Stream</span>
+                </div>
+                <div class="metric-grid-6">
+                  <div class="metric-card">
+                    <span class="metric-title">Toolhead Position</span>
+                    <span class="metric-value font-mono" id="tel-pos-xy">117.5, 117.5</span>
+                    <span class="metric-sub">XY Coordinates mm</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-title">Z Pen Height</span>
+                    <span class="metric-value font-mono" id="tel-pos-z">3.50 mm</span>
+                    <span class="metric-sub">Travel Height</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-title">Draw Feedrate</span>
+                    <span class="metric-value font-mono" id="tel-feedrate">3,600</span>
+                    <span class="metric-sub">mm/min</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-title">Buffer Depth</span>
+                    <span class="metric-value font-mono" id="tel-buffer">16 / 16</span>
+                    <span class="metric-sub">Planner Slots</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-title">Job Progress</span>
+                    <span class="metric-value font-mono" id="tel-progress">45.0%</span>
+                    <span class="metric-sub">562 / 1,248 strokes</span>
+                  </div>
+                  <div class="metric-card">
+                    <span class="metric-title">Marlin Flow State</span>
+                    <span class="metric-value font-mono text-success" id="tel-flow-state">ACTIVE</span>
+                    <span class="metric-sub">Checksums Verified</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Live Marlin Serial Stream Terminal -->
+              <div class="card terminal-card flex-1">
+                <div class="card-toolbar">
+                  <div class="toolbar-left">
+                    <span class="card-label">Marlin Checksum Serial Stream</span>
+                    <span class="badge badge-accent">N1..N100 Active</span>
+                  </div>
+                  <label class="toggle-pill toggle-sm"><input type="checkbox" id="terminal-autoscroll" checked><span>Autoscroll</span></label>
+                </div>
+                <div class="terminal-body" id="serial-log">
+                  <div class="log-line text-muted">-- PenPress Hardware Link Initialized (/dev/ttyUSB0 @ 115200 baud) --</div>
+                  <div class="log-line">N1 M104 S0*56</div>
+                  <div class="log-line text-muted">ok 1</div>
+                  <div class="log-line">N2 M140 S0*57</div>
+                  <div class="log-line text-muted">ok 2</div>
+                  <div class="log-line">N3 G28*112</div>
+                  <div class="log-line text-muted">ok 3</div>
+                  <div class="log-line">N4 G90*83</div>
+                  <div class="log-line text-muted">ok 4</div>
+                  <div class="log-line">N5 G21*82</div>
+                  <div class="log-line text-muted">ok 5</div>
+                  <div class="log-line">N6 G0 Z3.500 F1200*120</div>
+                  <div class="log-line text-muted">ok 6</div>
+                  <div class="log-line">N7 G0 X43.500 Y205.200 F6000*89</div>
+                  <div class="log-line text-muted">ok 7</div>
+                  <div class="log-line text-accent">N8 G1 Z0.450 F800*114 (PEN DOWN)</div>
+                  <div class="log-line text-muted">ok 8</div>
+                  <div class="log-line">N9 G1 X45.200 Y205.400 F2400*98</div>
+                  <div class="log-line text-muted">ok 9</div>
+                </div>
+              </div>
+
+              <!-- CUPS Virtual Print Spool Queue -->
+              <div class="card spool-card">
+                <div class="card-toolbar">
+                  <span class="card-label">CUPS Virtual Printer Spool Queue</span>
+                  <span class="badge" id="spool-queue-badge">0 enqueued</span>
+                </div>
+                <div class="spool-list" id="spool-queue-list">
+                  <div class="spool-item-empty">Virtual spooler ready. Print from any app to "PenPress_Plotter".</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Settings View -->
+        <section class="workspace-view" id="settings-view">
+          <div class="settings-container">
+            <div class="settings-header">
+              <div>
+                <h2 class="settings-title">Machine & Safety Configuration</h2>
+                <p class="settings-desc">Physical envelope limits, Z-axis spring protection, serial communications, and local privacy guarantees.</p>
+              </div>
+              <button class="btn btn-primary" id="btn-save-settings">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                  <polyline points="17 21 17 13 7 13 7 21"/>
+                  <polyline points="7 3 7 8 15 8"/>
+                </svg>
+                Save Configuration
+              </button>
+            </div>
+
+            <div class="settings-two-col">
+              <!-- Column 1 -->
+              <div class="settings-col">
+                <div class="card settings-section-card">
+                  <div class="card-toolbar">
+                    <span class="card-label">Kinematic Envelope & Limits</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="setting-bed-x">Bed Width (X mm)</label>
+                    <div class="input-with-unit">
+                      <input type="number" id="setting-bed-x" value="235.0" min="100" max="500" step="1" class="input-text">
+                      <span class="unit-badge">mm</span>
+                    </div>
+                    <span class="form-hint">Physical Ender 3 bed width (default 235.0 mm).</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="setting-bed-y">Bed Height (Y mm)</label>
+                    <div class="input-with-unit">
+                      <input type="number" id="setting-bed-y" value="235.0" min="100" max="500" step="1" class="input-text">
+                      <span class="unit-badge">mm</span>
+                    </div>
+                    <span class="form-hint">Physical Ender 3 bed depth (default 235.0 mm).</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="setting-speed">Maximum Travel Feedrate (XY)</label>
+                    <div class="input-with-unit">
+                      <input type="number" id="setting-speed" value="6000" min="1000" max="15000" step="500" class="input-text">
+                      <span class="unit-badge">mm/min</span>
+                    </div>
+                    <span class="form-hint">Rapid traverse velocity between strokes (100 mm/s).</span>
+                  </div>
+                </div>
+
+                <div class="card settings-section-card">
+                  <div class="card-toolbar">
+                    <span class="card-label">Serial Protocol & Flow Control</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="setting-baudrate">UART Baudrate</label>
+                    <select id="setting-baudrate" class="select-text">
+                      <option value="115200" selected>115200 baud (Standard Marlin)</option>
+                      <option value="250000">250000 baud (High Throughput)</option>
+                    </select>
+                    <span class="form-hint">Matching baudrate for the CH340 USB-UART bridge.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Checksum & Line Numbering</label>
+                    <div class="status-toggle-pill">
+                      <span class="dot-swatch swatch-active"></span>
+                      <span>Strict Marlin Checksums Enabled (N*CS protocol)</span>
+                    </div>
+                    <span class="form-hint">Guarantees zero corrupt commands reach the stepper drivers.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Column 2 -->
+              <div class="settings-col">
+                <div class="card settings-section-card">
+                  <div class="card-toolbar">
+                    <span class="card-label">Z-Axis & Spring Mount Protection</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="setting-z-write">Z Write Height (Pen Contact)</label>
+                    <div class="input-with-unit">
+                      <input type="number" id="setting-z-write" value="0.45" min="0.05" max="5.0" step="0.05" class="input-text">
+                      <span class="unit-badge">mm</span>
+                    </div>
+                    <span class="form-hint">Target height where pen tip exerts 1.0–1.5mm spring compression.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="setting-z-lift">Z Lift Travel Height</label>
+                    <div class="input-with-unit">
+                      <input type="number" id="setting-z-lift" value="3.50" min="1.0" max="10.0" step="0.1" class="input-text">
+                      <span class="unit-badge">mm</span>
+                    </div>
+                    <span class="form-hint">Clearance height during rapid traversals above paper surface.</span>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="setting-z-write-min">Z Safety Floor Floor (Crash Limit)</label>
+                    <div class="input-with-unit">
+                      <input type="number" id="setting-z-write-min" value="0.10" min="0.01" max="2.0" step="0.05" class="input-text">
+                      <span class="unit-badge">mm</span>
+                    </div>
+                    <span class="form-hint">Hard firmware safety barrier to prevent bed glass gouging.</span>
+                  </div>
+                </div>
+
+                <div class="card settings-section-card">
+                  <div class="card-toolbar">
+                    <span class="card-label">Local-First Privacy & Zero-Egress Audit</span>
+                  </div>
+                  <div class="privacy-checklist">
+                    <div class="check-item"><span class="check-icon">✓</span> <span>100% Offline Synthesis — Zero Cloud API calls</span></div>
+                    <div class="check-item"><span class="check-icon">✓</span> <span>Private Tailscale Binding (127.0.0.1 / 100.121.213.19)</span></div>
+                    <div class="check-item"><span class="check-icon">✓</span> <span>Local Math Engine (Node/MathJax subprocess)</span></div>
+                    <div class="check-item"><span class="check-icon">✓</span> <span>Zero Funnel exposure / Host-header protection active</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   </div>
+
+  <!-- Notification Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
 
   <script src="/static/app.js"></script>
 </body>
