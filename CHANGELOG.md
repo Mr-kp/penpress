@@ -4,7 +4,12 @@ All notable changes are recorded here (Keep a Changelog). Every change under `sr
 
 ## [Unreleased]
 
+### Added
+- 2026-10-16T17:15:00Z: Unified CLI pipeline in `src/penpress/__main__.py` and `src/penpress/plan/render.py` (`penpress render <file>`) compiling PDF, Markdown+LaTeX, and plain text assignments to G-code, PNG, and SVG with TSP optimization and multi-page support; bundled MathJax layout bridge and deterministic vector fallback layout in `src/penpress/core/math_engine.py`.
+- 2026-10-16T16:43:00Z: Audited end-to-end product against `BRIEF.md` and added Phase P10 remediation handoff (`FLASH_HANDOFF.md`) and task cards (`tasks/P10-1.md`, `tasks/P10-2.md`, `tasks/P10-3.md`) to wire interactive Web Studio UI, unified PDF/Markdown CLI rendering, and standalone MathJax bundling.
+
 ### Fixed
+- 2026-10-16T17:15:00Z: Initialized `h = 35.0` in `src/penpress/ingest/markdown_parser.py` preventing `UnboundLocalError` on single-line `$$...$$` equations at document root; added `autoscale_figures` option to `PageComposer` to scale oversized diagrams to printable bounds without crash; fixed no-argument CLI invocation to print usage help.
 - 2026-10-14T16:26:00Z: Replaced fixed sleep with polling retry loop for background server health check in `.github/workflows/ci.yml` to prevent race conditions during PyInstaller archive decompression on Windows runners.
 - 2026-10-14T16:05:00Z: Guarded `resource.getrusage` import and usage behind `sys.platform != "win32"` in `scripts/load_test.py` to ensure cross-platform mypy type checking passes on Windows runners.
 

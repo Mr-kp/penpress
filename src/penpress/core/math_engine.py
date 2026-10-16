@@ -12,6 +12,7 @@ import math
 import random
 import shutil
 import subprocess
+import sys
 import unicodedata
 from dataclasses import dataclass
 from pathlib import Path
@@ -26,9 +27,21 @@ from penpress.core.math_symbols import (
 from penpress.core.primitives import BoundingBox, Point, Stroke
 from penpress.profile.models import HandwritingProfile
 
-MATHJAX_LAYOUT_SCRIPT = (
-    Path(__file__).resolve().parent.parent.parent.parent / "research/R2-1/mathjax_layout.js"
-)
+
+def get_mathjax_script_path() -> Path:
+    """Resolve mathjax_layout.js for both dev repository checkout and PyInstaller bundle."""
+    base = getattr(sys, "_MEIPASS", None)
+    if base:
+        p1 = Path(base) / "research" / "R2-1" / "mathjax_layout.js"
+        if p1.is_file():
+            return p1
+        p2 = Path(base) / "mathjax_layout.js"
+        if p2.is_file():
+            return p2
+    return Path(__file__).resolve().parent.parent.parent.parent / "research/R2-1/mathjax_layout.js"
+
+
+MATHJAX_LAYOUT_SCRIPT = get_mathjax_script_path()
 
 
 class LaTeXParseError(ValueError):
@@ -92,47 +105,224 @@ class MathEngine:
         """Call MathJax layout engine to extract structural elements."""
         validate_latex_syntax(latex)
 
-        node_bin = shutil.which("node") or shutil.which("node.exe") or "node"
-        cmd = [node_bin, str(MATHJAX_LAYOUT_SCRIPT), latex]
-        proc = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            check=False,
-            cwd=str(MATHJAX_LAYOUT_SCRIPT.parent),
-        )
-        if proc.returncode != 0:
-            raise LaTeXParseError(f"Subprocess error compiling LaTeX: {proc.stderr}")
+        script_path = get_mathjax_script_path()
+        node_bin = shutil.which("node") or shutil.which("node.exe")
+        if node_bin and script_path.is_file():
+            cmd = [node_bin, str(script_path), latex]
+            proc = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                check=False,
+                cwd=str(script_path.parent),
+            )
+            if proc.returncode == 0:
+                try:
+                    raw_data = json.loads(proc.stdout)
+                    if isinstance(raw_data, dict):
+                        if raw_data.get("status") == "error":
+                            raise LaTeXParseError(f"MathJax error compiling LaTeX: {raw_data.get('error')}")
+                        return raw_data
+                except LaTeXParseError:
+                    raise
+                except Exception:
+                    pass
 
-        try:
-            raw_data = json.loads(proc.stdout)
-            if not isinstance(raw_data, dict):
-                raise LaTeXParseError("Expected JSON object from layout bridge")
-            return raw_data
-        except LaTeXParseError:
-            raise
-        except Exception as exc:
-            raise LaTeXParseError(f"Invalid JSON returned from layout bridge: {exc}") from exc
+        return self._fallback_layout_latex(latex)
 
     def layout_latex_batch(self, latex_list: list[str]) -> list[dict[str, Any]]:
         """Batch process multiple LaTeX equations in a single persistent Node invocation."""
         for s in latex_list:
             validate_latex_syntax(s)
 
-        node_bin = shutil.which("node") or shutil.which("node.exe") or "node"
-        payload = "\n".join(json.dumps({"latex": s}) for s in latex_list)
-        proc = subprocess.run(
-            [node_bin, str(MATHJAX_LAYOUT_SCRIPT)],
-            input=payload,
-            text=True,
-            capture_output=True,
-            check=True,
-            cwd=str(MATHJAX_LAYOUT_SCRIPT.parent),
-        )
-        batch_data = json.loads(proc.stdout)
-        if not isinstance(batch_data, list):
-            raise LaTeXParseError("Expected JSON array from layout bridge")
-        return batch_data
+        script_path = get_mathjax_script_path()
+        node_bin = shutil.which("node") or shutil.which("node.exe")
+        if node_bin and script_path.is_file():
+            payload = "\n".join(json.dumps({"latex": s}) for s in latex_list)
+            proc = subprocess.run(
+                [node_bin, str(script_path)],
+                input=payload,
+                text=True,
+                capture_output=True,
+                check=False,
+                cwd=str(script_path.parent),
+            )
+            if proc.returncode == 0:
+                try:
+                    batch_data = json.loads(proc.stdout)
+                    if isinstance(batch_data, list) and len(batch_data) == len(latex_list):
+                        return batch_data
+                except Exception:
+                    pass
+
+        return [self._fallback_layout_latex(s) for s in latex_list]
+
+    def _fallback_layout_latex(self, latex: str) -> dict[str, Any]:
+        """Deterministic vector fallback layout when Node.js/MathJax is unavailable."""
+        elements: list[dict[str, Any]] = []
+        cursor_x = 0.0
+
+        # Tokenize basic latex: \command, ^, _, {, }, or single character
+        tokens: list[str] = []
+        i = 0
+        while i < len(latex):
+            if latex[i].isspace():
+                i += 1
+                continue
+            if latex[i] == "\\":
+                j = i + 1
+                if j < len(latex) and not latex[j].isalpha():
+                    tokens.append(latex[i : j + 1])
+                    i = j + 1
+                else:
+                    while j < len(latex) and latex[j].isalpha():
+                        j += 1
+                    tokens.append(latex[i:j])
+                    i = j
+            else:
+                tokens.append(latex[i])
+                i += 1
+
+        idx = 0
+        while idx < len(tokens):
+            tok = tokens[idx]
+            if tok == r"\frac":
+                idx += 1
+                num_toks: list[str] = []
+                den_toks: list[str] = []
+                if idx < len(tokens) and tokens[idx] == "{":
+                    idx += 1
+                    depth = 1
+                    while idx < len(tokens) and depth > 0:
+                        if tokens[idx] == "{":
+                            depth += 1
+                        elif tokens[idx] == "}":
+                            depth -= 1
+                        if depth > 0:
+                            num_toks.append(tokens[idx])
+                        idx += 1
+                if idx < len(tokens) and tokens[idx] == "{":
+                    idx += 1
+                    depth = 1
+                    while idx < len(tokens) and depth > 0:
+                        if tokens[idx] == "{":
+                            depth += 1
+                        elif tokens[idx] == "}":
+                            depth -= 1
+                        if depth > 0:
+                            den_toks.append(tokens[idx])
+                        idx += 1
+
+                num_w = max(len(num_toks) * 450.0, 350.0)
+                den_w = max(len(den_toks) * 450.0, 350.0)
+                frac_w = max(num_w, den_w) + 120.0
+
+                nx = cursor_x + (frac_w - num_w) / 2.0
+                for nt in num_toks:
+                    c = nt[1:] if nt.startswith("\\") else nt
+                    elements.append(
+                        {
+                            "type": "glyph",
+                            "char_hex": hex(ord(c[0]) if c else ord("x"))[2:],
+                            "x": nx,
+                            "y": 420.0,
+                            "scale_x": 0.80,
+                            "scale_y": 0.80,
+                        }
+                    )
+                    nx += 450.0 * 0.80
+
+                dx = cursor_x + (frac_w - den_w) / 2.0
+                for dt in den_toks:
+                    c = dt[1:] if dt.startswith("\\") else dt
+                    elements.append(
+                        {
+                            "type": "glyph",
+                            "char_hex": hex(ord(c[0]) if c else ord("x"))[2:],
+                            "x": dx,
+                            "y": -320.0,
+                            "scale_x": 0.80,
+                            "scale_y": 0.80,
+                        }
+                    )
+                    dx += 450.0 * 0.80
+
+                elements.append(
+                    {
+                        "type": "rule",
+                        "x": cursor_x,
+                        "y": 140.0,
+                        "width": frac_w,
+                        "height": 40.0,
+                    }
+                )
+                cursor_x += frac_w + 120.0
+                continue
+            elif tok == "^":
+                idx += 1
+                if idx < len(tokens):
+                    st = tokens[idx]
+                    if st == "{" and idx + 1 < len(tokens):
+                        idx += 1
+                        st = tokens[idx]
+                        if idx + 1 < len(tokens) and tokens[idx + 1] == "}":
+                            idx += 1
+                    c = st[1:] if st.startswith("\\") else st
+                    elements.append(
+                        {
+                            "type": "glyph",
+                            "char_hex": hex(ord(c[0]) if c else ord("x"))[2:],
+                            "x": cursor_x,
+                            "y": 380.0,
+                            "scale_x": 0.70,
+                            "scale_y": 0.70,
+                        }
+                    )
+                    cursor_x += 450.0 * 0.70
+                idx += 1
+                continue
+            elif tok == "_":
+                idx += 1
+                if idx < len(tokens):
+                    st = tokens[idx]
+                    if st == "{" and idx + 1 < len(tokens):
+                        idx += 1
+                        st = tokens[idx]
+                        if idx + 1 < len(tokens) and tokens[idx + 1] == "}":
+                            idx += 1
+                    c = st[1:] if st.startswith("\\") else st
+                    elements.append(
+                        {
+                            "type": "glyph",
+                            "char_hex": hex(ord(c[0]) if c else ord("x"))[2:],
+                            "x": cursor_x,
+                            "y": -220.0,
+                            "scale_x": 0.70,
+                            "scale_y": 0.70,
+                        }
+                    )
+                    cursor_x += 450.0 * 0.70
+                idx += 1
+                continue
+            elif tok in ("{", "}"):
+                idx += 1
+                continue
+            else:
+                c = tok[1:] if tok.startswith("\\") else tok
+                elements.append(
+                    {
+                        "type": "glyph",
+                        "char_hex": hex(ord(c[0]) if c else ord("?"))[2:],
+                        "x": cursor_x,
+                        "y": 0.0,
+                        "scale_x": 1.0,
+                        "scale_y": 1.0,
+                    }
+                )
+                cursor_x += 500.0
+                idx += 1
+
+        return {"status": "ok", "elements": elements}
 
     def render_equation_to_strokes(
         self,

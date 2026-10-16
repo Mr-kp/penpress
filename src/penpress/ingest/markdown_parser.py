@@ -103,6 +103,7 @@ class MarkdownParser:
                     if m_single:
                         flush_paragraph()
                         eq_content = m_single.group(1).strip()
+                        h = 35.0
                         bbox = BoundingBox(
                             x0=40.0,
                             y0=cursor_y - h,

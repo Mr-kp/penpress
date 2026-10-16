@@ -2,16 +2,23 @@
 
 from __future__ import annotations
 
+import json
+import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TextIO
 
 from penpress.core.hershey import HersheyFont
+from penpress.core.math_engine import MathEngine
 from penpress.core.primitives import CoreGeometryError, Page
 from penpress.core.primitives import Path as CorePath
+from penpress.ingest.engine import DocumentIngestEngine
+from penpress.layout.composer import A4_PRESET, A5_PRESET, PageComposer
 from penpress.plan.compiler import GcodeCompiler
+from penpress.plan.optimizer import ToolpathOptimizer
 from penpress.plan.profile import MachineProfile
 from penpress.plan.sim import MarlinSimulator
+from penpress.synth.humanizer import OrganicHumanizer
 
 
 class LayoutOverflowError(CoreGeometryError):
@@ -271,5 +278,205 @@ def execute_render_pipeline(
         out_stream.write(f"G-code: {result.gcode_path}\n")
         out_stream.write(f"Simulator Image: {result.sim_image_path}\n")
         out_stream.write(f"Simulator SVG: {result.sim_svg_path}\n")
+
+    return result
+
+
+@dataclass(frozen=True, slots=True)
+class DocumentPageArtifacts:
+    """Artifact paths and kinematics telemetry for an individual rendered page."""
+
+    page_num: int
+    gcode_path: Path
+    sim_image_path: Path
+    sim_svg_path: Path
+    stroke_count: int
+    draw_distance_mm: float
+    travel_distance_mm: float
+    duration_s: float
+
+
+@dataclass(frozen=True, slots=True)
+class DocumentRenderResult:
+    """Complete summary and page artifacts for an end-to-end document render."""
+
+    input_file: Path
+    paper: str
+    page_count: int
+    total_strokes: int
+    total_pen_lifts: int
+    total_draw_distance_mm: float
+    total_travel_distance_mm: float
+    estimated_duration_s: float
+    artifacts: tuple[DocumentPageArtifacts, ...]
+    summary_json_path: Path
+
+
+def execute_document_pipeline(
+    file_path: Path | str,
+    output_dir: Path | str,
+    paper: str = "A5",
+    profile_path: Path | str | None = None,
+    profile_name: str = "ender3pro",
+    optimize: bool = True,
+    humanizer: OrganicHumanizer | None = None,
+    out_stream: TextIO | None = None,
+) -> DocumentRenderResult:
+    """Execute full production rendering pipeline for PDF, Markdown, or text assignments.
+
+    Runs: DocumentIngestEngine -> PageComposer -> ToolpathOptimizer -> GcodeCompiler -> MarlinSimulator.
+    """
+    in_file = Path(file_path)
+    if not in_file.exists():
+        raise FileNotFoundError(f"Input file not found: {in_file}")
+
+    valid_exts = {".pdf", ".md", ".markdown", ".txt"}
+    if in_file.suffix.lower() not in valid_exts:
+        raise ValueError(
+            f"Unsupported document format: {in_file.suffix}. Expected one of {sorted(valid_exts)}"
+        )
+
+    # 1. Ingest
+    ingest_engine = DocumentIngestEngine()
+    if in_file.suffix.lower() == ".txt":
+        text_content = in_file.read_text(encoding="utf-8")
+        doc = ingest_engine.md_parser.parse_markdown(text_content, doc_id=in_file.stem)
+    else:
+        doc = ingest_engine.ingest_document(in_file)
+
+    # 2. Page Composition
+    paper_preset = A5_PRESET if paper.strip().upper() == "A5" else A4_PRESET
+    math_engine = MathEngine()
+    composer = PageComposer(
+        paper=paper_preset,
+        humanizer=humanizer,
+        math_engine=math_engine,
+        autoscale_figures=True,
+    )
+    layout_res = composer.compose_document(doc)
+    pages = list(layout_res.pages)
+    if not pages:
+        pages = [Page(width_mm=paper_preset.width_mm, height_mm=paper_preset.height_mm, paths=())]
+
+    # 3. Path Optimization
+    if optimize:
+        optimizer = ToolpathOptimizer()
+        pages = [optimizer.optimize_page(p)[0] for p in pages]
+
+    # 4. Load Machine Profile
+    if profile_path is not None:
+        profile = MachineProfile.from_toml_file(profile_path)
+    else:
+        standard_path = Path("machine-profiles") / f"{profile_name}.toml"
+        profile = MachineProfile.from_toml_file(standard_path) if standard_path.exists() else MachineProfile()
+
+    # 5. Compile and Simulate
+    out_path = Path(output_dir)
+    out_path.mkdir(parents=True, exist_ok=True)
+    compiler = GcodeCompiler(profile=profile, emit_line_numbers=True)
+
+    artifacts_list: list[DocumentPageArtifacts] = []
+    total_strokes = 0
+    total_lifts = 0
+    total_draw = 0.0
+    total_travel = 0.0
+    total_duration = 0.0
+
+    for idx, page in enumerate(pages):
+        page_num = idx + 1
+        page_suffix = f"_p{page_num}" if len(pages) > 1 else ""
+        base = f"{in_file.stem}{page_suffix}"
+        gcode_file = out_path / f"{base}.gcode"
+        png_file = out_path / f"{base}.png"
+        svg_file = out_path / f"{base}.svg"
+
+        gcode_str = compiler.compile(page)
+        gcode_file.write_text(gcode_str, encoding="utf-8")
+
+        sim = MarlinSimulator(profile=profile, strict_safety=True)
+        gcode_commands = [line.strip() for line in gcode_str.splitlines() if line.strip()]
+        sim.execute_stream(gcode_commands)
+
+        sim.save_image(png_file)
+        svg_str = sim.render_to_svg()
+        svg_file.write_text(svg_str, encoding="utf-8")
+
+        page_strokes = sum(len(p.strokes) for p in page.paths)
+        page_draw = sum(s.length_mm for p in page.paths for s in p.strokes)
+        page_travel = sum(
+            math.hypot(s.end_x - s.start_x, s.end_y - s.start_y) for s in sim.segments if not s.pen_contact
+        )
+        page_time = sim.state.total_time_seconds
+
+        total_strokes += page_strokes
+        total_lifts += page_strokes
+        total_draw += page_draw
+        total_travel += page_travel
+        total_duration += page_time
+
+        artifacts_list.append(
+            DocumentPageArtifacts(
+                page_num=page_num,
+                gcode_path=gcode_file,
+                sim_image_path=png_file,
+                sim_svg_path=svg_file,
+                stroke_count=page_strokes,
+                draw_distance_mm=round(page_draw, 2),
+                travel_distance_mm=round(page_travel, 2),
+                duration_s=round(page_time, 2),
+            )
+        )
+
+    summary_file = out_path / f"{in_file.stem}_summary.json"
+    summary_dict = {
+        "input_file": str(in_file),
+        "paper": paper,
+        "page_count": len(pages),
+        "total_strokes": total_strokes,
+        "total_pen_lifts": total_lifts,
+        "total_draw_distance_mm": round(total_draw, 2),
+        "total_travel_distance_mm": round(total_travel, 2),
+        "estimated_duration_s": round(total_duration, 2),
+        "artifacts": [
+            {
+                "page_num": art.page_num,
+                "gcode": str(art.gcode_path),
+                "png": str(art.sim_image_path),
+                "svg": str(art.sim_svg_path),
+                "stroke_count": art.stroke_count,
+                "duration_s": art.duration_s,
+            }
+            for art in artifacts_list
+        ],
+    }
+    summary_file.write_text(json.dumps(summary_dict, indent=2), encoding="utf-8")
+
+    result = DocumentRenderResult(
+        input_file=in_file,
+        paper=paper,
+        page_count=len(pages),
+        total_strokes=total_strokes,
+        total_pen_lifts=total_lifts,
+        total_draw_distance_mm=round(total_draw, 2),
+        total_travel_distance_mm=round(total_travel, 2),
+        estimated_duration_s=round(total_duration, 2),
+        artifacts=tuple(artifacts_list),
+        summary_json_path=summary_file,
+    )
+
+    if out_stream is not None:
+        out_stream.write(f"Rendered {in_file.name} ({paper}) to {output_dir}\n")
+        out_stream.write(f"Pages: {result.page_count}\n")
+        out_stream.write(f"Strokes: {result.total_strokes}\n")
+        out_stream.write(f"Total Pen Lifts: {result.total_pen_lifts}\n")
+        out_stream.write(f"Draw Distance: {result.total_draw_distance_mm:.1f} mm\n")
+        out_stream.write(f"Travel Distance: {result.total_travel_distance_mm:.1f} mm\n")
+        out_stream.write(f"Estimated Duration: {result.estimated_duration_s:.1f}s\n")
+        out_stream.write(f"Summary JSON: {result.summary_json_path}\n")
+        for art in result.artifacts:
+            out_stream.write(
+                f"  Page {art.page_num}: {art.gcode_path.name}, "
+                f"{art.sim_image_path.name}, {art.sim_svg_path.name}\n"
+            )
 
     return result

@@ -72,12 +72,14 @@ class PageComposer:
         humanizer: OrganicHumanizer | None = None,
         math_engine: MathEngine | None = None,
         keepouts: Sequence[KeepoutPolygon] | None = None,
+        autoscale_figures: bool = False,
     ) -> None:
         self.paper = paper
         self.margins = margins if margins is not None else Margins()
         self.ruled_grid = ruled_grid if ruled_grid is not None else RuledGridConfig()
         self.humanizer = humanizer or OrganicHumanizer(params=HumanizerParams.zero_jitter())
         self.math_engine = math_engine or MathEngine()
+        self.autoscale_figures = autoscale_figures
 
         if keepouts is not None:
             self.keepouts = list(keepouts)
@@ -173,7 +175,7 @@ class PageComposer:
                 ys = [pt[1] for path in block.vector_paths for pt in path]
                 w_mm = (max(xs) - min(xs)) * 0.352778  # pt to mm
                 h_mm = (max(ys) - min(ys)) * 0.352778
-                if w_mm > self.usable_width or h_mm > self.usable_height:
+                if not self.autoscale_figures and (w_mm > self.usable_width or h_mm > self.usable_height):
                     raise LayoutOverflowError(
                         f"Figure block {block.block_id} dimensions ({w_mm:.1f}x{h_mm:.1f} mm) exceed "
                         f"printable area ({self.usable_width:.1f}x{self.usable_height:.1f} mm). "
@@ -285,7 +287,9 @@ class PageComposer:
 
                 scale = 1.0
                 if w_mm > self.usable_width:
-                    scale = self.usable_width / w_mm
+                    scale = min(scale, self.usable_width / w_mm)
+                if h_mm > self.usable_height:
+                    scale = min(scale, self.usable_height / h_mm)
 
                 w_final = w_mm * scale
                 h_final = h_mm * scale

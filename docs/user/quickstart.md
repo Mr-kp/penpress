@@ -57,7 +57,7 @@ If camera lighting is poor or no camera is attached, the tactile wizard provides
 3. **Height Point**: Jog pen along Y-axis to top-left corner.
 4. **Z-Touch (Paper Drag Test)**: Lower Z in 0.1 mm increments until a sheet of paper placed under the pen tip encounters gentle friction.
 
-![Calibration Wizard](../screenshots/ui/04_calibration_wizard.png)
+![Calibration Wizard](../screenshots/ui/03_calibration_wizard.png)
 
 ---
 

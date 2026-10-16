@@ -23,10 +23,10 @@ def test_cli_version(capsys: pytest.CaptureFixture[str]) -> None:
 
 
 def test_cli_no_args(capsys: pytest.CaptureFixture[str]) -> None:
-    """Test calling CLI with no arguments returns error code 2."""
+    """Test calling CLI with no arguments prints usage help and returns code 2."""
     assert main([]) == 2
     captured = capsys.readouterr()
-    assert "no commands available yet" in captured.err
+    assert "usage: penpress" in captured.err
 
 
 def test_cli_unknown_subcommand(capsys: pytest.CaptureFixture[str]) -> None:

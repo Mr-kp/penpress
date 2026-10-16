@@ -16,7 +16,7 @@ def test_cli_version(capsys: pytest.CaptureFixture[str]) -> None:
 
 def test_cli_without_args_is_an_error(capsys: pytest.CaptureFixture[str]) -> None:
     assert cli.main([]) == 2
-    assert "no commands" in capsys.readouterr().err
+    assert "usage: penpress" in capsys.readouterr().err
 
 
 def test_docs_check_requires_changelog() -> None:

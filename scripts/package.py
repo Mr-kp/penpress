@@ -54,6 +54,17 @@ def build_standalone_binary(
         data_args.extend(["--add-data", f"{web_dir}{sep}web"])
     if data_dir.is_dir():
         data_args.extend(["--add-data", f"{data_dir}{sep}penpress/core/data"])
+    r21_dir = ROOT / "research" / "R2-1"
+    if r21_dir.is_dir():
+        mathjax_js = r21_dir / "mathjax_layout.js"
+        if mathjax_js.is_file():
+            data_args.extend(["--add-data", f"{mathjax_js}{sep}research/R2-1"])
+        pkg_json = r21_dir / "package.json"
+        if pkg_json.is_file():
+            data_args.extend(["--add-data", f"{pkg_json}{sep}research/R2-1"])
+        node_modules = r21_dir / "node_modules"
+        if node_modules.is_dir():
+            data_args.extend(["--add-data", f"{node_modules}{sep}research/R2-1/node_modules"])
 
     cmd = [
         sys.executable,
